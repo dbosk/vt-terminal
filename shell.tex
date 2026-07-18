@@ -1,0 +1,53 @@
+\mode*
+\section{The command model}
+\label{sec:shell}
+
+The first educational objective is the shell's command model: the
+read--evaluate--print loop, the anatomy of a command line (command,
+options, arguments), and the shell as \emph{an} interface to the same
+system that the graphical desktop is another interface to.
+
+\subsection{Documented misconceptions and difficulties}
+
+Research on how learners get the command model wrong is scarce
+\autocite{Winder2024ShellTutor}; what exists comes largely from
+cognitive-psychology studies of Unix users.
+Producing correct composite commands is demanding, and help that states
+concrete information supports novices where abstract information only helps
+experts \autocite{Doane1992UnixPrompts}.
+Beginning programming students are commonly introduced through visual
+environments rather than the command line \autocite{Dillon2012MentalModels},
+so we must assume no prior CLI exposure.
+% TODO: The systematic search phase (cf. \cref{sec:method-litreview}) must
+% look for newer CS-education sources on CLI misconceptions specifically;
+% the Shell Tutor group's logging data may be the closest existing corpus.
+% TODO: Add misconceptions observed in our own course's grading and
+% tutoring data (datintro), clearly separated from the literature-derived
+% ones.
+
+\subsection{Candidate critical aspects}
+
+% XXX Preliminary; to be consolidated once the review phase is complete.
+\begin{itemize}
+  \item \emph{The command line is a language, not a search box}: the shell
+    parses; it does not guess. (Word order, spaces, quoting matter.)
+  \item \emph{Textual feedback}: output--and silence--is the system's
+    response; error messages are information, not failure.
+  \item \emph{The shell acts on the same system as the GUI}: same files,
+    same processes---only the interface varies.
+\end{itemize}
+
+\subsection{Patterns of variation}
+
+\begin{itemize}
+  \item Contrast (interface varies, system invariant): perform one task in
+    the GUI, then the same task in the shell; observe the same effect in
+    the other interface.
+  \item Contrast (one token varies): same command with and without one
+    option; with correct and with misspelled argument---observe how the
+    response differs.
+  \item Generalisation (command invariant, target varies): the same
+    \texttt{ls}/\texttt{cp} across different directories and file types.
+\end{itemize}
+% TODO: Realise these as concrete command sequences (PythonTeX-captured
+% terminal transcripts, as the companion papers capture program output).

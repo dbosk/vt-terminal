@@ -1,0 +1,40 @@
+\mode*
+\section{Composition: pipes, redirection, scripts}
+\label{sec:composition}
+
+The third educational objective is what makes the shell more than a clumsy
+file manager: composing programs with pipes and redirection, and freezing a
+composition into a script.
+
+\subsection{Documented difficulties}
+
+Composite command production is exactly where
+\textcite{Doane1992UnixPrompts} located the difficulty: users could know
+the component commands yet fail to compose them, and even targeted help
+prompts did not suffice for novices.
+% TODO: The systematic phase should search for later replications or
+% CS-education studies of pipeline construction difficulties.
+
+\subsection{Candidate critical aspects}
+
+% XXX Preliminary; to be consolidated once the review phase is complete.
+\begin{itemize}
+  \item \emph{Uniform interfaces}: programs read text in and write text
+    out, which is why any producer can feed any consumer.
+  \item \emph{The pipe is not the file}: redirection to a file versus
+    piping to a program.
+  \item \emph{A script is nothing new}: the same commands, replayable
+    (cf.\ the history-to-script demonstration used in the course).
+\end{itemize}
+
+\subsection{Patterns of variation}
+
+\begin{itemize}
+  \item Contrast (sink varies, producer invariant): the same command's
+    output to the screen, to a file (\texttt{>}), to a program
+    (\texttt{|}).
+  \item Generalisation (pipeline shape invariant, programs vary):
+    \texttt{X | sort}, \texttt{X | wc -l} across different \texttt{X}.
+  \item Fusion: build a pipeline solving a real task, then turn the
+    history into a script and rerun it.
+\end{itemize}

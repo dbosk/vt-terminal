@@ -1,0 +1,72 @@
+\mode*
+\section{Introduction}
+
+The Unix shell is one of the first tools computing students meet: it is how
+they access the university's systems, hand in their code, and later drive
+the tools of their trade.
+It is widely taught---and yet, in contrast to introductory programming,
+there is little research on how students learn the shell or on how to teach
+it \autocite{Winder2024ShellTutor}.
+What we do know suggests that the difficulties are real: producing composite
+shell commands is demanding even for users with some experience, and what
+helps novices (concrete information) differs qualitatively from what helps
+experts (abstract information) \autocite{Doane1992UnixPrompts}.
+Moreover, users in general persistently fail to adopt faster expert methods
+when a familiar interface is available \autocite{Cockburn2014NoviceExpert},
+so students will not move from the graphical interface to the shell merely
+because the shell is more powerful.
+
+\mode<presentation>{%
+\begin{frame}
+  \begin{block}{The shell}
+    \begin{itemize}
+      \item Widely taught, little researched
+        \autocite{Winder2024ShellTutor}.
+      \item Composite commands are hard; novices need \emph{concrete}
+        information \autocite{Doane1992UnixPrompts}.
+      \item Users don't switch interfaces voluntarily
+        \autocite{Cockburn2014NoviceExpert}.
+    \end{itemize}
+  \end{block}
+\end{frame}%
+}
+
+In this work we apply the approach of our companion paper on introductory
+programming \autocite{VTProgMisconceptions}: we treat documented
+misconceptions and difficulties as the phenomenographic observations for a
+variation-theory analysis \autocite{NCOL}, identify the critical aspects
+that learners must discern, and outline patterns of variation to teach them.
+We cover the shell's command model, the hierarchical file system,
+composition (pipes, redirection, scripting), and the remote shell (SSH).
+
+We ask the following research questions.
+
+\begin{frame}
+\begin{restatable}{question}{rqmisconceptions}\label{rq:misconceptions}
+  Which misconceptions and difficulties with the Unix shell---its command
+  model, the file system, composition, and remote use---does the literature
+  document?
+\end{restatable}
+
+\begin{restatable}{question}{rqaspects}\label{rq:aspects}
+  Which critical aspects of using the shell do these misconceptions and
+  difficulties point to?
+\end{restatable}
+
+\begin{restatable}{question}{rqpatterns}\label{rq:patterns}
+  Which patterns of variation can make these critical aspects discernible
+  to learners?
+\end{restatable}
+\end{frame}
+
+Our contributions are:
+a review of the literature on learners' difficulties with the shell,
+answering \cref{rq:misconceptions};
+a variation-theory analysis identifying the critical aspects,
+answering \cref{rq:aspects};
+and a set of patterns of variation for teaching the shell,
+answering \cref{rq:patterns}.
+
+% TODO: Once the systematic search phase has run, revisit whether the SSH
+% part has enough literature to stand as its own contribution or whether it
+% remains an aspect analysis grounded in course observations.

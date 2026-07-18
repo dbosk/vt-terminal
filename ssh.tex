@@ -1,0 +1,47 @@
+\mode*
+\section{The remote shell: SSH}
+\label{sec:ssh}
+
+The fourth educational objective is the remote shell: that a shell can just
+as well be attached to another machine, and what follows from that.
+
+\subsection{Documented difficulties}
+
+The seed literature round found \emph{no} studies of how learners
+(mis)understand SSH or remote shells---a genuine gap.
+% TODO: The systematic phase must confirm or fill this gap (queries on
+% remote access, SSH education, distributed-systems misconceptions at the
+% tool level).
+What we have are recurring observations from our own course and from the
+university's IT department: students lose track of which machine their
+shell is attached to, and chain \texttt{ssh} sessions into cycles
+(\texttt{ssh A}, then \texttt{ssh B}, then \texttt{ssh A} again) instead
+of opening parallel sessions.
+% TODO: Collect and cite these observations properly (course issue
+% tracker; IT correspondence), clearly marked as course data rather than
+% literature.
+
+\subsection{Candidate critical aspects}
+
+% XXX Preliminary.
+\begin{itemize}
+  \item \emph{A shell runs somewhere}: every prompt belongs to exactly one
+    machine; the prompt (and \texttt{hostname}) tells you where you are.
+  \item \emph{Same shell, different computer}: the interface is invariant,
+    the machine varies---which is precisely why it is easy to lose track.
+  \item \emph{Files live on machines}: a file created on the remote host
+    is not on the laptop, and vice versa.
+\end{itemize}
+
+\subsection{Patterns of variation}
+
+\begin{itemize}
+  \item Contrast (machine varies, shell invariant): run
+    \texttt{hostname}, \texttt{ls} before and after \texttt{ssh}; same
+    commands, different answers.
+  \item Contrast (session structure varies): a chained
+    \texttt{ssh A -> ssh B} versus two parallel terminals; observe
+    \texttt{exit} behaviour.
+  \item Fusion: edit locally, copy to the remote host, run remotely---the
+    full round trip.
+\end{itemize}

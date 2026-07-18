@@ -1,0 +1,55 @@
+\mode*
+\section{Search and verification protocol}
+\label{app:protocol}
+
+This appendix documents the literature searches behind the references, for
+reproducibility, following the protocol of the companion paper
+\autocite[App.~literature protocol]{VTProgMisconceptions}: every reference
+was found by a recorded query, read at least at abstract level, and
+recorded with a provenance block (claim, query, selection rationale,
+verbatim supporting quote, verification level) directly above its entry in
+\texttt{misconceptions.bib}.
+
+\subsection{Phase one: seed round (2026-07-18)}
+
+The seed round was a claim-driven search conducted with the
+\texttt{scholar} tool against DBLP, OpenAlex, and Semantic Scholar
+(Semantic Scholar was rate-limited during part of the session), with
+abstracts fetched via the OpenAlex API and full texts from open repository
+copies.
+Broad queries (e.g.\ \enquote{students mental models file system}) were
+dominated by irrelevant medical and machine-learning hits and were replaced
+by phrase and author-anchored queries.
+The queries whose results were retained:
+
+\begin{itemize}
+  \item \texttt{scholar search "shell tutor" -p dblp}
+  \item \texttt{scholar search '"command line" novice' -p openalex}
+  \item \texttt{scholar search "Doane unix experts strategies" -p openalex -p dblp}
+  \item \texttt{scholar search "navigation search file retrieval preference" -p openalex}
+  \item \texttt{scholar search "Bergman Whittaker file retrieval" -p openalex}
+  \item \texttt{scholar search "folder metaphor cloud" -p dblp -p openalex}
+  \item \texttt{scholar search "finding reminding file organization" -p dblp}
+  \item \texttt{scholar search "black box inside glass box presenting computing concepts" -p openalex -p dblp}
+  \item \texttt{scholar search "Sorva notional machines introductory programming" -p dblp -p openalex}
+  \item \texttt{scholar search "Ben-Ari constructivism" -p dblp}
+  \item \texttt{scholar search "difficulties of learning to program du Boulay" -p openalex}
+  \item \texttt{scholar search '"variation theory" computer programming' -p openalex}
+\end{itemize}
+
+Discarded as unverifiable or redundant in this round: Norman's 1981
+\emph{The trouble with Unix} (no verifiable source located); the use of
+journalism \autocite{Chin2021FileNotFound} as evidence (retained only as a
+flagged anecdote).
+Not yet verified at full text (tracked in the course repository's issues
+\#124--\#126): \autocite{DuBoulay1981BlackBox},
+\autocite{BenAri1998Constructivism}, \autocite{Dillon2012MentalModels}.
+
+\subsection{Phase two: systematic round}
+
+% TODO: To be run and documented here, mirroring the companion paper's
+% appendix: providers, queries (keyword and research-question driven),
+% screening criteria and decisions, and the comparison against the seed
+% round. Priority gaps to cover: CLI misconceptions in CS-education
+% venues, learner (not professional-user) file-system mental models, and
+% SSH/remote-shell learning (no sources found in phase one).

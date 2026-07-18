@@ -1,0 +1,77 @@
+\mode*
+\section{The file system}
+\label{sec:filesystem}
+
+The second educational objective is the hierarchical file system: files and
+directories, the tree, the working directory, and absolute versus relative
+paths.
+
+\subsection{What the literature supports}
+
+The personal-information-management literature shows that fluent users
+retrieve files overwhelmingly by \emph{navigating} folder hierarchies
+(56--68\% of retrievals) and search only as a last resort (4--15\%), a
+preference that better search engines did not change
+\autocite{Bergman2008Navigation}.
+Folder navigation recruits the brain's spatial-navigation structures, while
+query-based search recruits linguistic processing
+\autocite{Benn2015BrainFolders}: the file tree is effectively a
+\emph{spatial} skill.
+Folders also serve thinking and organising, not just retrieval; users
+forced to work folder-free could not replace them with search and recency
+lists \autocite{Whitham2017Folder}, and location-based finding is preferred
+for its reminding function \autocite{BarreauNardi1995}.
+
+The popular claim that students who grew up with search no longer
+understand files and folders is, so far, journalistic rather than
+peer-reviewed \autocite[flagged as anecdote]{Chin2021FileNotFound}.
+What is backed is weaker but sufficient for our purposes: the file tree is
+a spatial skill that the shell \emph{assumes}, and that our teaching must
+therefore build.
+% TODO: Analyse the course's own grading data (path errors in the terminal
+% lab) to substantiate---or refute---the local version of the cohort
+% claim; cf. introtools issue #50.
+
+\mode<presentation>{%
+\begin{frame}
+  \begin{block}{The file tree is a spatial skill}
+    \begin{itemize}
+      \item Fluent users navigate (56--68\%), search is last resort
+        (4--15\%) \autocite{Bergman2008Navigation}.
+      \item Navigation uses spatial brain structures
+        \autocite{Benn2015BrainFolders}.
+      \item Folders support thinking, not just retrieval
+        \autocite{Whitham2017Folder}.
+      \item \enquote{Students can't use folders}: journalism, not yet
+        research \autocite{Chin2021FileNotFound}.
+    \end{itemize}
+  \end{block}
+\end{frame}%
+}
+
+\subsection{Candidate critical aspects}
+
+% XXX Preliminary; to be consolidated once the review phase is complete.
+\begin{itemize}
+  \item \emph{Everything has a place}: every file lives at exactly one path
+    in one tree (the spatial model).
+  \item \emph{Where am I?}: every shell has a current working directory,
+    and commands act relative to it.
+  \item \emph{One tree, two views}: the GUI file manager and
+    \texttt{cd}/\texttt{ls} traverse the same tree.
+  \item \emph{Absolute versus relative}: the same file has many names,
+    depending on where you stand.
+\end{itemize}
+
+\subsection{Patterns of variation}
+
+\begin{itemize}
+  \item Contrast (view varies, tree invariant): open a directory in the
+    file manager and \texttt{ls} it in the shell; create a file in one
+    view, observe it in the other.
+  \item Contrast (standpoint varies, target invariant): reach the same
+    file from different working directories---the relative path varies,
+    the absolute path does not.
+  \item Fusion: a task that requires moving, listing and referring across
+    directories at once.
+\end{itemize}
