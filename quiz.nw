@@ -1,0 +1,699 @@
+\section{Setting up the diagnostic quizzes, literately}
+\label{app:quiz}
+
+This appendix is a literate program \autocite{LiterateProgramming}: the
+prose and the code are one and the same source, woven into the text you
+are reading and tangled into the files the computer runs.
+It implements the pre/post-test of \cref{sec:instruments}: two quizzes
+that measure whether the students discern the candidate critical aspects
+of \cref{sec:shell,sec:filesystem,sec:composition,sec:ssh} before and
+after the terminal module.
+Three files are tangled from this section:
+[[quiz-knowledge-start.json]] and [[quiz-knowledge-end.json]], the
+descriptions of the two quizzes that the [[canvaslms]] tool pushes to
+Canvas, and [[analyze_quiz.py]], which fetches the results from Canvas
+and summarises them.
+
+\subsection{The two quizzes for Canvas}
+
+The learning platform of the course is Canvas, and the [[canvaslms]]
+command-line tool creates the quizzes from their JSON descriptions:
+\begin{minted}{bash}
+canvaslms quizzes create -c datintro26 -f quiz-knowledge-start.json
+canvaslms quizzes create -c datintro26 -f quiz-knowledge-end.json
+\end{minted}
+The two quizzes share their knowledge items and differ only in what
+opens them.
+The start-of-course quiz measures what the students bring to the module;
+the end-of-course quiz repeats the same items to measure the gain, and
+adds one question of its own---whether the student prepared---because
+preparation would confound that gain: a student who reviews the material
+the night before measures preparation, not what the module left behind.
+The quiz titles name the terminal explicitly, since the course runs
+other diagnostic quizzes that must stay distinguishable for students and
+analysis alike.
+
+<<[[quiz-knowledge-start.json]]>>=
+{
+  "quiz_type": "new",
+  "settings": {
+    "title": "Terminal quiz: what you know already",
+    "instructions": "<p>This quiz checks what you already know about working in a terminal, so that we can adapt the course. If you have not used a shell before, answer as well as you can&mdash;guessing is fine, and a low score is expected and completely okay. You will see your score afterwards, but not the correct answers&mdash;the course will teach you those. The score does not affect your grade. Please answer on your own, without help from others or from tools.</p>",
+    "points_possible": 10,
+    <<scheduling settings>>
+    "quiz_settings": {
+      <<interaction settings>>
+      <<graded result view>>
+    }
+  },
+  "items": [
+    <<start-quiz consent item>>,
+    <<knowledge items>>
+  ]
+}
+@
+
+The end-of-course quiz carries the same knowledge items, so the two
+administrations measure the same discernment; only the opening item and
+the instructions differ.
+
+<<[[quiz-knowledge-end.json]]>>=
+{
+  "quiz_type": "new",
+  "settings": {
+    "title": "Terminal quiz: what you know now",
+    "instructions": "<p>This quiz repeats the terminal questions from the start-of-course quiz, so that we can see what you have learned during the course. You will see your score afterwards, but not the correct answers. The score does not affect your grade. Please answer on your own, without preparation, help or tools.</p>",
+    "points_possible": 10,
+    <<scheduling settings>>
+    "quiz_settings": {
+      <<interaction settings>>
+      <<graded result view>>
+    }
+  },
+  "items": [
+    <<end-quiz preparation item>>,
+    <<knowledge items>>
+  ]
+}
+@
+
+Both quizzes are diagnostics: there is no time limit, a single attempt
+suffices, and answers are never shuffled (several items show a sequence
+of commands whose order is meaningful).
+The shared settings come in two chunks---scheduling and
+interaction---and each chunk is a flat list of keys, so every brace opens
+and closes in the chunk that uses it: the [[quiz_settings]] object opens
+and closes in the quiz descriptions above.
+
+<<scheduling settings>>=
+"time_limit": null,
+"due_at": null,
+"unlock_at": null,
+"lock_at": null,
+<<interaction settings>>=
+"shuffle_answers": false,
+"shuffle_questions": false,
+"has_time_limit": false,
+"one_at_a_time_type": "none",
+"allow_backtracking": true,
+"multiple_attempts_enabled": false,
+"result_view_restricted": true,
+"display_items": true,
+"display_item_response": true,
+@
+
+Both quizzes show the points awarded---how well the student did---but
+neither per-item correctness nor the correct answers: the same questions
+must measure the gain at the end of the course, so they have to stay
+fresh.
+
+<<graded result view>>=
+  "display_item_response_correctness": false,
+  "display_item_correct_answer": false,
+  "display_points_awarded": true,
+  "display_points_possible": true
+@
+
+\subsection{The consent and preparation items}
+
+The start-of-course quiz opens with the consent item---an arrangement
+kept from the course's earlier diagnostic tests, which these quizzes
+replace:
+participation in the study is opt-in, so we ask before collecting
+anything.
+The item titles double as the keys under which Canvas reports the
+answers, so the analysis program (\cref{app:quiz-analysis}) refers to
+the items by these titles.
+
+% XXX The consent wording must follow the approved ethics application for
+% the datintro data collection; update it when the application is decided.
+
+<<start-quiz consent item>>=
+{
+  "position": 1,
+  "points_possible": 0,
+  "entry": {
+    "title": "Consent",
+    "item_body": "<p>I consent to my answers in these quizzes, and my submissions in the course, being used pseudonymised in computing education research. My participation does not affect my grade.</p>",
+    "interaction_type_slug": "true-false",
+    "interaction_data": {"true_choice": "Yes", "false_choice": "No"},
+    "scoring_data": {"value": true},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+The end-of-course quiz opens instead with the preparation item.
+Canvas requires a \enquote{correct} answer even for an ungraded item;
+the [[scoring_data]] value below is arbitrary and never shown to the
+student, since the result view above hides correctness.
+
+<<end-quiz preparation item>>=
+{
+  "position": 1,
+  "points_possible": 0,
+  "entry": {
+    "title": "Preparation",
+    "item_body": "<p>Did you prepare for this quiz&mdash;for example, review the course material&mdash;before taking it?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>No</p>"},
+        {"position": 2, "item_body": "<p>Yes, briefly</p>"},
+        {"position": 3, "item_body": "<p>Yes, thoroughly</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+\subsection{The knowledge items}
+\label{app:knowledge-items}
+
+The knowledge items are written for this study and published here in
+full.
+Each item tests one candidate critical aspect from the chapters: whether
+the student discerns it is exactly what the item measures.
+Following \citeauthor{NCOL}'s discussion of assessment, the stems do not
+point out the relevant aspect---discerning it is what we measure
+\autocite[p.~91]{NCOL}---so each stem shows a concrete command and its
+behaviour and leaves the interpretation to the student.
+Each distractor expresses a documented misconception or a plausible
+consequence of leaving the aspect undiscerned; the prose before each
+item names the aspect it tests and why the distractors are the mistakes
+they are.
+All items weigh one point: we measure knowledge by counting correct
+answers.
+
+The items are numbered from position 11, so that their placement is
+independent of the quiz they appear in: Canvas orders by position, gaps
+are fine, and the numbering leaves room for the quiz-specific opening
+item (consent or preparation) before them.
+
+<<knowledge items>>=
+<<item: the command line reads a language>>,
+<<item: a message after a command>>,
+<<item: the same files from two sides>>,
+<<item: which directory the command uses>>,
+<<item: two names for one file>>,
+<<item: sending output into a pipe>>,
+<<item: the same sort after different programs>>,
+<<item: which computer answers>>,
+<<item: switching between machines>>,
+<<item: where the remote file ends up>>
+@
+
+\subsubsection{The command model}
+
+The command line is a language, not a search box (\cref{sec:shell}): the
+shell parses the line into a command and its arguments; it does not guess
+what the words mean.
+The item gives a line of ordinary English and asks what happens.
+The correct answer reads the first word as the name of a program to run;
+the search-box distractor treats the line as a query over the machine;
+the remaining distractors credit the shell with understanding the words
+or silently correcting them.
+
+<<item: the command line reads a language>>=
+{
+  "position": 11,
+  "points_possible": 1,
+  "entry": {
+    "title": "The command line reads a language",
+    "item_body": "<p>At the shell prompt a student types the line below, hoping to see the files in the current directory.</p><pre>$ show me my files</pre><p>What happens?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The shell searches the computer for anything to do with \"my files\" and lists the closest matches</p>"},
+        {"position": 2, "item_body": "<p>The shell shows the files, because it understands what the words ask for</p>"},
+        {"position": 3, "item_body": "<p>The shell looks for a program called show, does not find one, and reports an error</p>"},
+        {"position": 4, "item_body": "<p>The shell corrects the line to the nearest real command and runs that instead</p>"}
+      ]
+    },
+    "scoring_data": {"value": 3},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+Textual feedback is the system's response, and an error message is
+information, not failure (\cref{sec:shell}).
+The item shows a command that produced a message and asks what the
+message means.
+The correct answer reads the message as reporting that the action did
+not happen; the distractors dismiss it as an ignorable warning, blame the
+terminal, or take one message to mean the shell itself has stopped.
+
+<<item: a message after a command>>=
+{
+  "position": 12,
+  "points_possible": 1,
+  "entry": {
+    "title": "A message after a command",
+    "item_body": "<p>A student runs a command and sees this:</p><pre>$ cd reports\nbash: cd: reports: No such file or directory</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>There is no directory called reports here, so the working directory did not change</p>"},
+        {"position": 2, "item_body": "<p>The command worked; the message is only a warning and can be ignored</p>"},
+        {"position": 3, "item_body": "<p>The terminal is broken and should be closed and reopened</p>"},
+        {"position": 4, "item_body": "<p>The shell has stopped, and no further commands will run</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+The shell acts on the same system as the graphical desktop---same files,
+only the interface varies (\cref{sec:shell,sec:filesystem}).
+A file made in the file manager and a listing typed in the shell meet in
+the same directory.
+The correct answer expects the file to appear; the distractor that keeps
+the two interfaces apart is the undiscerned-aspect case, that a student
+expects the shell and the graphical view to show different files.
+
+<<item: the same files from two sides>>=
+{
+  "position": 13,
+  "points_possible": 1,
+  "entry": {
+    "title": "The same files from two sides",
+    "item_body": "<p>A student uses the graphical file manager to create a file report.txt in their home folder. They then open a terminal, which also starts in the home folder, and run:</p><pre>$ ls</pre><p>What do they see?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>Nothing about report.txt, because files made in the file manager are separate from the ones the shell sees</p>"},
+        {"position": 2, "item_body": "<p>An error, because ls cannot list files that were created graphically</p>"},
+        {"position": 3, "item_body": "<p>report.txt only after the computer is restarted so the terminal can catch up</p>"},
+        {"position": 4, "item_body": "<p>report.txt is listed, because the file manager and the shell show the same files</p>"}
+      ]
+    },
+    "scoring_data": {"value": 4},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+\subsubsection{The file system}
+
+Every shell has a current working directory, and a command acts relative
+to it (\cref{sec:filesystem}).
+The item puts the file in one directory and the shell in another, and
+lets the student explain the resulting error.
+The correct answer connects the failure to where the command looked; the
+distractors deny the file exists at all, misread what [[ls]] can take, or
+invoke the graphical editor---each a way of not discerning that the
+command acted from the working directory.
+
+<<item: which directory the command uses>>=
+{
+  "position": 14,
+  "points_possible": 1,
+  "entry": {
+    "title": "Which directory the command uses",
+    "item_body": "<p>A student has a file notes.txt in the directory /home/lee/reports. Their shell's working directory is /home/lee. They run:</p><pre>$ ls notes.txt\nls: cannot access 'notes.txt': No such file or directory</pre><p>Why?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The file notes.txt does not exist anywhere on the computer</p>"},
+        {"position": 2, "item_body": "<p>ls looked for notes.txt in the working directory /home/lee, not in reports where the file is</p>"},
+        {"position": 3, "item_body": "<p>ls can only list a whole directory, never a single file</p>"},
+        {"position": 4, "item_body": "<p>The file must be opened in a graphical editor before ls can see it</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+The same file has many names depending on where you stand: an absolute
+path from the root of the tree, a relative path from the working
+directory (\cref{sec:filesystem}).
+The item shows two commands that reach the same file and asks the student
+to reconcile them.
+The correct answer identifies the two paths as two names for one file;
+the distractors take them for different files, deny that a relative path
+is legitimate, or read the absolute path as making a copy.
+
+<<item: two names for one file>>=
+{
+  "position": 15,
+  "points_possible": 1,
+  "entry": {
+    "title": "Two names for one file",
+    "item_body": "<p>A student's working directory is /home/lee. Both commands below succeed and show the same file:</p><pre>$ cat report.txt\n$ cat /home/lee/report.txt</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>They are two different files that happen to hold the same text</p>"},
+        {"position": 2, "item_body": "<p>report.txt and /home/lee/report.txt name the same file; the first is read from the working directory, the second from the root of the tree</p>"},
+        {"position": 3, "item_body": "<p>The first works only by chance; a file must always be given its full path</p>"},
+        {"position": 4, "item_body": "<p>The second command makes a copy of report.txt under /home/lee</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+\subsubsection{Composition}
+
+The pipe is not the file (\cref{sec:composition}): a pipe carries one
+program's output straight into another program, rather than storing it.
+Composite commands are exactly where the difficulty is documented---users
+can know the component commands yet fail to compose them
+\autocite{Doane1992UnixPrompts}---so the distractors are the plausible
+wrong models of what the pipe does.
+The correct answer streams the output into the reader; the leading
+distractor treats the pipe as a file, saving the output under the second
+program's name; the others reverse the order or deny the connection.
+
+<<item: sending output into a pipe>>=
+{
+  "position": 16,
+  "points_possible": 1,
+  "entry": {
+    "title": "Sending output into a pipe",
+    "item_body": "<p>A student wants to count how many lines the program report prints, and writes:</p><pre>$ report | wc -l</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>report first saves its output in a file called wc, which is then counted</p>"},
+        {"position": 2, "item_body": "<p>wc -l runs first, and its result is handed to report</p>"},
+        {"position": 3, "item_body": "<p>The two programs run separately and print their output one after the other</p>"},
+        {"position": 4, "item_body": "<p>The output of report is fed straight into wc, which counts the lines as they arrive</p>"}
+      ]
+    },
+    "scoring_data": {"value": 4},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+Programs read text in and write text out, which is why any producer can
+feed any consumer---the uniform interface (\cref{sec:composition}).
+The item varies the producer while keeping the consumer invariant (a
+generalisation pattern): the same [[sort]] follows two different
+programs, and the student must say why that works.
+The correct answer names the shared text interface; the distractors
+invent special modes, conflate the two producers, or deny that the reuse
+is possible.
+
+<<item: the same sort after different programs>>=
+{
+  "position": 17,
+  "points_possible": 1,
+  "entry": {
+    "title": "The same sort after different programs",
+    "item_body": "<p>The first command lists a directory and passes the listing to sort, which orders lines alphabetically:</p><pre>$ ls | sort</pre><p>The same sort is then used after a different program, which lists running processes:</p><pre>$ ps | sort</pre><p>Why can sort be used after both ls and ps?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>Both ls and ps write their output as text, and sort reads any text, whatever produced it</p>"},
+        {"position": 2, "item_body": "<p>sort has one built-in mode for ls and another for ps</p>"},
+        {"position": 3, "item_body": "<p>ls and ps are the same program under two names</p>"},
+        {"position": 4, "item_body": "<p>It cannot; sort works only after ls</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+\subsubsection{The remote shell}
+
+A shell runs somewhere: every prompt belongs to exactly one machine, and
+a command acts on that machine (\cref{sec:ssh}).
+After an [[ssh]] the prompt looks the same but the machine has changed,
+which is precisely why it is easy to lose track.
+The item asks whose files a listing shows after connecting to a server.
+The correct answer follows the shell to the server; the leading
+distractor stays with the laptop the student is sitting at---the
+undiscerned-aspect case of not knowing which machine the command acts
+on.
+
+<<item: which computer answers>>=
+{
+  "position": 18,
+  "points_possible": 1,
+  "entry": {
+    "title": "Which computer answers",
+    "item_body": "<p>A student is working in a terminal on their laptop. They run:</p><pre>$ ssh server.example.edu</pre><p>and the prompt changes. They now run:</p><pre>$ ls</pre><p>Whose files are listed?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The files on the laptop, because that is where the student is sitting</p>"},
+        {"position": 2, "item_body": "<p>The files on both machines together</p>"},
+        {"position": 3, "item_body": "<p>The files on server.example.edu, because the shell is now attached to that machine</p>"},
+        {"position": 4, "item_body": "<p>No files, because ls does not work over a network</p>"}
+      ]
+    },
+    "scoring_data": {"value": 3},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+The interface is invariant while the machine varies, so parallel sessions
+are how one works on several machines at once (\cref{sec:ssh}).
+The item describes a student who needs to switch repeatedly between the
+laptop and an intermediate host.
+The correct answer opens a separate session per machine; the leading
+distractor is the ssh-cycle---chaining [[ssh]] onward and back instead of
+holding parallel sessions---which our course observations report; the
+others give up or reach for a reboot.
+
+<<item: switching between machines>>=
+{
+  "position": 19,
+  "points_possible": 1,
+  "entry": {
+    "title": "Switching between machines",
+    "item_body": "<p>A student has an SSH connection from their laptop to host A, and from A they have run ssh again to host B. They now want to run some commands on the laptop and some on A, switching back and forth. What is the best way?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>From B, run ssh back to the laptop, then ssh to A again, chaining onward each time a different machine is needed</p>"},
+        {"position": 2, "item_body": "<p>There is no way; only the machine at the end of the chain can be used</p>"},
+        {"position": 3, "item_body": "<p>Open separate terminal windows, one connected to each machine, and switch between the windows</p>"},
+        {"position": 4, "item_body": "<p>Restart the laptop to get back to it</p>"}
+      ]
+    },
+    "scoring_data": {"value": 3},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+Files live on machines: a file created on the remote host is on that
+host, not on the laptop (\cref{sec:ssh}).
+The item runs a program over SSH that writes a file, closes the
+connection, and asks where the file is.
+The correct answer keeps the file on the server where the program ran;
+the distractors bring it home to the laptop, sync it to both, or treat it
+as vanishing with the connection.
+
+<<item: where the remote file ends up>>=
+{
+  "position": 20,
+  "points_possible": 1,
+  "entry": {
+    "title": "Where the remote file ends up",
+    "item_body": "<p>Connected by SSH to a remote server, a student runs a program that creates results.txt. They then close the connection and look in the file manager on their laptop. Where is results.txt?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>On the laptop, because that is the computer the student is using</p>"},
+        {"position": 2, "item_body": "<p>On the server, because that is where the program ran; it is not on the laptop</p>"},
+        {"position": 3, "item_body": "<p>On both, because SSH keeps the two machines' files in sync</p>"},
+        {"position": 4, "item_body": "<p>Nowhere; files made over SSH are temporary and vanish when the connection closes</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+\subsection{Analysing the results}
+\label{app:quiz-analysis}
+
+Canvas compiles the responses into a student-analysis report: a CSV file
+with one row per student and one column per item, keyed by the item
+titles above.
+The analysis program fetches that report itself---we know the course and
+the quiz titles, so nothing needs to be clicked or downloaded by
+hand---using the same [[canvaslms]] machinery as the command-line tool.
+It then tabulates the two opening items and summarises the scores.
+There are no open-text items to code, so---unlike the companion paper's
+quiz program---this one writes no coding sheet.
+
+<<[[analyze_quiz.py]]>>=
+"""Fetch and summarise the terminal-quiz results.
+
+The quizzes are defined in the two quiz-knowledge-*.json files, tangled
+from the same literate source (the appendix of the paper).  The results
+come straight from Canvas via canvaslms; the item titles are the column
+keys.
+
+Requires canvaslms and its configured credentials.
+"""
+
+import argparse
+import collections
+import csv
+import os
+import statistics
+import sys
+
+<<the course and the quiz titles are the keys>>
+<<fetch the results from Canvas>>
+<<tabulate the closed items>>
+<<analysis main>>
+
+if __name__ == "__main__":
+    main()
+@
+
+The course name and the item titles are the join keys between the tangled
+files: if a title changes in a quiz, this block is the only other place
+to change---and they live in the same source, side by side.
+Canvas prefixes the report's columns with item identifiers, so we match
+columns by containment rather than equality.
+
+<<the course and the quiz titles are the keys>>=
+# TODO: confirm the course instance once the datintro26 Canvas course is
+# finalised; the code selects it by this string.
+COURSE = "datintro26"
+QUIZ_TITLES = {
+    "start": "Terminal quiz: what you know already",
+    "end": "Terminal quiz: what you know now",
+}
+STUDENT = "name"
+CLOSED_ITEMS = ["Consent", "Preparation"]
+
+
+def column_for(title, fieldnames):
+    """Return the report column whose name contains the item title."""
+    return next((name for name in fieldnames if title in name), None)
+@
+
+\subsubsection{Fetching the report from Canvas}
+
+Just as we create the quizzes with [[canvaslms]], we extract the results
+with it: the same package provides the credentials, the course lookup and
+the report machinery, so the program reuses them instead of
+reimplementing the Canvas API calls.
+The report is generated on demand by Canvas, so we request it, wait for
+it, and download the CSV it points to.
+
+<<fetch the results from Canvas>>=
+def fetch_results(which):
+    """Download the student-analysis rows for the start or end quiz."""
+    import appdirs
+    import requests
+    import canvaslms.cli
+    import canvaslms.cli.login
+    from canvasapi import Canvas
+    from canvaslms.cli.quizzes import (
+        create_new_quiz_report,
+        filter_quizzes,
+        is_new_quiz,
+        poll_progress,
+    )
+
+    config_file = os.path.join(
+        appdirs.user_config_dir("canvaslms"), "config.json"
+    )
+    config = canvaslms.cli.read_configuration(config_file)
+    hostname, token = canvaslms.cli.login.load_credentials(config)
+    if not hostname.startswith("http"):
+        hostname = f"https://{hostname}"
+    canvas = Canvas(hostname, token)
+
+    course = next(
+        c for c in canvas.get_courses()
+        if COURSE in (c.name or "") or COURSE in (c.course_code or "")
+    )
+    quiz = next(filter_quizzes([course], QUIZ_TITLES[which]))
+    if not is_new_quiz(quiz):
+        sys.exit(f"quiz {quiz.title!r} is not a New Quiz")
+
+    progress = poll_progress(
+        create_new_quiz_report(course, quiz.id, canvas._Canvas__requester)
+    )
+    url = progress.results.get("url") if progress else None
+    if not url:
+        sys.exit("Canvas did not produce the student-analysis report")
+    response = requests.get(url)
+    response.raise_for_status()
+    return list(csv.DictReader(response.text.splitlines()))
+@
+
+\subsubsection{Summaries}
+
+Tabulating a closed item is counting its answer frequencies; we print one
+table per item present in the report (the consent item only exists in the
+start quiz, the preparation item only in the end quiz).
+Since Canvas grades the knowledge items, each report carries a score
+column, which we summarise: the score distribution at the start measures
+what the students bring, and at the end, the gain.
+
+<<tabulate the closed items>>=
+def tabulate(rows, item):
+    """Print the answer frequencies for one closed item."""
+    column = column_for(item, rows[0].keys())
+    if column is None:
+        return
+    counts = collections.Counter(row[column] for row in rows)
+    print(f"\n{item}")
+    for answer, count in counts.most_common():
+        print(f"  {answer or '(no answer)'}: {count}")
+
+
+def summarize_scores(rows):
+    """Print the score distribution, if the report has scores."""
+    column = column_for("score", rows[0].keys())
+    if column is None:
+        return
+    scores = [float(row[column]) for row in rows if row[column]]
+    if scores:
+        print(f"\nscores: n={len(scores)}"
+              f", mean={statistics.mean(scores):.1f}"
+              f", median={statistics.median(scores):.1f}"
+              f", max={max(scores):.0f}")
+@
+
+The main function ties the pieces together: fetch (or read) the report
+for the requested quiz, tabulate its opening item, and summarise the
+scores.
+
+<<analysis main>>=
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--quiz", choices=QUIZ_TITLES, default="start",
+                        help="which quiz to analyse")
+    parser.add_argument("--results",
+                        help="read this CSV instead of fetching from Canvas")
+    args = parser.parse_args()
+
+    if args.results:
+        with open(args.results, newline="") as infile:
+            rows = list(csv.DictReader(infile))
+    else:
+        rows = fetch_results(args.quiz)
+    if not rows:
+        sys.exit("no responses")
+
+    print(f"{len(rows)} students")
+    for item in CLOSED_ITEMS:
+        tabulate(rows, item)
+    summarize_scores(rows)
+@

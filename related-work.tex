@@ -1,11 +1,17 @@
 \mode*
 \section{Related work}
+\label{sec:related}
 
 The Shell Tutor \autocite{Winder2024ShellTutor} is, to our knowledge, the
 main teaching intervention aimed directly at the shell (and Git); its
-logging infrastructure is also the closest thing to a corpus of student
-shell behaviour.
-Our work is complementary: where the tutor scaffolds \emph{doing}, we aim
+logging infrastructure is also one of the few corpora of student shell
+behaviour.
+A second such corpus comes from cybersecurity training, where a
+command-logging toolset records the shell commands students run and analyses
+them for solution patterns and misconceptions
+\autocite{Svabensky2021ShellCommands}.
+Both collect behaviour; neither analyses it in variation-theoretic terms.
+Our work is complementary: where the tutors scaffold \emph{doing}, we aim
 to identify \emph{what must be discerned} and how to vary it.
 Variation theory has been applied to computing education before, notably to
 programming conceptions of non-CS engineering students
@@ -13,4 +19,7 @@ programming conceptions of non-CS engineering students
 \autocite{ThuneEckerdal2018Lab}; our companion papers
 \autocite{VTProgMisconceptions,VTDebug} extend this line to misconception
 catalogues and debugging.
-% TODO(#1): Expand after the systematic search phase.
+The systematic search (\cref{app:protocol}) confirmed that the
+learner-focused literature on the file system, on composition, and on the
+remote shell remains sparse---the gaps that this paper's aspect analyses
+address.

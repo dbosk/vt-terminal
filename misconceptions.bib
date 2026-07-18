@@ -56,6 +56,71 @@
   doi={10.1145/2184512.2184546},
 }
 
+% === provenance: Svabensky2021ShellCommands ===
+% CLAIM: Logging the shell commands students run reveals their solution
+%   patterns and misconceptions; such command logs are the closest thing to a
+%   corpus of student command-line behaviour.
+% FOUND-VIA: scholar search "command line" students learning interface -p openalex
+%   (phase-two systematic round, 2026-07-18); abstract read via Semantic
+%   Scholar graph API (DOI 10.1109/fie49875.2021.9637052).
+% PICKED: the most recent open toolset that both logs student command-line
+%   activity at scale and reports what that activity reveals; complements the
+%   Shell Tutor (Winder2024ShellTutor) as a second corpus/instrument for
+%   student shell behaviour, from a cybersecurity-training rather than a
+%   CS1 setting.
+% QUOTE (abstract): "Collecting and analyzing data about the command usage
+%   can reveal valuable insights into how students progress and where they
+%   make mistakes. [...] The semiautomated data analysis revealed different
+%   solution patterns, used tools, and misconceptions of students."
+% VERIFIED: abstract read (Semantic Scholar); entails that student
+%   command-line logs surface solution patterns and misconceptions.  The
+%   study is a tool-and-deployment paper (50 students, 4439 commands over two
+%   semesters), not a misconception catalogue, so it is cited for the
+%   corpus/instrument claim, not for specific misconceptions.
+% DATE: 2026-07-18
+@inproceedings{Svabensky2021ShellCommands,
+  title={Toolset for Collecting Shell Commands and Its Application in Hands-on Cybersecurity Training},
+  author={{\v S}v{\'a}bensk{\'y}, Valdemar and Vykopal, Jan and Tovar{\v n}{\'a}k, Daniel and {\v C}eleda, Pavel},
+  booktitle={2021 IEEE Frontiers in Education Conference (FIE)},
+  publisher={IEEE},
+  year={2021},
+  pages={1--9},
+  doi={10.1109/fie49875.2021.9637052},
+}
+
+% === provenance: Karvelas2020ErrorMessages ===
+% CLAIM: Error-message presentation is one of the main mechanisms through
+%   which novices interact with a programming environment, and changing it
+%   markedly affects novice behaviour.
+% FOUND-VIA: scholar search "command line" students learning interface -p openalex
+%   (phase-two systematic round, 2026-07-18); abstract read via Semantic
+%   Scholar graph API (DOI 10.1145/3328778.3366882).
+% PICKED: a large-scale (Blackbox, thousands of users) controlled comparison
+%   isolating error-message presentation as the variable; grounds why textual
+%   feedback is treated as a critical aspect for novices.
+% QUOTE (abstract): "These environments can differ substantially in
+%   compilation behavior and error message presentation - arguably two of the
+%   most important mechanisms through which users interact with the
+%   programming language. [...] We find that the programming experience and
+%   behavior of these users can be substantially affected by changes in these
+%   mechanisms".
+% VERIFIED: abstract read (Semantic Scholar).  SCOPE NOTE: the study is set in
+%   the BlueJ Java environment (a GUI editor), not the shell; cited only for
+%   the general claim that error-message presentation shapes novice behaviour,
+%   as background for the textual-feedback critical aspect, not as evidence
+%   about the shell specifically.
+% DATE: 2026-07-18
+@inproceedings{Karvelas2020ErrorMessages,
+  title={The Effects of Compilation Mechanisms and Error Message Presentation on Novice Programmer Behavior},
+  author={Karvelas, Ioannis and Li, Annie and Becker, Brett A.},
+  booktitle={Proceedings of the 51st ACM Technical Symposium on Computer Science Education},
+  series={SIGCSE '20},
+  publisher={ACM},
+  year={2020},
+  pages={759--765},
+  doi={10.1145/3328778.3366882},
+}
+
 % === provenance: Doane1992UnixPrompts ===
 % CLAIM: Producing composite Unix commands (pipelines) is difficult, and
 %   novices are helped by concrete information where experts use abstract
@@ -405,6 +470,32 @@
   pages={010127},
   year={2020},
   doi={10.1103/physrevphyseducres.16.010127},
+}
+
+% === provenance: LiterateProgramming ===
+% CLAIM: A literate program addresses the human reader first: the program
+%   is explained to people, and tangled into machine form from the same
+%   source.
+% FOUND-VIA: known primary source; metadata verified via Crossref DOI
+%   10.1093/comjnl/27.2.97; full text from literateprogramming.com.
+% PICKED: the primary source defining literate programming.
+% QUOTE (p. 97): "Let us change our traditional attitude to the
+%   construction of programs: Instead of imagining that our main task is
+%   to instruct a computer what to do, let us concentrate rather on
+%   explaining to human beings what we want a computer to do."
+% VERIFIED: full-text PDF read (p. 97); defines exactly the practice the
+%   appendix (\cref{app:quiz}) follows (WEB's descendants: noweb).  Entry and
+%   verification reused from the companion paper's debugging.bib.
+% DATE: 2026-07-14
+@article{LiterateProgramming,
+  author =	 {Donald E. Knuth},
+  title =	 {Literate Programming},
+  journal =	 {The Computer Journal},
+  volume =	 {27},
+  number =	 {2},
+  pages =	 {97--111},
+  year =	 {1984},
+  doi =		 {10.1093/comjnl/27.2.97},
 }
 
 % Companion papers (self-references; no external verification needed).

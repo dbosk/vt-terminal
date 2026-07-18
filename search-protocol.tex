@@ -47,9 +47,98 @@ Not yet verified at full text (tracked in the course repository's issues
 
 \subsection{Phase two: systematic round}
 
-% TODO(#1): To be run and documented here, mirroring the companion paper's
-% appendix: providers, queries (keyword and research-question driven),
-% screening criteria and decisions, and the comparison against the seed
-% round. Priority gaps to cover: CLI misconceptions in CS-education
-% venues, learner (not professional-user) file-system mental models, and
-% SSH/remote-shell learning (no sources found in phase one).
+The systematic round (2026-07-18) targeted the four gaps the seed round left
+open: command-line and shell misconceptions in CS-education venues; learners'
+(as opposed to professional users') file-system mental models; SSH and
+remote-shell learning; and pipeline-construction difficulty.
+It was run with the \texttt{scholar} tool against OpenAlex.
+Two intended providers were unavailable: DBLP returned zero results for every
+query in this session---including the seed round's known-good
+\texttt{scholar search "shell tutor" -p dblp}---and Semantic Scholar's search
+endpoint was rate-limited, usable only for DOI-keyed abstract lookups.
+OpenAlex therefore carried the round; abstracts were read through the
+OpenAlex and Semantic Scholar APIs.
+Each retained reference was read at least at abstract level and recorded with
+a provenance block in \texttt{misconceptions.bib}.
+
+Both keyword and research-question-driven queries were used.
+The research-question queries were generated with \texttt{scholar rq} from the
+paper's research questions, one per gap:
+
+\begin{itemize}
+  \item \texttt{scholar rq "What misconceptions and difficulties do learners
+    have with the Unix command line and shell?" -p openalex}
+  \item \texttt{scholar rq "How do students or novice users understand
+    hierarchical file systems, directories and paths?" -p openalex}
+  \item \texttt{scholar rq "How do learners understand SSH and remote shell
+    access to another machine?" -p openalex}
+  \item \texttt{scholar rq "Why do users find it difficult to compose Unix
+    commands with pipes and build shell pipelines?" -p openalex}
+\end{itemize}
+
+\texttt{scholar rq} generated Boolean queries for each (e.g.\ for the shell
+question, \enquote{(Unix command line OR shell OR bash OR terminal) AND
+(learners OR students OR novices OR beginners) AND (misconceptions OR
+difficulties OR errors OR challenges OR mental models OR misunderstandings)}),
+but its large paged fetch was repeatedly rate-limited by OpenAlex; the same
+coverage was therefore obtained through the smaller phrase queries below,
+which mirror the generated terms.
+The keyword and phrase queries, grouped by gap:
+
+\begin{itemize}
+  \item \emph{Command line and shell.}
+    \texttt{scholar search "command line interface novice programmers" -p
+    openalex}; \texttt{scholar search '"command line" students learning
+    interface' -p openalex}; \texttt{scholar search 'shell OR "command line"
+    students misconceptions difficulties learning' -p openalex}.
+  \item \emph{File system.}
+    \texttt{scholar search "students mental model file system directory" -p
+    openalex}; \texttt{scholar search '"directory structure" students
+    understanding files folders' -p openalex}; \texttt{scholar search "novice
+    users hierarchical file system directories mental models understanding"
+    -p openalex}.
+  \item \emph{Remote shell.}
+    \texttt{scholar search "SSH remote access students learning" -p openalex};
+    \texttt{scholar search '"secure shell" OR "remote login" learning students
+    education' -p openalex}; \texttt{scholar search 'SSH OR "secure shell" OR
+    "remote shell" learners understanding misconceptions' -p openalex}.
+  \item \emph{Composition.}
+    \texttt{scholar search "Unix pipe pipeline composition difficulty" -p
+    openalex}; \texttt{scholar search 'shell pipe OR pipeline composition
+    difficulty users novice construct' -p openalex}.
+\end{itemize}
+
+Screening kept a result only if it concerned \emph{learners or novices} and
+one of the four objectives, at a level of description useful for the aspect
+analysis; systems papers (file-system benchmarks, kernel internals) and the
+large volumes of unrelated medical, machine-learning and health-education
+hits that the broad queries returned were discarded.
+Two references were retained.
+The command-line queries surfaced a command-logging toolset for hands-on
+cybersecurity training, whose analysis of the shell commands students run
+reports \enquote{different solution patterns, used tools, and misconceptions
+of students} \autocite{Svabensky2021ShellCommands}---a second corpus of
+student shell behaviour alongside the Shell Tutor, cited in
+\cref{sec:shell,sec:related}.
+The same queries surfaced a controlled study of how error-message
+presentation shapes novice behaviour \autocite{Karvelas2020ErrorMessages},
+retained (with its scope---the BlueJ programming environment, not the
+shell---recorded in its provenance block) as background for treating the
+shell's textual feedback as a critical aspect (\cref{sec:shell}).
+One promising command-line title, \emph{Automated testing of Unix
+command-line and scripting skills} (ITHET 2006), was \emph{not} retained: no
+abstract was accessible through any provider this session, and the protocol
+forbids citing what has not been read.
+
+For the three remaining gaps the round is a confirmation rather than a
+harvest.
+The file-system queries returned only professional-user or systems work and
+no study of how learners build a mental model of the directory tree; the
+remote-shell queries returned nothing on SSH or remote-shell learning; and
+the composition queries returned no later replication or CS-education study of
+pipeline-construction difficulty, leaving \textcite{Doane1992UnixPrompts} the
+sole source.
+These empty results substantiate the gaps that \cref{sec:filesystem,sec:ssh}
+and \cref{sec:composition} fill with aspect analyses grounded in course
+observations rather than in a learner-focused literature that does not yet
+exist.

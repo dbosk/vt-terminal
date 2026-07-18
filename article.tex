@@ -17,6 +17,14 @@
 \usepackage[inline]{enumitem}
 \setlist[enumerate]{label=(\arabic*)}
 
+% The appendix literate program is woven with noweave; article-only, so
+% noweb.sty is loaded here and not in the shared preamble.  The [minted]
+% option makes noweb typeset the chunks with minted (the weave runs the
+% tominted filter), which highlights them and wraps long lines
+% (breaklines, set in the shared preamble).
+\usepackage[minted]{noweb}
+\noweboptions{breakcode,longchunks}
+
 \title{%
   The terminal through the lens of variation theory:
   misconceptions and critical aspects of the Unix shell%
@@ -57,6 +65,7 @@
 
 \appendix
 
+\input{quiz.tex}
 \input{search-protocol.tex}
 
 \end{document}

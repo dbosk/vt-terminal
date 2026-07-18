@@ -18,9 +18,18 @@ experts \autocite{Doane1992UnixPrompts}.
 Beginning programming students are commonly introduced through visual
 environments rather than the command line \autocite{Dillon2012MentalModels},
 so we must assume no prior CLI exposure.
-% TODO(#1): The systematic search phase (cf. \cref{sec:method-litreview}) must
-% look for newer CS-education sources on CLI misconceptions specifically;
-% the Shell Tutor group's logging data may be the closest existing corpus.
+The systematic search (\cref{app:protocol}) confirmed this scarcity: it
+turned up teaching interventions and command-logging tools rather than
+studies of shell misconceptions.
+The closest data on how students actually use the command line come from
+logging the commands they run, which reveals their solution patterns and
+misconceptions \autocite{Svabensky2021ShellCommands}.
+As for the feedback the shell gives back, the programming-education
+literature finds that error-message presentation is one of the main
+mechanisms through which novices interact with a system, and that changing it
+markedly affects their behaviour \autocite{Karvelas2020ErrorMessages}---a
+reason to treat the shell's textual feedback as something the learner must
+come to read.
 % TODO(#3): Add misconceptions observed in our own course's grading and
 % tutoring data (datintro), clearly separated from the literature-derived
 % ones.

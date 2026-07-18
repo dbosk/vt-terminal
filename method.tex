@@ -34,12 +34,9 @@ provenance (query, selection rationale, verbatim supporting quote,
 verification level); the protocol and queries are in \cref{app:protocol}.
 The second phase is a systematic, tool-supported multi-database search with
 the \texttt{scholar} tool, as in the companion papers
-\autocite{VTProgMisconceptions,VTDebug}.
-% TODO(#1): The systematic phase has not yet run for this paper. Its queries
-% must cover: shell/CLI misconceptions, command-line education
-% interventions, file-system mental models in learners (the seed round
-% found only professional-user PIM studies), and SSH/remote-shell learning
-% (the seed round found nothing).
+\autocite{VTProgMisconceptions,VTDebug}; it covered shell and command-line
+misconceptions, command-line education, learners' file-system mental models,
+and SSH and remote-shell learning, and is documented in \cref{app:protocol}.
 
 \subsection{Variation-theory analysis}
 \label{sec:method-vt-analysis}
@@ -59,3 +56,45 @@ programming environments afford for learning
 \autocite{Svensson2020Affordances} and that variation theory has been shown
 to support in lab-based computing teaching
 \autocite{ThuneEckerdal2009Variation,ThuneEckerdal2018Lab}.
+
+\subsection{Course instruments}
+\label{sec:instruments}
+
+The candidate critical aspects (\cref{rq:aspects}) are, at this stage, the
+product of the analysis, not yet an empirical finding: we argue that a
+learner who has not discerned an aspect will make the corresponding
+mistake, but we have not measured whether discerning it is what the module
+changes.
+To make that future validation possible, we prepare a pre/post-test.
+It is a pair of short diagnostic quizzes, run at the start and again at the
+end of the terminal module: one graded item per candidate critical aspect,
+whose distractors express the documented misconceptions and the plausible
+behaviour of a learner who has not discerned the aspect.
+Administered at the start, the test measures which aspects the students
+already discern; administered again at the end, the difference measures
+what the module made discernible.
+The instrument therefore operationalises the analysis of
+\cref{sec:shell,sec:filesystem,sec:composition,sec:ssh}, so that a later
+study can test whether the identified aspects are the ones that separate
+students who succeed at the shell from those who do not.
+The two quizzes, their items, and the program that summarises their results
+are set up in the learning platform by the literate program of
+\cref{app:quiz}.
+
+The pre/post-test is one of two data sources the follow-up will have.
+The other is the course's own assessment: the terminal and SSH labs are
+graded by checking the state the student produced on the shared server,
+and each check operationalises a candidate critical aspect---path
+errors, for instance, are direct observations of undiscerned
+file-system aspects (\cref{sec:filesystem}).
+Each check failure is thus a misconception observation collected by the
+assessment the course already runs, over repeated attempts (the grading
+runs all year), giving attempt trajectories: which aspects block
+students first, and which persist.
+The two sources are kept methodologically separate to avoid
+circularity: codes derived from the assessment traces are never
+correlated with those same traces; the pre/post-test is the independent
+measure of discernment.
+Participation is opt-in through the consent item of the pre-test, which
+covers course submissions; grading runs for all students regardless,
+and research extraction filters by consent afterwards.
