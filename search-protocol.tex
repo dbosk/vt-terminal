@@ -142,3 +142,35 @@ These empty results substantiate the gaps that \cref{sec:filesystem,sec:ssh}
 and \cref{sec:composition} fill with aspect analyses grounded in course
 observations rather than in a learner-focused literature that does not yet
 exist.
+
+\subsection{Extended-database round (2026-07-19)}
+
+The rounds above searched only the keyless providers (DBLP, OpenAlex,
+Semantic Scholar); Web of Science, Scopus and IEEE~Xplore were configured
+but unused.
+This round repeated the gap-critical queries across all providers:
+\begin{itemize}
+  \item \texttt{scholar search "command line interface students
+    misconceptions" -p wos -p scopus -p ieee} --- retained
+    \autocite{Salerno2026ToolInstallation} (novice tool-installation
+    challenges, EMSE) and identified \emph{The Linux Luminarium}
+    (Shoshitaishvili, Doup\'e \& Nelson, SIGCSE~TS 2026, DOI
+    10.1145/3770762.3772655, CC-BY): a Linux-teaching curriculum
+    explicitly designed around eliminating manual-setup barriers.
+    % TODO: The Luminarium's full text is open (CC-BY) but ACM blocked
+    % automated retrieval; read and, if it documents learner
+    % difficulties, retain with provenance.
+  \item \texttt{scholar search "unix shell terminal teaching novices" -p
+    wos -p scopus -p ieee} --- teaching interventions only, no
+    misconception study.
+  \item \texttt{scholar search "SSH remote access teaching students" -p
+    wos -p scopus -p ieee} --- remote-lab platform papers only: the
+    SSH-learning gap \emph{holds across Web of Science, Scopus and IEEE
+    Xplore as well}.
+  \item \texttt{scholar search "file system folder hierarchy students
+    mental model" -p wos -p scopus} --- nothing on-topic: the
+    learner-file-system gap likewise holds across the added databases.
+\end{itemize}
+Natural-language queries rank noticeably worse in Web of Science and
+Scopus than in the CS-specific indexes; a future round should use their
+field-tagged syntax (\texttt{scholar syntax}).
