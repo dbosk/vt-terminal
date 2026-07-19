@@ -174,3 +174,28 @@ This round repeated the gap-critical queries across all providers:
 Natural-language queries rank noticeably worse in Web of Science and
 Scopus than in the CS-specific indexes; a future round should use their
 field-tagged syntax (\texttt{scholar syntax}).
+
+\subsection{Named-session field-tagged round (2026-07-19)}
+
+The extended-database round above used natural-language queries, which
+rank poorly in Web of Science and Scopus; this round re-ran the searches
+with each provider's field-tagged syntax, recorded under the
+\texttt{scholar} session \texttt{vt-terminal-systematic}, whose full
+export (queries, every screened paper, and each keep/discard decision
+with its reason) is in \texttt{literature-review/} in this repository.
+Queries (WoS \texttt{TS=}, Scopus \texttt{TITLE-ABS-KEY}): the command
+line with students/novices and
+misconception/difficulty/learning terms; Unix/Linux shell teaching;
+SSH with teaching/learning terms; and the file system with mental-model
+terms.
+Retained: \autocite{Berry2022ShellOnYou} (ShellOnYou, ITiCSE 2022),
+\autocite{May2019FileLifecycle} (user-vs-OS file-model mismatch, ACM
+TOS), \autocite{Khamvongsa2026UnixBiologists} (Unix curriculum for life
+scientists), and \autocite{Costa2023SSHAssess} (assessment over SSH,
+cited to characterise the SSH gap precisely).
+Screened and discarded, with reasons in the session export: a
+perception-survey study of early practical-skills exposure, an
+LLM-tutoring tool, and an Android file-events study overlapping the
+retained TOS article.
+The SSH and learner-file-system gaps stand: even field-tagged queries
+return tooling and interventions, not studies of learner understanding.
