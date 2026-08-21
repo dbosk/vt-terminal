@@ -13,8 +13,51 @@ research gap for the shell itself \autocite{Winder2024ShellTutor} and for
 SSH (nothing found).
 
 \rqaspects*
-Preliminary candidate aspects are listed per objective in
-\cref{sec:shell,sec:filesystem,sec:composition,sec:ssh}.
+Thirteen candidate aspects, listed per objective in
+\cref{sec:shell-aspects,sec:filesystem-aspects,sec:composition-aspects,sec:ssh-aspects}
+and summarised in \cref{tab:aspects}.
+Their evidential status is uneven and is stated with each: four are read
+off difficulties documented in the literature, four off our own course
+observations, and five are posited from the structure of the object of
+learning; one of the thirteen (\emph{one tree, two views}) is the
+file-system instance of another (\emph{the shell acts on the same system
+as the GUI}).
+Every aspect has an item in the pre/post-test of \cref{app:quiz}, which
+is what will turn \enquote{candidate} into \enquote{critical} or not.
+
+\begin{table}
+  \begin{sidecaption}{The candidate critical aspects, what each is read
+    off, and the item of \cref{app:knowledge-items} that tests
+    it.}[tab:aspects]
+    \small
+    \begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.36\linewidth}l>{\raggedright\arraybackslash}p{0.34\linewidth}@{}}
+      \toprule
+      Aspect & Read off & Item \\
+      \midrule
+      \multicolumn{3}{@{}l}{\emph{The command model} (\cref{sec:shell-aspects})} \\
+      A language, not a search box & literature & the command line reads a language; a space in a file name \\
+      Textual feedback & literature & a message after a command \\
+      Same system as the GUI & posited & the same files from two sides \\
+      \addlinespace
+      \multicolumn{3}{@{}l}{\emph{The file system} (\cref{sec:filesystem-aspects})} \\
+      Everything has a place & literature & where a saved file is \\
+      Where am I? & course & which directory the command uses \\
+      One tree, two views & posited & the same files from two sides \\
+      Absolute versus relative & course & two names for one file \\
+      \addlinespace
+      \multicolumn{3}{@{}l}{\emph{Composition} (\cref{sec:composition-aspects})} \\
+      The pipe is not the file & literature & sending output into a pipe \\
+      Uniform interfaces & posited & the same sort after different programs \\
+      A script is nothing new & posited & running the same commands from a file \\
+      \addlinespace
+      \multicolumn{3}{@{}l}{\emph{The remote shell} (\cref{sec:ssh-aspects})} \\
+      A shell runs somewhere & course & which computer answers \\
+      Same shell, different computer & course & where exit leaves you \\
+      Files live on machines & posited & where the remote file ends up \\
+      \bottomrule
+    \end{tabular}
+  \end{sidecaption}
+\end{table}
 
 \rqpatterns*
 Preliminary patterns accompany each aspect; they are to be realised as

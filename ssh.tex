@@ -27,16 +27,36 @@ of opening parallel sessions.
 % literature.
 
 \subsection{Candidate critical aspects}
+\label{sec:ssh-aspects}
 
-% XXX Preliminary.
-\begin{itemize}
-  \item \emph{A shell runs somewhere}: every prompt belongs to exactly one
-    machine; the prompt (and \texttt{hostname}) tells you where you are.
-  \item \emph{Same shell, different computer}: the interface is invariant,
-    the machine varies---which is precisely why it is easy to lose track.
-  \item \emph{Files live on machines}: a file created on the remote host
-    is not on the laptop, and vice versa.
-\end{itemize}
+With no literature to read off, the aspects below rest on the course and
+IT observations above (to be cited as course data,
+\cref{sec:method-vt-analysis}) and on the object of learning.
+
+\begin{description}
+  \item[A shell runs somewhere]
+    Every prompt belongs to exactly one machine, and a command acts on
+    that machine; the prompt (and \texttt{hostname}) tells you where you
+    are.
+    Read off the observation that students lose track of which machine
+    their shell is attached to.
+    Tested by the item \emph{which computer answers}
+    (\cref{app:knowledge-items}).
+  \item[Same shell, different computer]
+    The interface is invariant while the machine varies---which is
+    precisely why it is easy to lose track.
+    Read off the ssh-cycle observation: a student who chains
+    \texttt{ssh} onward and back again has not discerned that each
+    session is one machine and that leaving one returns to the one
+    below.
+    Tested by the item \emph{where exit leaves you}.
+  \item[Files live on machines]
+    A file created on the remote host is not on the laptop, and vice
+    versa.
+    Posited from the object of learning as the consequence of the first
+    aspect for the file system of \cref{sec:filesystem}.
+    Tested by the item \emph{where the remote file ends up}.
+\end{description}
 
 \subsection{Patterns of variation}
 
