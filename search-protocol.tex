@@ -199,3 +199,185 @@ LLM-tutoring tool, and an Android file-events study overlapping the
 retained TOS article.
 The SSH and learner-file-system gaps stand: even field-tagged queries
 return tooling and interventions, not studies of learner understanding.
+
+\subsection{Measurement round (2026-08-21): has learners' understanding of
+the shell been measured?}
+\label{sec:protocol-measurement}
+
+The rounds above asked what the literature says about learners'
+misconceptions of the shell; this round asks a prior question that
+\cref{sec:instruments,sec:related} rely on: \emph{has learners' understanding
+of the Unix shell, the command line, the file system as users see it, or
+SSH actually been measured}---by a phenomenographic study, a diagnostic
+instrument or concept inventory, or a knowledge test---and what measures
+the existing empirical work does use.
+A second, methodological sub-question is whether the pre-/post-test design
+of \cref{sec:instruments} has a precedent in learning-study practice and in the
+diagnostic-instrument literature.
+
+\paragraph{Method.}
+Fifteen queries were run with the \texttt{scholar} tool under the session
+\texttt{vt-terminal-measurement}, each against OpenAlex, Scopus and Web of
+Science, with DBLP added to the four shortest (DBLP returned HTTP~500 on
+longer queries that day); Semantic Scholar was unavailable throughout the
+round (\texttt{scholar providers check}: API key rejected, HTTP~403), so
+its coverage is missing and abstracts that only it holds were fetched
+through its anonymous graph API by DOI.
+Twenty results per provider per query were kept.
+The queries, verbatim:
+\begin{itemize}
+  \item \emph{Measurement of shell understanding.}
+    \texttt{"command line misconceptions students pre-test post-test"};
+    \texttt{"phenomenographic study students understanding command line"};
+    \texttt{"phenomenographic UNIX students"};
+    \texttt{"concept inventory Linux command line"};
+    \texttt{"students mental model file system hierarchy folders"};
+    \texttt{"unix shell course learning outcomes pre post quiz students"}.
+  \item \emph{What the existing work measures.}
+    \texttt{"Software Carpentry shell workshop assessment learning"};
+    \texttt{"bash shell novice errors study terminal usability"};
+    \texttt{"command line self-efficacy survey students computing course"}.
+  \item \emph{Method precedents.}
+    \texttt{"two-tier diagnostic test misconceptions development"};
+    \texttt{"concept inventory computer science development validation
+    interviews"};
+    \texttt{"learning study pre-test post-test critical aspects Marton
+    Pang"}.
+  \item \emph{Counter-searches} (phrased to surface the interview and
+    think-aloud studies that would refute the gap):
+    \texttt{"ways of experiencing command line terminal students
+    conceptions interviews"};
+    \texttt{"students conceptions files folders directories interview study
+    understanding"};
+    \texttt{"Unix shell learners think-aloud protocol study"}.
+\end{itemize}
+The session collected 522 distinct papers (436 from the fifteen topic queries, the rest from the three known-item title searches below).
+Abstracts were filled in with \texttt{scholar enrich} (110 added; the
+rest came with the provider records or have none); the full list was then
+classified zero-shot against a written research context with
+\texttt{scholar llm classify} (GPT-5.4 via GitHub Copilot), which kept 99
+and discarded 423; every paper the model kept, and every discarded paper
+whose title mentions the shell, Unix, the command line, the file system or
+phenomenography, was then read by hand and decided, the model's over-keeps
+(single-topic science diagnostic tests, Carpentry workshop reports,
+learning studies in other domains) being re-labelled with their reason;
+the model's labels and confidences remain in the session export.
+The final tally is 32 kept (cited or recorded as corroboration) and 490
+discarded, each with its reason.
+Decisions were recorded with \texttt{scholar sessions decide}; the export
+(queries, every screened paper with abstract, decision and reason) is in
+\texttt{literature-review/vt-terminal-measurement.\{bib,csv,tex\}}, and each
+retained reference carries a provenance block in
+\texttt{misconceptions.bib} or \texttt{theory.bib}.
+Four references were \emph{not} returned by the topic queries and were
+retrieved as known items, which the provenance blocks state: the
+operating-systems concept inventory and the concept-inventory review
+\autocite{WebbTaylor2014OSCI,Taylor2014CI} and the uAssign platform
+\autocite{BaileyZilles2019uAssign}, identified outside the session and
+added to it by title search; and Greening's 1996 paper
+\autocite{Greening1996Unix}, reached by citation chaining from
+\textcite{DoyleLister2006Unix}.
+One reference is re-used from the systematic session, where it had been
+screened out as a perception survey, for exactly that characterisation
+\autocite{Buxton2024Perception}.
+
+\paragraph{Results.}
+The hit list is dominated by false positives---science-education
+diagnostic tests, nursing and psychology scale-development papers,
+software manuals that mention a command line---which the classifier
+discarded; the on-topic residue falls into five groups.
+\emph{Phenomenographic studies.}
+Exactly one phenomenographic study of students learning Unix exists:
+six interviews with students who had just completed a first Unix course,
+yielding a hierarchical outcome space (Unix as a set of commands; as a tool
+for solving certain problems; as a professional computing environment)
+that co-varies with course marks, and which the authors present as
+preliminary and unsaturated \autocite{DoyleLister2006Unix}.
+Its interview protocol asked what students understood by
+\enquote{script}, \enquote{file system} and \enquote{pipe}, but no
+instrument was built from the answers.
+The same authors' teacher counterpart (nine academics) finds conceptions
+\enquote{broadly consistent} with the student outcome space
+\autocite{DoyleLister2007WhyUnix}.
+The only earlier study of students learning Unix that Doyle and Lister
+could cite is a qualitative discussion of sources of difficulty
+\autocite{Greening1996Unix}.
+The counter-searches returned no second interview or think-aloud study of
+learners' shell understanding; phenomenographic work in computing
+education that the queries did surface concerns concurrency and vectors,
+not the shell.
+\emph{Diagnostic instruments and concept inventories.}
+No validated diagnostic instrument or concept inventory for the shell, the
+command line, the user-level file system or SSH was found.
+The field review reports no widely used, validated concept inventory for
+computer science at all, with the groundwork concentrated on CS1 and
+digital logic \autocite{Taylor2014CI}; the CS1 test items developed with
+think-aloud interviews \autocite{Vahrenhold2014TestItems} confirm where
+that groundwork lies.
+The nearest instrument is an operating-systems concept inventory whose
+items concern OS internals (its file-system item is block-map
+indirection), whose distractors come from instructor experience, and
+whose validation the authors defer to future student interviews
+\autocite{WebbTaylor2014OSCI}.
+The nearest \emph{measurement of conceptions} is likewise in an
+operating-systems course: seven students' conceptions of virtual memory,
+derived from written tests at the beginning and end of the course
+\autocite{Pamplona2024VirtualMemory}---the method this paper adopts,
+applied to a neighbouring topic.
+\emph{Perception and confidence surveys.}
+What the remaining empirical work measures is perception: the
+Carpentries' pre- and post-workshop surveys (over 14\,000 pre-workshop
+responses) record self-reported perspectives, skills and confidence
+\autocite{Jordan2018Carpentry}; the uAssign evaluation reports improved
+\enquote{terminal skill confidence} and satisfaction, and its authors note
+that terminal skills are otherwise assessed not at all or by basic
+multiple-choice quizzes \autocite{BaileyZilles2019uAssign}; a
+three-year longitudinal survey of practical-skills exposure, command-line
+tools included, measures interest and use \autocite{Buxton2024Perception};
+a 2025 comparison of chatbots for a Unix-shell course reports Net Promoter
+Scores from four surveys \autocite{Berengueres2025Chatbots}; and the
+student-led \enquote{Missing CS Class} is evaluated by self-efficacy
+ratings \autocite{Gilson2022MissingCSClass}.
+The one assessment of command-line proficiency as such is a live checkoff
+in which students demonstrate skills and verbalise concepts to a teaching
+assistant, again with confidence surveyed alongside
+\autocite{McMahon2026Checkoffs}---a skill check, not an instrument of
+understanding.
+\emph{Command-log tooling.}
+The other measured quantity is behaviour: terminal histories matched
+against milestones to monitor progress on hands-on exercises
+\autocite{Mirkovic2020Terminal}, and pattern mining over 8\,834 commands
+from 113 cybersecurity trainees to reveal strategies and mistakes
+\autocite{Svabensky2022PatternMining}, extending the command-log corpus
+already cited \autocite{Svabensky2021ShellCommands}.
+\emph{Learning-study precedents.}
+The learning-study literature supplies the design this paper's method
+follows: a pre-test (written task plus interviews) used to identify the
+critical aspects that separate the qualitatively different ways of
+understanding, the same task repeated as post-test, and the comparison
+read against what was enacted \autocite{PangMarton2005}; the procedure is
+standard in variation-theory lesson studies, where the teacher team
+identifies critical aspects and collects pre- and post-test data
+\autocite{Kullberg2017ZDM}.
+In the diagnostic-instrument literature, interviews and open-ended tests
+are the most common route to students' conceptions, ahead of
+multiple-choice and multiple-tier tests \autocite{KaltakciGurel2015Diagnostics}.
+
+\paragraph{Conclusion.}
+Barely, and never with an instrument built for the shell: one preliminary
+phenomenographic study (and its teacher counterpart) exists; no diagnostic
+instrument or concept inventory for the shell, the
+command line, the user-level file system or SSH exists, the nearest being
+an operating-systems inventory built from instructor experience; and the
+rest of the empirical work measures confidence, satisfaction, skill
+performance or command histories rather than understanding.
+The qualification is that measurement of conceptions by written pre- and
+post-tests \emph{has} been done in the neighbouring operating-systems
+course \autocite{Pamplona2024VirtualMemory}, so the gap is specific to the
+shell, not to computing education's methods; the learning-study tradition
+\autocite{PangMarton2005,Kullberg2017ZDM} and the diagnostic-instrument
+typology \autocite{KaltakciGurel2015Diagnostics} give the pre-/post-test
+design of \cref{sec:instruments} its precedent.
+Semantic Scholar's absence from the round is the main limitation; the
+claim rests on OpenAlex, Scopus and Web of Science, plus DBLP for the
+short queries.
