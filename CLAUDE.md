@@ -69,5 +69,24 @@ base (NCOL etc.), shared with the companion papers.
 
 Scaffold stage: research questions, method skeleton, seeded literature, and
 preliminary aspect/pattern analyses per chapter are in place. The systematic
-literature-search phase (phase two in `search-protocol.tex`) has not run
-yet; `% TODO`/`% XXX` comments mark the open work.
+literature-search phase (`search-protocol.tex`) has run in several rounds,
+including a measurement round (has learners' shell understanding been
+measured? — one phenomenographic study, Doyle & Lister 2006; no shell
+concept inventory). `% TODO`/`% XXX` comments mark the open work.
+
+## The instrument (`quiz.nw`)
+
+`quiz.nw` is a literate program (noweb; `make programs` tangles
+`quiz-knowledge-{start,end}.json` and `analyze_quiz.py`, all gitignored).
+Each quiz has an opener (consent / preparation, position 1), four open
+essay items (positions 3–6, the phenomenographic accounts — placed *before*
+the closed items and shown one at a time without backtracking so the
+distractors cannot seed the accounts) and thirteen closed knowledge items
+(positions 11–23, one per candidate critical aspect, in chapter order).
+Items are keyed by title in the Canvas report; `analyze_quiz.py` reads the
+answer key from the tangled start-quiz JSON, filters by consent, prints
+per-item facility and distractor counts, paired pre/post gains
+(`--quiz both --results start.csv end.csv`) and writes a long-format
+coding sheet for the accounts (optional `--llm` pre-coding in separate
+`suggested_*` columns). Activate the `literate-programming` skill before
+editing `quiz.nw`.
