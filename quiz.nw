@@ -1196,6 +1196,7 @@ import sys
 <<the courses and the item titles are the keys>>
 <<the answer key from the quiz description>>
 <<fetch the results from Canvas>>
+<<attach the login IDs>>
 <<the consent filter>>
 <<tabulate the closed items>>
 <<per-item facility and distractor frequencies>>
@@ -1218,13 +1219,16 @@ The analysis therefore fetches the report from every course in the list
 that has the quiz, pools the rows, and tags each row with its course, so
 the cohorts stay separable; a course or quiz not found is noted and
 skipped, since the copy is made by hand and may lag this source.
-Pooling changes what identifies a student: the reports carry names, and
-two students in different courses may share one, so every join below
-keys on the pair of course and name---[[student_of]]---never on the name
-alone, lest namesakes pair with each other or inherit each other's
-consent.
-(Rows read from a results file without a course column all key as the
-empty course, so single-course use is unchanged.)
+A name cannot identify a student: two students may share one even
+within a course, let alone across the pooled ones.
+The identifier is the student's \emph{login ID}---an email address,
+unique across the institution and beyond, and the identifier the
+surrounding tooling already keys results by---which the report does not
+carry, so [[fetch_results]] attaches it to every row from the course's
+own roster (\cref{app:quiz-analysis}).
+Every join below goes through [[student_of]], which uses the login ID
+and falls back to the course--name pair only for rows read from a saved
+report, which lack the attached column.
 The coding columns are the open scheme: a category of description, what
 the account shows the student discerning and not discerning, and notes;
 the suggested columns mirror them and add the model's rationale.
@@ -1237,6 +1241,7 @@ columns by containment rather than equality.
 # progd22, so progd26 is the guess).
 COURSES = ["datintro26", "progd26"]
 COURSE_COLUMN = "course"
+LOGIN_COLUMN = "login"
 QUIZ_TITLES = {
     "start": "Terminal quiz: what you know already",
     "end": "Terminal quiz: what you know now",
@@ -1259,8 +1264,12 @@ def column_for(title, fieldnames):
 
 
 def student_of(row):
-    """Return the (course, name) pair that identifies a student."""
-    return (row.get(COURSE_COLUMN, ""), row[STUDENT])
+    """Return the identifier of the student behind a row.
+
+    The login ID attached by fetch_results when available; rows read
+    from a saved report lack it and fall back to the course--name pair.
+    """
+    return row.get(LOGIN_COLUMN) or (row.get(COURSE_COLUMN, ""), row[STUDENT])
 @
 
 \subsubsection{The answer key}
@@ -1399,10 +1408,62 @@ def fetch_results(which):
             sys.exit(f"Canvas did not produce the report for {name}")
         response = requests.get(url)
         response.raise_for_status()
-        for row in csv.DictReader(response.text.splitlines()):
+        course_rows = list(csv.DictReader(response.text.splitlines()))
+        for row in course_rows:
             row[COURSE_COLUMN] = name
-            rows.append(row)
+        attach_logins(course_rows, course, name)
+        rows.extend(course_rows)
     return rows
+@
+
+The report identifies its rows by name and, in its [[id]] and [[sis_id]]
+columns, by the platform's and the institution's identifiers; the login
+ID lives in the course roster.
+So each row is looked up in the roster: by the platform ID, else by the
+institutional ID, else---for a report that carries neither---by name,
+which is accepted only when exactly one enrolled student bears it; an
+ambiguous name is reported rather than silently mis-joined, and such
+rows keep the course--name fallback of [[student_of]].
+
+<<attach the login IDs>>=
+def attach_logins(rows, course, name):
+    """Attach each row's student login ID from the course roster."""
+    by_id, by_sis, by_name = {}, {}, {}
+    try:
+        students = list(course.get_users(enrollment_type=["student"]))
+    except Exception as error:
+        print(f"warning: cannot read the roster of {name}: {error}")
+        return
+    for user in students:
+        login = getattr(user, "login_id", None)
+        if not login:
+            continue
+        by_id[str(user.id)] = login
+        sis = getattr(user, "sis_user_id", None)
+        if sis:
+            by_sis[str(sis)] = login
+        by_name.setdefault(user.name, []).append(login)
+    if not rows:
+        return
+    id_column = next((c for c in rows[0] if c.strip().lower() == "id"), None)
+    sis_column = next((c for c in rows[0]
+                       if c.strip().lower() == "sis_id"), None)
+    for row in rows:
+        login = None
+        if id_column and row.get(id_column):
+            login = by_id.get(str(row[id_column]).strip())
+        if not login and sis_column and row.get(sis_column):
+            login = by_sis.get(str(row[sis_column]).strip())
+        if not login:
+            candidates = by_name.get(row[STUDENT], [])
+            if len(candidates) == 1:
+                login = candidates[0]
+            elif len(candidates) > 1:
+                print(f"warning: several students in {name} are named"
+                      f" {row[STUDENT]!r} and the report has no usable ID"
+                      f" column; falling back to course and name")
+        if login:
+            row[LOGIN_COLUMN] = login
 @
 
 \subsubsection{Consent}
@@ -1417,8 +1478,8 @@ program says so rather than silently keeping everyone.
 def consenting(rows):
     """Return the students who consented, or None if unasked.
 
-    Students are (course, name) pairs, so namesakes across the pooled
-    courses stay distinct.
+    Students are login IDs (or the course--name fallback), so namesakes
+    stay distinct.
     """
     column = column_for(CONSENT, rows[0].keys())
     if column is None:
@@ -1501,8 +1562,8 @@ def item_table(rows, knowledge):
 
 The gain is a within-student quantity: the same student, the same item,
 before and after.
-The two reports are joined on the student---the course and name pair,
-so that namesakes across courses do not pair---and for each item the
+The two reports are joined on the student---the login ID, so that
+namesakes never pair, not even within one course---and for each item the
 program counts how many of the paired students were right at the start,
 how many at the end, and---the two numbers that matter---how many moved
 from wrong to right and from right to wrong; they are the discordant
@@ -1599,8 +1660,8 @@ def llm_precode(records):
     return suggestions
 @
 
-The sheet is in long format---one row per student, quiz and item, with the course the student
-belongs to---for
+The sheet is in long format---one row per student, quiz and item, with the course the
+student belongs to and the login ID that identifies them---for
 two reasons.
 The categories are formed per phenomenon, so the coder reads all the
 accounts of one item together, which a sort on the item column gives;
@@ -1623,6 +1684,7 @@ def open_records(rows, quiz, stems):
             if answer:
                 records.append({"quiz": quiz, STUDENT: row[STUDENT],
                                 COURSE_COLUMN: row.get(COURSE_COLUMN, ""),
+                                LOGIN_COLUMN: row.get(LOGIN_COLUMN, ""),
                                 "item": item, "stem": stems.get(item, item),
                                 "answer": answer})
     return records
@@ -1630,7 +1692,7 @@ def open_records(rows, quiz, stems):
 
 def write_coding_sheet(records, path, suggestions=None):
     """Write the accounts with coding columns to path."""
-    fields = (["quiz", STUDENT, COURSE_COLUMN, "item", "answer"]
+    fields = (["quiz", STUDENT, LOGIN_COLUMN, COURSE_COLUMN, "item", "answer"]
               + (SUGGESTED_COLUMNS if suggestions else []) + CODING_COLUMNS)
     with open(path, "w", newline="") as out:
         writer = csv.DictWriter(out, fieldnames=fields, extrasaction="ignore")
