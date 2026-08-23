@@ -1218,6 +1218,13 @@ The analysis therefore fetches the report from every course in the list
 that has the quiz, pools the rows, and tags each row with its course, so
 the cohorts stay separable; a course or quiz not found is noted and
 skipped, since the copy is made by hand and may lag this source.
+Pooling changes what identifies a student: the reports carry names, and
+two students in different courses may share one, so every join below
+keys on the pair of course and name---[[student_of]]---never on the name
+alone, lest namesakes pair with each other or inherit each other's
+consent.
+(Rows read from a results file without a course column all key as the
+empty course, so single-course use is unchanged.)
 The coding columns are the open scheme: a category of description, what
 the account shows the student discerning and not discerning, and notes;
 the suggested columns mirror them and add the model's rationale.
@@ -1249,6 +1256,11 @@ SUGGESTED_COLUMNS = [f"suggested_{key}" for key in CODED_KEYS + ["rationale"]]
 def column_for(title, fieldnames):
     """Return the report column whose name contains the item title."""
     return next((name for name in fieldnames if title in name), None)
+
+
+def student_of(row):
+    """Return the (course, name) pair that identifies a student."""
+    return (row.get(COURSE_COLUMN, ""), row[STUDENT])
 @
 
 \subsubsection{The answer key}
@@ -1396,27 +1408,31 @@ def fetch_results(which):
 \subsubsection{Consent}
 
 Consent is asked once, in the start quiz, and covers both; the end quiz
-has no consent item of its own, so its rows are filtered by the names
-that consented at the start (\cref{sec:instruments}).
+has no consent item of its own, so its rows are filtered by the
+students that consented at the start (\cref{sec:instruments}).
 Analysed on its own, the end quiz therefore cannot be filtered, and the
 program says so rather than silently keeping everyone.
 
 <<the consent filter>>=
 def consenting(rows):
-    """Return the names of the students who consented, or None if unasked."""
+    """Return the students who consented, or None if unasked.
+
+    Students are (course, name) pairs, so namesakes across the pooled
+    courses stay distinct.
+    """
     column = column_for(CONSENT, rows[0].keys())
     if column is None:
         return None
-    return {row[STUDENT] for row in rows
+    return {student_of(row) for row in rows
             if row[column].strip().lower() in ("yes", "true")}
 
 
-def filter_consent(rows, names):
-    """Keep the rows of the named students; None keeps every row."""
-    if names is None:
+def filter_consent(rows, students):
+    """Keep the rows of the given students; None keeps every row."""
+    if students is None:
         print("note: no consent item in these rows, so no filtering")
         return rows
-    return [row for row in rows if row[STUDENT] in names]
+    return [row for row in rows if student_of(row) in students]
 @
 
 \subsubsection{Summaries}
@@ -1485,7 +1501,8 @@ def item_table(rows, knowledge):
 
 The gain is a within-student quantity: the same student, the same item,
 before and after.
-The two reports are joined on the student column, and for each item the
+The two reports are joined on the student---the course and name pair,
+so that namesakes across courses do not pair---and for each item the
 program counts how many of the paired students were right at the start,
 how many at the end, and---the two numbers that matter---how many moved
 from wrong to right and from right to wrong; they are the discordant
@@ -1496,9 +1513,9 @@ The score gain is reported as a mean over the same pairs.
 <<paired pre/post gain>>=
 def paired_gain(start, end, knowledge):
     """Print, per item, how the students who took both quizzes moved."""
-    at_end = {row[STUDENT]: row for row in end}
-    pairs = [(row, at_end[row[STUDENT]])
-             for row in start if row[STUDENT] in at_end]
+    at_end = {student_of(row): row for row in end}
+    pairs = [(row, at_end[student_of(row)])
+             for row in start if student_of(row) in at_end]
     print(f"\n{len(pairs)} students took both quizzes")
     print(f"{'item':42s} {'start':>5s} {'end':>5s} {'+':>4s} {'-':>4s}")
     for title in knowledge:
@@ -1670,9 +1687,9 @@ def main():
         sys.exit("no responses")
     knowledge, stems = load_quiz(args.quiz_file)
 
-    names = consenting(rows["start"]) if "start" in rows else None
+    students = consenting(rows["start"]) if "start" in rows else None
     for quiz in which:
-        rows[quiz] = filter_consent(rows[quiz], names)
+        rows[quiz] = filter_consent(rows[quiz], students)
         print(f"\n== {QUIZ_TITLES[quiz]}: {len(rows[quiz])} students")
         for item in CLOSED_ITEMS:
             tabulate(rows[quiz], item)
