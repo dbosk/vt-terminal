@@ -304,7 +304,7 @@ The stem says \enquote{type something}, not \enquote{type a command}:
 the word \emph{command} already names what the first aspect of
 \cref{sec:shell} asks the student to discern, that the line is an
 instruction to be parsed, and a stem that supplies the word would be
-doing the discerning.
+doing the discerning \autocite[p.~91]{NCOL}.
 
 <<item: what the terminal is>>=
 {
@@ -363,7 +363,7 @@ is a place with a path or a list in a window, whether the file keeps its
 name on arrival, whether the check is made from somewhere.
 The stem names folders and their neighbourhood but no path, no slash
 and no \enquote{directory}: the spatial words are the student's to
-supply, or not.
+supply, or not \autocite[p.~91]{NCOL}.
 
 <<item: getting a file into place>>=
 {
@@ -936,8 +936,10 @@ After an [[ssh]] the prompt looks the same but the machine has changed,
 which is precisely why it is easy to lose track.
 The item asks what a listing shows after connecting to a server.
 The stem does not say \emph{computer}---that would already tell the
-student that the machine is the point; the alternatives cannot avoid
-naming the machines, and that is the discerning they do for the student.
+student that the machine is the point, and a test of discernment must
+not point out the aspect \autocite[p.~91]{NCOL}; the alternatives
+cannot avoid naming the machines, and that is the discerning they do for
+the student.
 The correct answer follows the shell to the server; the leading
 distractor stays with the laptop the student is sitting at---the
 undiscerned-aspect case of not knowing which machine the command acts
