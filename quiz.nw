@@ -1144,8 +1144,8 @@ aspect.)
 Canvas compiles the responses into a student-analysis report: a CSV file
 with one row per student and one column per item, keyed by the item
 titles above.
-The analysis program fetches that report itself---we know the course and
-the quiz titles, so nothing needs to be clicked or downloaded by
+The analysis program fetches that report itself---we know the courses
+and the quiz titles, so nothing needs to be clicked or downloaded by
 hand---using the same [[canvaslms]] machinery as the command-line tool.
 It then does three things.
 For the closed items it reports, item by item, how many students chose
@@ -1193,7 +1193,7 @@ import re
 import statistics
 import sys
 
-<<the course and the item titles are the keys>>
+<<the courses and the item titles are the keys>>
 <<the answer key from the quiz description>>
 <<fetch the results from Canvas>>
 <<the consent filter>>
@@ -1208,19 +1208,28 @@ if __name__ == "__main__":
     main()
 @
 
-The course name and the item titles are the join keys between the
+The course names and the item titles are the join keys between the
 tangled files: if a title changes in a quiz, this block is the only
 other place to change---and they live in the same source, side by side.
+The module runs in two courses: datintro26, where this program created
+the quizzes, and the CS programme's course alongside it, into which the
+teachers copy the module---quizzes included---by hand.
+The analysis therefore fetches the report from every course in the list
+that has the quiz, pools the rows, and tags each row with its course, so
+the cohorts stay separable; a course or quiz not found is noted and
+skipped, since the copy is made by hand and may lag this source.
 The coding columns are the open scheme: a category of description, what
 the account shows the student discerning and not discerning, and notes;
 the suggested columns mirror them and add the model's rationale.
 Canvas prefixes the report's columns with item identifiers, so we match
 columns by containment rather than equality.
 
-<<the course and the item titles are the keys>>=
-# TODO: confirm the course instance once the datintro26 Canvas course is
-# finalised; the code selects it by this string.
-COURSE = "datintro26"
+<<the courses and the item titles are the keys>>=
+# TODO(#7): confirm the CS course's exact Canvas course code when
+# the 2026 instance becomes visible (the 2022 instance's code was
+# progd22, so progd26 is the guess).
+COURSES = ["datintro26", "progd26"]
+COURSE_COLUMN = "course"
 QUIZ_TITLES = {
     "start": "Terminal quiz: what you know already",
     "end": "Terminal quiz: what you know now",
@@ -1321,11 +1330,17 @@ with it: the same package provides the credentials, the course lookup and
 the report machinery, so the program reuses them instead of
 reimplementing the Canvas API calls.
 The report is generated on demand by Canvas, so we request it, wait for
-it, and download the CSV it points to.
+it, and download the CSV it points to---once per course that has the
+quiz, appending the course name to each row under [[COURSE_COLUMN]].
 
 <<fetch the results from Canvas>>=
 def fetch_results(which):
-    """Download the student-analysis rows for the start or end quiz."""
+    """Download the student-analysis rows for the start or end quiz.
+
+    Fetches from every course in COURSES that has the quiz, pools the
+    rows and tags each with its course; missing courses or quizzes are
+    noted and skipped.
+    """
     import appdirs
     import requests
     import canvaslms.cli
@@ -1347,23 +1362,35 @@ def fetch_results(which):
         hostname = f"https://{hostname}"
     canvas = Canvas(hostname, token)
 
-    course = next(
-        c for c in canvas.get_courses()
-        if COURSE in (c.name or "") or COURSE in (c.course_code or "")
-    )
-    quiz = next(filter_quizzes([course], QUIZ_TITLES[which]))
-    if not is_new_quiz(quiz):
-        sys.exit(f"quiz {quiz.title!r} is not a New Quiz")
+    rows = []
+    for name in COURSES:
+        course = next(
+            (c for c in canvas.get_courses()
+             if name in (c.name or "") or name in (c.course_code or "")),
+            None,
+        )
+        if course is None:
+            print(f"note: no course matching {name}, skipping")
+            continue
+        quiz = next(filter_quizzes([course], QUIZ_TITLES[which]), None)
+        if quiz is None:
+            print(f"note: {name} has no quiz {QUIZ_TITLES[which]!r}, skipping")
+            continue
+        if not is_new_quiz(quiz):
+            sys.exit(f"quiz {quiz.title!r} in {name} is not a New Quiz")
 
-    progress = poll_progress(
-        create_new_quiz_report(course, quiz.id, canvas._Canvas__requester)
-    )
-    url = progress.results.get("url") if progress else None
-    if not url:
-        sys.exit("Canvas did not produce the student-analysis report")
-    response = requests.get(url)
-    response.raise_for_status()
-    return list(csv.DictReader(response.text.splitlines()))
+        progress = poll_progress(
+            create_new_quiz_report(course, quiz.id, canvas._Canvas__requester)
+        )
+        url = progress.results.get("url") if progress else None
+        if not url:
+            sys.exit(f"Canvas did not produce the report for {name}")
+        response = requests.get(url)
+        response.raise_for_status()
+        for row in csv.DictReader(response.text.splitlines()):
+            row[COURSE_COLUMN] = name
+            rows.append(row)
+    return rows
 @
 
 \subsubsection{Consent}
@@ -1555,7 +1582,8 @@ def llm_precode(records):
     return suggestions
 @
 
-The sheet is in long format---one row per student, quiz and item---for
+The sheet is in long format---one row per student, quiz and item, with the course the student
+belongs to---for
 two reasons.
 The categories are formed per phenomenon, so the coder reads all the
 accounts of one item together, which a sort on the item column gives;
@@ -1577,6 +1605,7 @@ def open_records(rows, quiz, stems):
             answer = row.get(column, "").strip() if column else ""
             if answer:
                 records.append({"quiz": quiz, STUDENT: row[STUDENT],
+                                COURSE_COLUMN: row.get(COURSE_COLUMN, ""),
                                 "item": item, "stem": stems.get(item, item),
                                 "answer": answer})
     return records
@@ -1584,7 +1613,7 @@ def open_records(rows, quiz, stems):
 
 def write_coding_sheet(records, path, suggestions=None):
     """Write the accounts with coding columns to path."""
-    fields = (["quiz", STUDENT, "item", "answer"]
+    fields = (["quiz", STUDENT, COURSE_COLUMN, "item", "answer"]
               + (SUGGESTED_COLUMNS if suggestions else []) + CODING_COLUMNS)
     with open(path, "w", newline="") as out:
         writer = csv.DictWriter(out, fieldnames=fields, extrasaction="ignore")

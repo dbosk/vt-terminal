@@ -97,6 +97,9 @@ items why the key is right and what each distractor assumes, for open
 items a *provisional* outcome space (ordered levels posited from the
 aspects; replace with the empirical one after cohort 1, issue #6); the
 analysis program ignores it.
+The analysis fetches results from every course in `COURSES` (datintro26
+plus the CS programme's parallel course, copied by hand; exact 2026 code
+unconfirmed, issue #7), tagging rows by course.
 Items are keyed by title in the Canvas report; `analyze_quiz.py` reads the
 answer key from the tangled start-quiz JSON, filters by consent, prints
 per-item facility and distractor counts, paired pre/post gains
