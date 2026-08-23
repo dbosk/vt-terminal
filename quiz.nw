@@ -24,9 +24,27 @@ sheet.
 The learning platform of the course is Canvas, and the [[canvaslms]]
 command-line tool creates the quizzes from their JSON descriptions:
 \begin{minted}{bash}
+canvaslms modules create -c datintro26 -p 2 "Terminal pre-test"
+canvaslms modules create -c datintro26 -p 4 "Terminal post-test"
 canvaslms quizzes create -c datintro26 -f quiz-knowledge-start.json
 canvaslms quizzes create -c datintro26 -f quiz-knowledge-end.json
 \end{minted}
+Each quiz is the only item of a module of its own, created first: the
+pre-test module sits just before the terminal module and the post-test
+module just after it.
+The reason is that Canvas locks a module behind the completion of the
+modules it names as prerequisites, and only whole modules can be
+prerequisites.
+With the pre-test in its own module, the terminal module can require
+it, so that no student reads the material before writing the pre-test;
+with the post-test in its own module, it can require the terminal
+module, so that no student writes the post-test before the material.
+The placement is part of the quiz description, under the key
+[[modules]], which [[canvaslms]] reads and strips before it talks to
+Canvas: a module name, anchored so that the pre-test module cannot match
+the post-test module, and the position within it.
+The modules and the quizzes are created unpublished; the teacher
+releases them when the course opens.
 The two quizzes share their open items and, with one exception explained
 with the item (\cref{app:knowledge-items}), their knowledge items; they
 differ in what opens them.
@@ -49,6 +67,7 @@ does not skip them as odd.
     "title": "Terminal quiz: what you know already",
     "instructions": "<p>This quiz checks what you already know about working in a terminal, so that we can adapt the course and, together with the quiz at the end of the module, measure how well the material works. If you have not used a shell before, answer as well as you can&mdash;guessing is fine, and a low score is expected and completely okay. Five questions ask you to write in your own words; there are no wrong answers there, and they carry no points. You will see your score afterwards, but not the correct answers&mdash;the course will teach you those. The score does not affect your grade. Please answer on your own, without help from others or from tools.</p>",
     "points_possible": 13,
+    <<start-quiz module>>
     <<scheduling settings>>
     "quiz_settings": {
       <<interaction settings>>
@@ -77,6 +96,7 @@ the start quiz asks only in the open form
     "title": "Terminal quiz: what you know now",
     "instructions": "<p>This quiz repeats the terminal questions from the start-of-course quiz, so that we can see what you have learned during the course. Five questions ask you to write in your own words; there are no wrong answers there, and they carry no points. Afterwards you will see your score and, for each question, the correct answer. The score does not affect your grade. Please answer on your own, without preparation, help or tools.</p>",
     "points_possible": 14,
+    <<end-quiz module>>
     <<scheduling settings>>
     "quiz_settings": {
       <<interaction settings>>
@@ -90,6 +110,15 @@ the start quiz asks only in the open form
     <<knowledge items>>
   ]
 }
+@
+
+The module keys name the modules created above; the quiz is the first
+and only item of its module.
+
+<<start-quiz module>>=
+"modules": [{"module": "^Terminal pre-test$", "position": 1}],
+<<end-quiz module>>=
+"modules": [{"module": "^Terminal post-test$", "position": 1}],
 @
 
 Both quizzes are diagnostics: there is no time limit, a single attempt
