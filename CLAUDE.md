@@ -85,6 +85,11 @@ distractors cannot seed the accounts) and the closed knowledge items
 (positions 11–24, one per candidate critical aspect, in chapter order;
 item 11 — the closed twin of open item 4 — is in the end quiz only, so
 the start quiz has 13 closed items and the end quiz 14).
+The two JSONs carry canvaslms `modules` specs: each quiz is the sole,
+must-submit item of its own datintro26 module ("Terminal pre-test" /
+"Terminal post-test"), and the appendix prose gives the `modules
+create`/`modules edit --prerequisite` commands that chain pre-test →
+The terminal → post-test. Deployed 2026-08-23, unpublished.
 Items are keyed by title in the Canvas report; `analyze_quiz.py` reads the
 answer key from the tangled start-quiz JSON, filters by consent, prints
 per-item facility and distractor counts, paired pre/post gains
