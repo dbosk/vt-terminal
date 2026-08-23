@@ -142,10 +142,18 @@ items, and on a single page the order of the items would govern only the
 order of reading.
 The cost of forbidding revisits is small in a zero-stakes diagnostic; it
 is the price of clean accounts.
-The shared settings come in two chunks---scheduling and
-interaction---and each chunk is a flat list of keys, so every brace opens
-and closes in the chunk that uses it: the [[quiz_settings]] object opens
-and closes in the quiz descriptions above.
+The shared settings come in two chunks---scheduling and interaction.
+Canvas keeps two groups of settings in objects of their own,
+[[multiple_attempts]] and [[result_view_settings]], and silently ignores
+the same keys written flat; so the interaction chunk carries the
+attempts object whole, and the result-view chunks below are each a
+complete [[result_view_settings]] object.
+(An earlier version wrote them flat, and the deployed pre-test would
+have shown the correct answers; reading the settings back from Canvas
+after deploying is what caught it.)
+Every brace still opens and closes in the chunk that writes it: the
+[[quiz_settings]] object opens and closes in the quiz descriptions
+above.
 
 <<scheduling settings>>=
 "time_limit": null,
@@ -158,10 +166,7 @@ and closes in the quiz descriptions above.
 "has_time_limit": false,
 "one_at_a_time_type": "question",
 "allow_backtracking": false,
-"multiple_attempts_enabled": false,
-"result_view_restricted": true,
-"display_items": true,
-"display_item_response": true,
+"multiple_attempts": {"multiple_attempts_enabled": false},
 @
 
 The two quizzes differ in what they show the student afterwards.
@@ -176,15 +181,25 @@ distractor a student chose is the misconception they can now read against
 the correct account.
 
 <<start result view>>=
+"result_view_settings": {
+  "result_view_restricted": true,
+  "display_items": true,
+  "display_item_response": true,
   "display_item_response_correctness": false,
   "display_item_correct_answer": false,
   "display_points_awarded": true,
   "display_points_possible": true
+}
 <<end result view>>=
+"result_view_settings": {
+  "result_view_restricted": true,
+  "display_items": true,
+  "display_item_response": true,
   "display_item_response_correctness": true,
   "display_item_correct_answer": true,
   "display_points_awarded": true,
   "display_points_possible": true
+}
 @
 
 \subsection{The consent and preparation items}
