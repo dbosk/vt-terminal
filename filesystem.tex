@@ -21,6 +21,10 @@ Folders also serve thinking and organising, not just retrieval; users
 forced to work folder-free could not replace them with search and recency
 lists \autocite{Whitham2017Folder}, and location-based finding is preferred
 for its reminding function \autocite{BarreauNardi1995}.
+The mismatch runs deeper than retrieval: users hold rich mental models of
+their files---projects, documents evolving over time---which the operating
+system's named-collection-of-bytes view simply ignores
+\autocite{May2019FileLifecycle}.
 
 The popular claim that students who grew up with search no longer
 understand files and folders is, so far, journalistic rather than
@@ -50,22 +54,56 @@ therefore build.
 }
 
 \subsection{Candidate critical aspects}
+\label{sec:filesystem-aspects}
 
-% XXX Preliminary; to be consolidated once the review phase is complete.
-\begin{itemize}
-  \item \emph{Everything has a place}: every file lives at exactly one path
-    in one tree (the spatial model).
-  \item \emph{Where am I?}: every shell has a current working directory,
-    and commands act relative to it.
-  \item \emph{One tree, two views}: the GUI file manager and
-    \texttt{cd}/\texttt{ls} traverse the same tree.
-  \item \emph{Absolute versus relative}: the same file has many names,
-    depending on where you stand.
-\end{itemize}
+The literature above describes what fluent users \emph{have}---a spatial
+model of a tree they navigate---rather than what learners get wrong.
+The aspects below are therefore read off the difference between that
+model and the learner who lacks it, with the course's own path errors
+(\cref{sec:method-vt-analysis}) as the local evidence that the lack is
+real.
+
+\begin{description}
+  \item[Everything has a place]
+    Every file lives at exactly one path in one tree, whichever program
+    made it.
+    Read off the spatial model of the fluent user
+    \autocite{Bergman2008Navigation,Benn2015BrainFolders} and its
+    documented mismatch with how users otherwise think of their
+    files---as projects and documents rather than as named bytes at a
+    path \autocite{May2019FileLifecycle}: a learner whose files live
+    \enquote{in Word} or \enquote{in Downloads, somewhere} has not
+    discerned that each has a place in the tree.
+    Tested by the item \emph{where a saved file is}
+    (\cref{app:knowledge-items}).
+  \item[Where am I?]
+    Every shell has a current working directory, and commands act
+    relative to it.
+    The notion has no counterpart in the graphical file manager and is
+    not in the literature; it is read off the course's path
+    errors---commands run from the wrong directory---and the object of
+    learning itself.
+    Tested by the item \emph{which directory the command uses}.
+  \item[One tree, two views]
+    The file manager and \texttt{cd}/\texttt{ls} traverse the same tree.
+    The file-system instance of the command model's \emph{same system as
+    the GUI} (\cref{sec:shell-aspects}), sharing its status and its item
+    \emph{the same files from two sides}.
+  \item[Absolute versus relative]
+    The same file has many names, depending on where you stand.
+    Read off the same path errors---the relative path that was right
+    from one directory and is wrong from another---and the consequence
+    of the two aspects before it.
+    Tested by the item \emph{two names for one file}.
+\end{description}
 
 \subsection{Patterns of variation}
 
 \begin{itemize}
+  \item Contrast (program varies, place invariant): save a file from the
+    editor, download one in the browser, \texttt{touch} one in the
+    shell---then \texttt{ls} shows all three at their paths in the one
+    tree.
   \item Contrast (view varies, tree invariant): open a directory in the
     file manager and \texttt{ls} it in the shell; create a file in one
     view, observe it in the other.

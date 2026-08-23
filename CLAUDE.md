@@ -69,5 +69,41 @@ base (NCOL etc.), shared with the companion papers.
 
 Scaffold stage: research questions, method skeleton, seeded literature, and
 preliminary aspect/pattern analyses per chapter are in place. The systematic
-literature-search phase (phase two in `search-protocol.tex`) has not run
-yet; `% TODO`/`% XXX` comments mark the open work.
+literature-search phase (`search-protocol.tex`) has run in several rounds,
+including a measurement round (has learners' shell understanding been
+measured? — one phenomenographic study, Doyle & Lister 2006; no shell
+concept inventory). `% TODO`/`% XXX` comments mark the open work.
+
+## The instrument (`quiz.nw`)
+
+`quiz.nw` is a literate program (noweb; `make programs` tangles
+`quiz-knowledge-{start,end}.json` and `analyze_quiz.py`, all gitignored).
+Each quiz has an opener (consent / preparation, position 1), six open
+essay items (positions 3–8, the phenomenographic accounts; item 8 is the
+open twin of the closed *which computer answers* — placed *before*
+the closed items and shown one at a time without backtracking so the
+distractors cannot seed the accounts) and the closed knowledge items
+(positions 11–24, one per candidate critical aspect, in chapter order;
+item 11 — the closed twin of open item 4 — is in the end quiz only, so
+the start quiz has 13 closed items and the end quiz 14).
+The two JSONs carry canvaslms `modules` specs: each quiz is the sole,
+must-submit item of its own datintro26 module ("Terminal pre-test" /
+"Terminal post-test"), and the appendix prose gives the `modules
+create`/`modules edit --prerequisite` commands that chain pre-test →
+The terminal → post-test. Deployed 2026-08-23, unpublished.
+The start quiz hides correctness, correct answers and item feedback, the
+end quiz shows them all. Every item carries `feedback.neutral`: for closed
+items why the key is right and what each distractor assumes, for open
+items a *provisional* outcome space (ordered levels posited from the
+aspects; replace with the empirical one after cohort 1, issue #6); the
+analysis program ignores it.
+The analysis fetches results from every course in `COURSES` (datintro26
+plus the CS programme's parallel course, copied by hand; exact 2026 code
+unconfirmed, issue #7), tagging rows by course.
+Items are keyed by title in the Canvas report; `analyze_quiz.py` reads the
+answer key from the tangled start-quiz JSON, filters by consent, prints
+per-item facility and distractor counts, paired pre/post gains
+(`--quiz both --results start.csv end.csv`) and writes a long-format
+coding sheet for the accounts (optional `--llm` pre-coding in separate
+`suggested_*` columns). Activate the `literate-programming` skill before
+editing `quiz.nw`.

@@ -1,0 +1,1769 @@
+\section{Setting up the diagnostic quizzes, literately}
+\label{app:quiz}
+
+This appendix is a literate program \autocite{LiterateProgramming}: the
+prose and the code are one and the same source, woven into the text you
+are reading and tangled into the files the computer runs.
+It implements the pre/post-test of \cref{sec:instruments}: two quizzes
+that collect two kinds of data before and after the terminal module.
+The closed items measure whether the students discern the candidate
+critical aspects of \cref{sec:shell,sec:filesystem,sec:composition,sec:ssh};
+the open items collect the students' own accounts of the terminal, the
+file system, a pipeline and a remote shell, from which the
+phenomenographic analysis of \cref{sec:instruments} forms its categories
+of description.
+Three files are tangled from this section:
+[[quiz-knowledge-start.json]] and [[quiz-knowledge-end.json]], the
+descriptions of the two quizzes that the [[canvaslms]] tool pushes to
+Canvas, and [[analyze_quiz.py]], which fetches the results from Canvas,
+summarises the closed items and writes the open accounts to a coding
+sheet.
+
+\subsection{The two quizzes for Canvas}
+
+The learning platform of the course is Canvas, and the [[canvaslms]]
+command-line tool creates the quizzes from their JSON descriptions:
+\begin{minted}{bash}
+canvaslms modules create -c datintro26 -p 2 "Terminal pre-test"
+canvaslms modules create -c datintro26 -p 4 "Terminal post-test"
+canvaslms quizzes create -c datintro26 -f quiz-knowledge-start.json
+canvaslms quizzes create -c datintro26 -f quiz-knowledge-end.json
+canvaslms modules edit -c datintro26 \
+  --prerequisite "^Terminal pre-test$" "^The terminal$"
+canvaslms modules edit -c datintro26 \
+  --prerequisite "^The terminal$" "^Terminal post-test$"
+\end{minted}
+Each quiz is the only item of a module of its own, created first: the
+pre-test module sits just before the terminal module and the post-test
+module just after it.
+The reason is that Canvas locks a module behind the completion of the
+modules it names as prerequisites, and only whole modules can be
+prerequisites.
+With the pre-test in its own module, the terminal module can require
+it, so that no student reads the material before writing the pre-test;
+with the post-test in its own module, it can require the terminal
+module, so that no student writes the post-test before the material.
+The last two commands set up exactly that chain.
+The placement is part of the quiz description, under the key
+[[modules]], which [[canvaslms]] reads and strips before it talks to
+Canvas: a module name, anchored so that the pre-test module cannot match
+the post-test module, the position within it, and the completion
+requirement---submitting the quiz---without which a module counts as
+complete the moment it is opened and the prerequisite would lock
+nothing.
+The modules and the quizzes are created unpublished; the teacher
+releases them when the course opens.
+The two quizzes share their open items and, with one exception explained
+with the item (\cref{app:knowledge-items}), their knowledge items; they
+differ in what opens them.
+The start-of-course quiz measures what the students bring to the module;
+the end-of-course quiz repeats the same items to measure the gain, and
+adds one question of its own---whether the student prepared---because
+preparation would confound that gain: a student who reviews the material
+the night before measures preparation, not what the module left behind.
+The quiz titles name the terminal explicitly, since the course runs
+other diagnostic quizzes that must stay distinguishable for students and
+analysis alike.
+The instructions warn that some questions ask for an account in the
+student's own words, so that a student who expects only multiple choice
+does not skip them as odd.
+
+<<[[quiz-knowledge-start.json]]>>=
+{
+  "quiz_type": "new",
+  "settings": {
+    "title": "Terminal quiz: what you know already",
+    "instructions": "<p>This quiz checks what you already know about working in a terminal, so that we can adapt the course and, together with the quiz at the end of the module, measure how well the material works. If you have not used a shell before, answer as well as you can&mdash;guessing is fine, and a low score is expected and completely okay. Six questions ask you to write in your own words; there are no wrong answers there, and they carry no points. You will see your score afterwards, but not the correct answers&mdash;the course will teach you those. The score does not affect your grade. Please answer on your own, without help from others or from tools.</p>",
+    "points_possible": 13,
+    <<start-quiz module>>
+    <<scheduling settings>>
+    "quiz_settings": {
+      <<interaction settings>>
+      <<start result view>>
+    }
+  },
+  "items": [
+    <<start-quiz consent item>>,
+    <<open items>>,
+    <<knowledge items>>
+  ]
+}
+@
+
+The end-of-course quiz carries the same open and knowledge items, so the
+two administrations measure the same discernment and collect comparable
+accounts; the opening item and the instructions differ, and the end quiz
+adds the closed twin of the open item on a line of plain English, which
+the start quiz asks only in the open form
+(\cref{app:knowledge-items}).
+
+<<[[quiz-knowledge-end.json]]>>=
+{
+  "quiz_type": "new",
+  "settings": {
+    "title": "Terminal quiz: what you know now",
+    "instructions": "<p>This quiz repeats the terminal questions from the start-of-course quiz, so that we can see what you have learned during the course. Six questions ask you to write in your own words; there are no wrong answers there, and they carry no points. Afterwards you will see your score and, for each question, the correct answer. The score does not affect your grade. Please answer on your own, without preparation, help or tools.</p>",
+    "points_possible": 14,
+    <<end-quiz module>>
+    <<scheduling settings>>
+    "quiz_settings": {
+      <<interaction settings>>
+      <<end result view>>
+    }
+  },
+  "items": [
+    <<end-quiz preparation item>>,
+    <<open items>>,
+    <<item: the command line reads a language>>,
+    <<knowledge items>>
+  ]
+}
+@
+
+The module keys name the modules created above; the quiz is the first
+and only item of its module, and the module is complete once the quiz
+is submitted.
+
+<<start-quiz module>>=
+"modules": [{"module": "^Terminal pre-test$", "position": 1,
+             "completion_requirement": "must_submit"}],
+<<end-quiz module>>=
+"modules": [{"module": "^Terminal post-test$", "position": 1,
+             "completion_requirement": "must_submit"}],
+@
+
+Both quizzes are diagnostics: there is no time limit, a single attempt
+suffices, and answers are never shuffled (several items show a sequence
+of commands whose order is meaningful).
+The items are shown one at a time, without going back, for a reason
+that \cref{app:open-items} spells out: the open accounts must be
+written before the student has seen the alternatives of the closed
+items, and on a single page the order of the items would govern only the
+order of reading.
+The cost of forbidding revisits is small in a zero-stakes diagnostic; it
+is the price of clean accounts.
+The shared settings come in two chunks---scheduling and interaction.
+Canvas keeps two groups of settings in objects of their own,
+[[multiple_attempts]] and [[result_view_settings]], and silently ignores
+the same keys written flat; so the interaction chunk carries the
+attempts object whole, and the result-view chunks below are each a
+complete [[result_view_settings]] object.
+(An earlier version wrote them flat, and the deployed pre-test would
+have shown the correct answers; reading the settings back from Canvas
+after deploying is what caught it.)
+Every brace still opens and closes in the chunk that writes it: the
+[[quiz_settings]] object opens and closes in the quiz descriptions
+above.
+
+<<scheduling settings>>=
+"time_limit": null,
+"due_at": null,
+"unlock_at": null,
+"lock_at": null,
+<<interaction settings>>=
+"shuffle_answers": false,
+"shuffle_questions": false,
+"has_time_limit": false,
+"one_at_a_time_type": "question",
+"allow_backtracking": false,
+"multiple_attempts": {"multiple_attempts_enabled": false},
+@
+
+The two quizzes differ in what they show the student afterwards.
+The start quiz shows the points awarded---how well the student did---but
+neither per-item correctness nor the correct answers: the same questions
+must measure the gain at the end of the module, so they have to stay
+fresh.
+The end quiz has nothing left to protect, and the students have earned
+the answers: it shows, item by item, whether the answer was right and
+which alternative was, so that the diagnostic also teaches---the
+distractor a student chose is the misconception they can now read against
+the correct account.
+It also shows, under each item, a short text of ours: for a closed item
+why the keyed alternative is right and what each distractor assumes, and
+for an open item the ways of seeing we expect, from the first impression
+to the one the module aims at (\cref{app:open-items-feedback}).
+That text travels with the item, and the items are shared by the two
+quizzes, so the start quiz carries it too; the last key of each object is
+the one switch that hides it there and shows it at the end, and the
+deployment reads the settings back to confirm the switch took.
+The platform applies none of this unless the view is declared
+restricted, hence the first key of each object.
+
+<<start result view>>=
+"result_view_settings": {
+  "result_view_restricted": true,
+  "display_items": true,
+  "display_item_response": true,
+  "display_item_response_correctness": false,
+  "display_item_correct_answer": false,
+  "display_points_awarded": true,
+  "display_points_possible": true,
+  "display_item_feedback": false
+}
+<<end result view>>=
+"result_view_settings": {
+  "result_view_restricted": true,
+  "display_items": true,
+  "display_item_response": true,
+  "display_item_response_correctness": true,
+  "display_item_correct_answer": true,
+  "display_points_awarded": true,
+  "display_points_possible": true,
+  "display_item_feedback": true
+}
+@
+
+\subsection{The consent and preparation items}
+
+The start-of-course quiz opens with the consent item---an arrangement
+kept from the course's earlier diagnostic tests, which these quizzes
+replace:
+participation in the study is opt-in, so we ask before collecting
+anything.
+The item titles double as the keys under which Canvas reports the
+answers, so the analysis program (\cref{app:quiz-analysis}) refers to
+the items by these titles.
+
+% XXX The consent wording must follow the approved ethics application for
+% the datintro data collection; update it when the application is decided.
+
+<<start-quiz consent item>>=
+{
+  "position": 1,
+  "points_possible": 0,
+  "entry": {
+    "title": "Consent",
+    "item_body": "<p>I consent to my answers in these quizzes, and my submissions in the course, being used pseudonymised in computing education research. My participation does not affect my grade.</p>",
+    "interaction_type_slug": "true-false",
+    "interaction_data": {"true_choice": "Yes", "false_choice": "No"},
+    "scoring_data": {"value": true},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+The end-of-course quiz opens instead with the preparation item.
+Canvas requires a \enquote{correct} answer even for an ungraded item;
+the [[scoring_data]] value below is arbitrary, and the item carries no
+points, so the correctness the end quiz shows for it is meaningless---a
+wrinkle of the platform, not of the design.
+
+<<end-quiz preparation item>>=
+{
+  "position": 1,
+  "points_possible": 0,
+  "entry": {
+    "title": "Preparation",
+    "item_body": "<p>Did you prepare for this quiz&mdash;for example, review the course material&mdash;before taking it?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>No</p>"},
+        {"position": 2, "item_body": "<p>Yes, briefly</p>"},
+        {"position": 3, "item_body": "<p>Yes, thoroughly</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+\subsection{The open accounts}
+\label{app:open-items}
+
+The open items are the phenomenographic data: the students' own
+accounts of what the terminal is, of what happens to a line of plain
+English typed at the prompt, of getting a file into place, of a
+pipeline, of a remote shell, and of what a listing shows after logging
+in.
+Every student writes about the same stimulus, so the accounts are
+comparable across students and between the start and the end of the
+module; they are read for qualitatively different ways of experiencing
+the phenomenon, sorted into categories of description and ordered into
+an outcome space (\cref{sec:instruments}).
+The stems present a concrete situation and ask for the student's own
+account; none of them names an aspect, for the same reason as the closed
+items below \autocite[p.~91]{NCOL}: a stem that says \enquote{working
+directory} has already done the discerning.
+The closing invitation---\enquote{if you do not know the commands,
+describe in words}---matters at the start of the module, where many
+students have never typed a command: an account in words of what they
+would want to happen is exactly the data we are after, and without the
+invitation those students would leave the box empty.
+
+The open items come \emph{before} the closed items.
+The closed items' distractors spell out the candidate conceptions in
+full---\enquote{the shell is now attached to that machine},
+\enquote{report first saves its output in a file called wc}---so a
+student who has just read a dozen such items has been handed the outcome
+space, and an account written afterwards echoes the alternatives rather
+than the student's own way of seeing.
+The other direction is harmless: an open stem shows only a situation,
+and whatever small effect writing about it has on the closed answers is
+the same in both administrations, so the pre/post gain is unaffected.
+This is why the quizzes show one item at a time without backtracking
+(\cref{app:quiz}).
+
+<<open items>>=
+<<item: what the terminal is>>,
+<<item: what happens to this line>>,
+<<item: getting a file into place>>,
+<<item: explaining a command line>>,
+<<item: after ssh>>,
+<<item: which computer answers, in words>>
+@
+
+All open items carry no points and no correct answer; Canvas's essay
+interaction needs only the flag that turns off the rich-text editor (a
+plain box invites plain prose) and the word limit.
+The items occupy positions 3--8, leaving position 2 free for a further
+opening item, just as the knowledge items leave room below 11.
+
+The first item asks for the student's conception of the terminal itself
+and of what happens when a command is entered.
+It is the counterpart of the question \enquote{what does the word Unix
+mean to you?} in the only earlier phenomenographic study of Unix
+\autocite{DoyleLister2006Unix}, rephrased for a terminal the student may
+never have opened.
+The stem says \enquote{type something}, not \enquote{type a command}:
+the word \emph{command} already names what the first aspect of
+\cref{sec:shell} asks the student to discern, that the line is an
+instruction to be parsed, and a stem that supplies the word would be
+doing the discerning \autocite[p.~91]{NCOL}.
+
+<<item: what the terminal is>>=
+{
+  "position": 3,
+  "points_possible": 0,
+  "entry": {
+    "title": "What the terminal is",
+    "item_body": "<p>Imagine explaining to a friend who has never used one: what is the terminal, and what is it for? And when you type something and press Enter&mdash;what happens between that and what you see on the screen? Write in your own words; there is no right length.</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None",
+    <<outcome space: what the terminal is>>
+  }
+}
+@
+
+The second item is the open twin of the first closed item
+(\cref{app:knowledge-items}): a line of plain English typed at the
+prompt, and the question what happens.
+In the start quiz it is the only form the question takes, since the
+closed alternatives---\enquote{the shell looks for a program called
+show}---would hand a student who has never met a shell the very model
+the module is about to teach; the account written here is the starting
+point against which the closed item at the end is read.
+
+<<item: what happens to this line>>=
+{
+  "position": 4,
+  "points_possible": 0,
+  "entry": {
+    "title": "What happens to this line",
+    "item_body": "<p>At the shell prompt a student types the line below, hoping to see the files in the current directory.</p><pre>$ show me my files</pre><p>What happens, and why? Write in your own words.</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None",
+    <<outcome space: what happens to this line>>
+  }
+}
+@
+
+The third item is a file-system task told in words: a file in one
+place, wanted in another, and a check that it arrived.
+It is a task rather than a question because of what the file system is
+to the learner: a spatial skill (\cref{sec:filesystem}), and a spatial
+skill shows in how one moves, not in how one defines.
+The only earlier study asked what the student understood by the term
+\enquote{file system} \autocite{DoyleLister2006Unix}, which elicits
+remembered words; at the start of the module most students have none,
+but every one of them has moved a file.
+The task makes the student move through the tree---from the home
+folder into Downloads, across to its neighbour, and back to check---and
+name things on the way, so whatever they write---commands, a description
+of dragging the file in the file manager, a question back---shows how
+they picture places, names and the shell's standpoint: whether Downloads
+is a place with a path or a list in a window, whether the file keeps its
+name on arrival, whether the check is made from somewhere.
+The stem names folders and their neighbourhood but no path, no slash
+and no \enquote{directory}: the spatial words are the student's to
+supply, or not \autocite[p.~91]{NCOL}.
+
+<<item: getting a file into place>>=
+{
+  "position": 5,
+  "points_possible": 0,
+  "entry": {
+    "title": "Getting a file into place",
+    "item_body": "<p>A friend sends you a file data.csv; it is saved in your Downloads folder. You want it in the folder project, which sits next to Downloads in your home folder, and then to check that it is there&mdash;using only the terminal. Describe how you would go about it: what you would type, and what you expect to see after each step. If you do not know the commands, describe in words what you would want to do.</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None",
+    <<outcome space: getting a file into place>>
+  }
+}
+@
+
+The fourth item shows a pipeline and its output and asks the student to
+explain how the number came out.
+The stem glosses the two programs, so that not knowing [[grep]] does not
+stop the account; what we want is the student's picture of what goes on
+between the two programs, which is where the conceptions of
+\cref{sec:composition}---the pipe as a file, as a sequence, as a
+stream---show themselves unprompted.
+
+<<item: explaining a command line>>=
+{
+  "position": 6,
+  "points_possible": 0,
+  "entry": {
+    "title": "Explaining a command line",
+    "item_body": "<p>A student runs the line below. grep prints the lines of log.txt that contain ERROR, and wc -l counts lines.</p><pre>$ grep ERROR log.txt | wc -l\n42</pre><p>Explain, in your own words, what happens when this line runs and how the number 42 comes out. What do you picture going on between grep and wc?</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None",
+    <<outcome space: explaining a command line>>
+  }
+}
+@
+
+The gloss does teach two command names, and one may ask whether that
+spoils anything.
+It does not.
+No item depends on the student not knowing [[grep]] or [[wc]]: the
+closed items that use [[wc]] (\cref{app:knowledge-items}) gloss it in
+their own stems, since what they test is the pipe, not the program.
+Nor does the gloss hand over the account: it describes each program on
+its own---[[grep]] prints lines, [[wc -l]] counts lines---and says
+nothing about what passes between them, which is the question; the
+conceptions of \cref{sec:composition} stay open, and a student may still
+have [[grep]] save its lines in a file for [[wc]], or the two programs
+run one after the other.
+If anything the gloss sharpens the question: [[grep]] is said to print,
+yet the screen shows only [[42]], so the account has to say where the
+lines went---the gap between the gloss and the output is the pipe.
+What the student takes away is two names, not an aspect, and the same
+gloss is read at both administrations, so the gain is untouched; without
+it, the many students who have never seen [[grep]] at the start of the
+module would write nothing, and the account is what we are after.
+
+The fifth item describes logging in to a server and asks what has
+happened, what the student pictures when typing commands there, and how
+they would get at results produced there from the laptop.
+The last question is the round trip of \cref{sec:ssh}; the account of it
+shows whether the student's shell runs somewhere and whether files live
+on machines.
+
+<<item: after ssh>>=
+{
+  "position": 7,
+  "points_possible": 0,
+  "entry": {
+    "title": "After ssh",
+    "item_body": "<p>In a terminal on your laptop you type ssh student@server.example.edu, give your password, and get a prompt. Describe in your own words what has happened, and what you picture when you now type commands. Later you want to look, on your laptop, at the results of a program you ran there&mdash;how do you go about that?</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None",
+    <<outcome space: after ssh>>
+  }
+}
+@
+
+The sixth item is the open twin of the closed item \emph{which computer
+answers} (\cref{app:knowledge-items}): the same situation---an [[ssh]],
+a new prompt, an [[ls]]---but no alternatives, and a question that asks
+only what is listed.
+The word \emph{computer} is kept out of the stem on purpose: asking
+\enquote{which computer's files} already tells the student that there
+are two computers to choose between, and that the choice is the point,
+which is precisely the aspect they are to discern for themselves
+\autocite[p.~91]{NCOL}.
+An account that mentions the machine at all, and names the right one,
+has discerned it unprompted; an account that describes \enquote{the
+files in the folder} and stops has not.
+The closed item, where the alternatives cannot help naming the
+machines, shows whether the student picks the right one once the choice
+is laid out before them, and comparing the two answers of one student
+tells how much of the discernment the alternatives do: an account that
+never mentions a machine, followed by the correct choice, is the
+alternatives doing the work.
+The item follows the general account of the remote shell so that its
+pointed question does not steer that account, and its title avoids the
+closed item's title as a substring, since the analysis
+(\cref{app:quiz-analysis}) finds the report columns by title.
+
+<<item: which computer answers, in words>>=
+{
+  "position": 8,
+  "points_possible": 0,
+  "entry": {
+    "title": "What ls lists after ssh",
+    "item_body": "<p>A student is working in a terminal on their laptop. They run:</p><pre>$ ssh server.example.edu</pre><p>and a new prompt appears after the password. They now run:</p><pre>$ ls</pre><p>What is listed? Explain in your own words.</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None",
+    <<outcome space: which computer answers, in words>>
+  }
+}
+@
+
+\subsubsection{What the end quiz shows for an account}
+\label{app:open-items-feedback}
+
+The end quiz has an answer for the open items too.
+Under each account it shows the ways of seeing we expect for that
+stimulus, from the first impression to the one the module aims at---an
+outcome space, ordered as phenomenography orders one: each level
+discerns something the level before it does not
+\autocite[Ch.~2]{NCOL}.
+The levels are \emph{provisional}: no account has been read yet, so they
+are posited from the candidate critical aspects of the chapter each item
+belongs to
+(\cref{sec:shell-aspects,sec:filesystem-aspects,sec:composition-aspects,sec:ssh-aspects})
+and, for the terminal itself, from the outcome space of the one earlier
+phenomenographic study of Unix---a set of commands, a tool for solving
+problems, a working environment \autocite{DoyleLister2006Unix}---and
+they are written for the student, in the words of the stem.
+Three things keep them from contaminating the data.
+They are shown only after submission, so the account is written first;
+they are shown only in the end quiz, since the start quiz hides all
+feedback (\cref{app:quiz}); and they are never given to the coder or to
+the model that pre-codes the accounts
+(\cref{app:quiz-analysis})---the categories are what the analysis is to
+find, and a coder who had our expectation in front of them would be
+confirming it.
+Once the first cohort's accounts are coded, the empirical outcome space
+replaces these lists, and the closed items' explanations are revisited
+against the distractor frequencies.
+% TODO(#6): replace the provisional outcome spaces below with the
+% empirical ones after the first cohort's accounts are coded; re-apply
+% both quizzes with canvaslms quizzes edit --replace-items.
+
+The platform shows such a text as the item's feedback; the first line
+says what the list is, and the list runs from the least to the most
+powerful way of seeing.
+
+<<outcome space: what the terminal is>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>A black window for experts, where you type commands you have memorised and hope they work.</li><li>A place to type commands: each line names a program, and the text that comes back is the program&rsquo;s answer&mdash;or the shell saying it could not find or run it.</li><li>Another way into the same computer as the desktop: the shell reads the line as a sentence of a small language&mdash;a program and its arguments&mdash;runs the program on the same files and folders the desktop shows, and whatever comes back, output, silence or an error message, is information about what happened.</li></ol>"}
+<<outcome space: what happens to this line>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>The computer reads the words and shows the files, or searches for whatever they mean.</li><li>It does not work: the shell does not understand English, so some error appears.</li><li>The shell takes the first word, show, as the name of a program to run and the rest as its arguments; there is no program called show, so it says so&mdash;command not found&mdash;and nothing else happens. The same wish, said in the shell&rsquo;s language, is ls.</li></ol>"}
+<<outcome space: getting a file into place>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>Open Downloads in a window, find the file and drag it across; the terminal is not where this happens.</li><li>Type a copy or move command with the file&rsquo;s name, and look for the file afterwards in a window.</li><li>Name two places in the tree from where the shell stands: the file is at Downloads/data.csv and is to be at project/data.csv, so mv Downloads/data.csv project/ moves it, and ls project, run from the same place, shows it there&mdash;every command acts from the shell&rsquo;s working directory, and the window would show the same tree.</li></ol>"}
+<<outcome space: explaining a command line>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>grep finds the lines and prints them; then wc counts something; 42 is the answer.</li><li>grep writes the lines it found into a file, and wc then counts the lines of that file.</li><li>The lines grep would have printed go, as they are produced, straight into wc instead of onto the screen; wc counts them and prints 42. The pipe connects the output of one program to the input of the next, and nothing is stored in between.</li></ol>"}
+<<outcome space: after ssh>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>I am connected to the server: my commands travel over the network, and the files I make come back to my laptop.</li><li>A window on the server has opened; commands run there, and to see what they made I have to be in that window again.</li><li>My shell now runs on the server: every command acts on its files and programs, and a file made there stays there. To look at it from the laptop I copy it across&mdash;scp&mdash;or log in again; the two machines are separate, and the prompt tells me which one I am on.</li></ol>"}
+<<outcome space: which computer answers, in words>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>The files in my folder&mdash;the same listing as before the ssh.</li><li>Files from the server and the laptop together, or whichever the connection happens to reach.</li><li>The files in the home folder on server.example.edu: after ssh the shell runs there, and every command, ls included, acts on that machine&rsquo;s files.</li></ol>"}
+@
+
+\subsection{The knowledge items}
+\label{app:knowledge-items}
+
+The knowledge items are written for this study and published here in
+full.
+Each item tests one candidate critical aspect from the chapters: whether
+the student discerns it is exactly what the item measures.
+Following \citeauthor{NCOL}'s discussion of assessment, the stems do not
+point out the relevant aspect---discerning it is what we measure
+\autocite[p.~91]{NCOL}---so each stem shows a concrete command and its
+behaviour and leaves the interpretation to the student.
+Each distractor expresses a documented misconception or a plausible
+consequence of leaving the aspect undiscerned; the prose before each
+item names the aspect it tests and why the distractors are the mistakes
+they are.
+The correct alternative is kept about as long as the distractors, since
+the longest alternative is a known cue for test-wise students.
+All items weigh one point: we measure knowledge by counting correct
+answers, and \cref{app:quiz-analysis} reports them item by item, since
+each item stands for one aspect.
+Each item is followed by the text the end quiz shows under it, with the
+correct alternative: a short account of why that alternative is right and
+what each distractor assumes---the distractor a student chose is the
+misconception they can now read against it.
+The text may name the aspect, since it is shown only after the answer and
+only at the end; it paraphrases the rationale given before the item, and
+the two must be kept in step.
+
+The items are numbered from position 11, so that their placement is
+independent of the quiz they appear in: Canvas orders by position, gaps
+are fine, and the numbering leaves room for the quiz-specific opening
+item (consent or preparation) and the open accounts before them.
+
+<<knowledge items>>=
+<<item: a message after a command>>,
+<<item: the same files from two sides>>,
+<<item: a space in a file name>>,
+<<item: which directory the command uses>>,
+<<item: two names for one file>>,
+<<item: where a saved file is>>,
+<<item: a file on the pipe>>,
+<<item: sending output into a pipe>>,
+<<item: the same sort after different programs>>,
+<<item: running the same commands from a file>>,
+<<item: where the remote file ends up>>,
+<<item: which computer answers>>,
+<<item: where exit leaves you>>
+@
+
+\subsubsection{The command model}
+
+The command line is a language, not a search box (\cref{sec:shell}): the
+shell parses the line into a command and its arguments; it does not guess
+what the words mean.
+The item gives a line of ordinary English and asks what happens.
+The correct answer reads the first word as the name of a program to run;
+the search-box distractor treats the line as a query over the machine;
+the remaining distractors credit the shell with understanding the words
+or silently correcting them.
+This item is the one the start quiz leaves out: there the same stem is
+the open item \emph{what happens to this line} (\cref{app:open-items}),
+because the alternatives spell out the command model---that the first
+word names a program---to students who may be meeting a shell for the
+first time, and the start quiz promises not to reveal what the course
+will teach.
+The end quiz carries both forms, so for this aspect the movement is read
+from the account at the start to the item at the end, and the paired
+per-item gain of \cref{app:quiz-analysis} is computed over the other
+items only.
+The item keeps position 11 in the end quiz; the start quiz simply has a
+gap there.
+
+<<item: the command line reads a language>>=
+{
+  "position": 11,
+  "points_possible": 1,
+  "entry": {
+    "title": "The command line reads a language",
+    "item_body": "<p>At the shell prompt a student types the line below, hoping to see the files in the current directory.</p><pre>$ show me my files</pre><p>What happens?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The shell searches the computer for anything to do with \"my files\" and lists the closest matches</p>"},
+        {"position": 2, "item_body": "<p>The shell shows the files, because it understands what the words ask for</p>"},
+        {"position": 3, "item_body": "<p>The shell looks for a program called show, does not find one, and reports an error</p>"},
+        {"position": 4, "item_body": "<p>The shell corrects the line to the nearest real command and runs that instead</p>"}
+      ]
+    },
+    "scoring_data": {"value": 3},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: the command line reads a language>>
+  }
+}
+<<feedback: the command line reads a language>>=
+"feedback": {"neutral": "<p>The shell does not read English: it takes the first word of the line as the name of a program to run and the rest as that program&rsquo;s arguments. There is no program called show, so it reports that and does nothing else&mdash;it neither searches, nor guesses the nearest command, nor understands the words. The program that lists files is ls.</p>"}
+@
+
+Textual feedback is the system's response, and an error message is
+information, not failure (\cref{sec:shell}).
+The item shows a command that produced a message and asks what the
+message means.
+The correct answer reads the message as reporting that the action did
+not happen; the distractors dismiss it as an ignorable warning, blame the
+terminal, or take one message to mean the shell itself has stopped.
+
+<<item: a message after a command>>=
+{
+  "position": 12,
+  "points_possible": 1,
+  "entry": {
+    "title": "A message after a command",
+    "item_body": "<p>A student runs a command and sees this:</p><pre>$ cd reports\nbash: cd: reports: No such file or directory</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>There is no directory reports here, so the working directory did not change</p>"},
+        {"position": 2, "item_body": "<p>The command worked and the working directory changed; the message is only a warning and can be ignored</p>"},
+        {"position": 3, "item_body": "<p>The terminal is broken and should be closed and reopened</p>"},
+        {"position": 4, "item_body": "<p>The shell has stopped, and no further commands will run</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: a message after a command>>
+  }
+}
+<<feedback: a message after a command>>=
+"feedback": {"neutral": "<p>The message is the shell&rsquo;s report: cd looked for a directory called reports here and found none, so the working directory did not change. An error message is information about what did not happen&mdash;not a warning to ignore, not a broken terminal, not a shell that has stopped; the next command runs as usual.</p>"}
+@
+
+The shell acts on the same system as the graphical desktop---same files,
+only the interface varies (\cref{sec:shell,sec:filesystem}).
+A file made in the file manager and a listing typed in the shell meet in
+the same directory.
+The correct answer expects the file to appear; the distractor that keeps
+the two interfaces apart is the undiscerned-aspect case, that a student
+expects the shell and the graphical view to show different files.
+
+<<item: the same files from two sides>>=
+{
+  "position": 13,
+  "points_possible": 1,
+  "entry": {
+    "title": "The same files from two sides",
+    "item_body": "<p>A student uses the graphical file manager to create a file report.txt in their home folder. They then open a terminal, which starts in the home folder, and run:</p><pre>$ ls</pre><p>What do they see?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>Nothing about report.txt, because files made in the file manager are separate from the ones the shell sees</p>"},
+        {"position": 2, "item_body": "<p>An error, because ls cannot list files that were created graphically</p>"},
+        {"position": 3, "item_body": "<p>report.txt only after the computer is restarted so the terminal can catch up</p>"},
+        {"position": 4, "item_body": "<p>report.txt is listed, because the file manager and the shell show the same files</p>"}
+      ]
+    },
+    "scoring_data": {"value": 4},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: the same files from two sides>>
+  }
+}
+<<feedback: the same files from two sides>>=
+"feedback": {"neutral": "<p>The file manager and the shell are two views of the same file system: a file made in one is there for the other at once. ls lists report.txt; nothing has to restart, and nothing made graphically is hidden from the shell.</p>"}
+@
+
+The shell parses the line into words at the spaces before it knows
+which program runs; a name with a space in it is two words unless it is
+quoted (\cref{sec:shell}).
+The item shows the error that a spaced file name produces and asks why.
+The correct answer reads the message as the shell having split the name;
+the distractors credit [[cp]] with a one-file limit, an argument-order
+rule, or a length limit---each an explanation that keeps the line whole
+and blames the program, that is, that has not discerned the shell's
+parsing.
+
+<<item: a space in a file name>>=
+{
+  "position": 14,
+  "points_possible": 1,
+  "entry": {
+    "title": "A space in a file name",
+    "item_body": "<p>A student has a file named &ldquo;my report.txt&rdquo; and runs:</p><pre>$ cp my report.txt backup/\ncp: cannot stat 'my': No such file or directory</pre><p>Why?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The shell split the line at the space into my and report.txt, and there is no file called my</p>"},
+        {"position": 2, "item_body": "<p>cp copies only the first file named on the line and silently stops at the second</p>"},
+        {"position": 3, "item_body": "<p>The directory backup/ must come first on the line, before the file</p>"},
+        {"position": 4, "item_body": "<p>The file name is too long for cp, so it was cut off at the space</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: a space in a file name>>
+  }
+}
+<<feedback: a space in a file name>>=
+"feedback": {"neutral": "<p>The shell splits the line at spaces before cp sees it, so cp was given two files, my and report.txt, and could not find the first. That is the shell reading the line as words, not cp stopping early, the order being wrong or the name being too long; quoting the name, or writing my\\ report.txt, keeps it one word.</p>"}
+@
+
+\subsubsection{The file system}
+
+Every shell has a current working directory, and a command acts relative
+to it (\cref{sec:filesystem}).
+The item puts the file in one directory and the shell in another, and
+lets the student explain the resulting error.
+The correct answer connects the failure to where the command looked; the
+distractors deny the file exists at all, misread what [[ls]] can take, or
+invoke the graphical editor---each a way of not discerning that the
+command acted from the working directory.
+
+<<item: which directory the command uses>>=
+{
+  "position": 15,
+  "points_possible": 1,
+  "entry": {
+    "title": "Which directory the command uses",
+    "item_body": "<p>A student has a file notes.txt in /home/lee/reports. In a terminal opened in /home/lee they run:</p><pre>$ ls notes.txt\nls: cannot access 'notes.txt': No such file or directory</pre><p>Why?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The file notes.txt does not exist anywhere on the computer, so nothing can list it</p>"},
+        {"position": 2, "item_body": "<p>ls looked in /home/lee, where the shell is, not in reports where the file is</p>"},
+        {"position": 3, "item_body": "<p>ls can only list a whole directory at a time, never a single file by name</p>"},
+        {"position": 4, "item_body": "<p>The file must first be opened in a graphical editor before ls can see it</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: which directory the command uses>>
+  }
+}
+<<feedback: which directory the command uses>>=
+"feedback": {"neutral": "<p>Every command acts from the working directory: ls notes.txt looked for the file in /home/lee, where the shell stood, and the file is in /home/lee/reports. The file exists, ls lists single files, and no editor is needed&mdash;only the place was wrong: ls reports/notes.txt, or cd reports first.</p>"}
+@
+
+The same file has many names depending on where you stand: an absolute
+path from the root of the tree, a relative path from the working
+directory (\cref{sec:filesystem}).
+The item shows two commands that reach the same file and asks the student
+to reconcile them.
+The correct answer identifies the two paths as two names for one file;
+the distractors take them for different files, deny that a relative path
+is legitimate, or read the absolute path as making a copy.
+
+<<item: two names for one file>>=
+{
+  "position": 16,
+  "points_possible": 1,
+  "entry": {
+    "title": "Two names for one file",
+    "item_body": "<p>A student's working directory is /home/lee. Both commands below succeed and print the same text:</p><pre>$ cat report.txt\n$ cat /home/lee/report.txt</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>They are two different files that happen to hold the same text, one under /home/lee and one elsewhere</p>"},
+        {"position": 2, "item_body": "<p>They are two names for the same file: one read from the working directory, one from the root</p>"},
+        {"position": 3, "item_body": "<p>The first works only by chance; a file must always be given its full path</p>"},
+        {"position": 4, "item_body": "<p>The second command makes a copy of report.txt under /home/lee</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: two names for one file>>
+  }
+}
+<<feedback: two names for one file>>=
+"feedback": {"neutral": "<p>Both names lead to the same file: report.txt is read from the working directory, /home/lee, and /home/lee/report.txt is the same place named from the root of the tree. Neither is a copy and neither works by chance&mdash;a relative name is resolved against where the shell stands, an absolute one from the root.</p>"}
+@
+
+Everything has a place: every file lives at exactly one path in one
+tree, whichever program made it (\cref{sec:filesystem}).
+The item has a file saved from a graphical editor and asks where it is
+now.
+The correct answer puts it at one path in the tree; the distractors keep
+it inside the program, make it findable only by name, or put graphical
+programs' files outside the tree the terminal reaches---the ways of not
+having a spatial model of the file system at all.
+
+<<item: where a saved file is>>=
+{
+  "position": 17,
+  "points_possible": 1,
+  "entry": {
+    "title": "Where a saved file is",
+    "item_body": "<p>Lee saves thesis.txt from a graphical editor; the save dialog showed the folder Documents in Lee's home folder. Where is the file now?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>In Documents under Lee's home folder: one place in the tree, whichever program made it</p>"},
+        {"position": 2, "item_body": "<p>Inside the editor program; it has no place in the directory tree until it is exported</p>"},
+        {"position": 3, "item_body": "<p>Nowhere in particular; a file is found by its name, not by a place</p>"},
+        {"position": 4, "item_body": "<p>In a separate area for graphical programs' files, which the terminal cannot reach</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: where a saved file is>>
+  }
+}
+<<feedback: where a saved file is>>=
+"feedback": {"neutral": "<p>The file is in Documents under Lee&rsquo;s home folder: every file has one place in the directory tree, whichever program made it, and the save dialog showed that place. It is not inside the editor, not in a separate area for graphical programs, and not found by name alone&mdash;the terminal reaches it by that same place.</p>"}
+@
+
+\subsubsection{Composition}
+
+A file is not a program.
+The source end of a pipe is a program's output, and a file enters a
+pipeline only through a program that reads it; the pipe is not the file
+at either end.
+It is common in our course to see the file itself named on the left of
+the pipe, as if naming it would send its contents on---a course
+observation (\cref{sec:method-vt-analysis}) that this item tests.
+The item shows that line and asks what happens.
+The correct answer has the shell look for a program called
+[[report.txt]] and fail; the leading distractor sends the file's
+contents down the pipe; the others have [[wc]] count the name, or have
+the pipe write the count back into the file.
+The item comes before its partner, the working pipeline, on purpose:
+shown after [[cat report.txt | wc -l]], the line with the file on the
+left is wrong by inspection---the [[cat]] is visibly missing---and the
+item would measure comparison rather than discernment.
+Shown first, the student has to judge the line on its own.
+
+<<item: a file on the pipe>>=
+{
+  "position": 18,
+  "points_possible": 1,
+  "entry": {
+    "title": "A file on the pipe",
+    "item_body": "<p>A student wants to count the lines of the file report.txt and writes:</p><pre>$ report.txt | wc -l</pre><p>What happens?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>wc counts the lines of report.txt, because naming a file sends its contents into the pipe</p>"},
+        {"position": 2, "item_body": "<p>The shell looks for a program called report.txt, finds none, and reports an error; nothing is counted</p>"},
+        {"position": 3, "item_body": "<p>wc counts the words in the name report.txt rather than the lines in the file</p>"},
+        {"position": 4, "item_body": "<p>report.txt is replaced by its own line count, because the pipe writes into the file</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: a file on the pipe>>
+  }
+}
+<<feedback: a file on the pipe>>=
+"feedback": {"neutral": "<p>A pipe connects one program&rsquo;s output to another program&rsquo;s input, and report.txt is not a program: the shell looks for one by that name, finds none, and reports an error; wc receives nothing. Naming a file does not send its contents anywhere&mdash;a program has to read it, as in cat report.txt | wc -l, or wc -l report.txt directly.</p>"}
+@
+
+The pipe is not the file (\cref{sec:composition}): a pipe carries one
+program's output straight into another program, rather than storing it.
+Composite commands are exactly where the difficulty is documented---users
+can know the component commands yet fail to compose them
+\autocite{Doane1992UnixPrompts}---so the distractors are the plausible
+wrong models of what the pipe does.
+The item shows the working form of the previous item's line and asks
+what is true of it.
+The correct answer streams [[cat]]'s output into the reader; the leading
+distractor treats the pipe as a file, saving the output under the second
+program's name; the others reverse the order or deny the connection.
+
+<<item: sending output into a pipe>>=
+{
+  "position": 19,
+  "points_possible": 1,
+  "entry": {
+    "title": "Sending output into a pipe",
+    "item_body": "<p>A student wants to count the lines of the file report.txt and writes:</p><pre>$ cat report.txt | wc -l</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>cat first saves the file's text in a file called wc, which is then counted</p>"},
+        {"position": 2, "item_body": "<p>wc -l runs first, and its count is handed to cat</p>"},
+        {"position": 3, "item_body": "<p>The two programs run separately, one after the other, and each prints its own output to the screen</p>"},
+        {"position": 4, "item_body": "<p>The text that cat prints is fed straight into wc, which counts its lines</p>"}
+      ]
+    },
+    "scoring_data": {"value": 4},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: sending output into a pipe>>
+  }
+}
+<<feedback: sending output into a pipe>>=
+"feedback": {"neutral": "<p>cat prints the file&rsquo;s text, and the pipe feeds that text straight into wc, which counts its lines. Nothing is saved in a file called wc, the programs do not run in reverse or separately, and only wc&rsquo;s count reaches the screen.</p>"}
+@
+
+Programs read text in and write text out, which is why any producer can
+feed any consumer---the uniform interface (\cref{sec:composition}).
+The item varies the producer while keeping the consumer invariant (a
+generalisation pattern): the same [[sort]] follows two different
+programs, and the student must say why that works.
+The correct answer names the shared text interface; the distractors
+invent special modes, conflate the two producers, or deny that the reuse
+is possible.
+
+<<item: the same sort after different programs>>=
+{
+  "position": 20,
+  "points_possible": 1,
+  "entry": {
+    "title": "The same sort after different programs",
+    "item_body": "<p>The first command lists a directory and passes the listing to sort:</p><pre>$ ls | sort</pre><p>The same sort is then used after a different program, which lists running processes:</p><pre>$ ps | sort</pre><p>Why can sort be used after both ls and ps?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>Both write text, and sort reads any text, whatever program produced it</p>"},
+        {"position": 2, "item_body": "<p>sort has one built-in mode for listings from ls and another for process lists from ps</p>"},
+        {"position": 3, "item_body": "<p>ls and ps are the same program under two names</p>"},
+        {"position": 4, "item_body": "<p>It cannot; sort works only after ls</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: the same sort after different programs>>
+  }
+}
+<<feedback: the same sort after different programs>>=
+"feedback": {"neutral": "<p>Programs read text in and write text out, so sort reads whatever text the program before it produced&mdash;ls&rsquo;s listing or ps&rsquo;s process list&mdash;without knowing which. It has no special modes, ls and ps are different programs, and any program that writes text can be followed by sort.</p>"}
+@
+
+A script is nothing new: the same commands, replayed from a file
+(\cref{sec:composition}; the course demonstrates it by turning the
+history into a script).
+The item puts three commands in a file and runs it with [[bash]].
+The correct answer replays them as if typed; the distractors deny that a
+text file can run, interpose a compilation step that may fail, or limit
+a file to one command---each a way of seeing the script as a different
+kind of thing from the commands.
+
+<<item: running the same commands from a file>>=
+{
+  "position": 21,
+  "points_possible": 1,
+  "entry": {
+    "title": "Running the same commands from a file",
+    "item_body": "<p>A student puts three commands they ran earlier, one per line, into a file steps.sh and runs:</p><pre>$ bash steps.sh</pre><p>What happens?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The three commands run one after another, exactly as if typed at the prompt</p>"},
+        {"position": 2, "item_body": "<p>Nothing; a text file cannot be run, only programs can</p>"},
+        {"position": 3, "item_body": "<p>bash first translates the file into a program, which fails unless the commands are exact</p>"},
+        {"position": 4, "item_body": "<p>Only the first command runs; a file can hold one command</p>"}
+      ]
+    },
+    "scoring_data": {"value": 1},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: running the same commands from a file>>
+  }
+}
+<<feedback: running the same commands from a file>>=
+"feedback": {"neutral": "<p>bash reads steps.sh line by line and runs each line exactly as if it had been typed at the prompt: three commands, one after another. A script is nothing new&mdash;no translation, no limit of one command&mdash;and the file runs because bash is the program being run, with the file as its input.</p>"}
+@
+
+\subsubsection{The remote shell}
+
+Files live on machines: a file created on the remote host is on that
+host, not on the laptop (\cref{sec:ssh}).
+The item runs a program over SSH that writes a file, closes the
+connection, and asks where the file is.
+The correct answer keeps the file on the server where the program ran;
+the distractors bring it home to the laptop, sync it to both, or treat it
+as vanishing with the connection.
+It opens the remote-shell items: a concrete round trip whose answer
+shows at once whether files live on machines for the student, before
+the two items that follow ask where the shell itself is.
+
+<<item: where the remote file ends up>>=
+{
+  "position": 22,
+  "points_possible": 1,
+  "entry": {
+    "title": "Where the remote file ends up",
+    "item_body": "<p>Connected by SSH to a remote server, a student runs a program that creates results.txt. They then close the connection and look in the file manager on their laptop. Where is results.txt?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>On the laptop, because that is the computer the student is using</p>"},
+        {"position": 2, "item_body": "<p>On the server, because that is where the program ran; it is not on the laptop</p>"},
+        {"position": 3, "item_body": "<p>On both, because SSH keeps the two machines' files in sync</p>"},
+        {"position": 4, "item_body": "<p>Nowhere; files made over SSH are temporary and vanish when the connection closes</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: where the remote file ends up>>
+  }
+}
+<<feedback: where the remote file ends up>>=
+"feedback": {"neutral": "<p>The program ran on the server, so the file it created is on the server, in the folder the shell stood in there; nothing copies it to the laptop, and closing the connection deletes nothing. To have it on the laptop, fetch it&mdash;with scp, for example.</p>"}
+@
+
+A shell runs somewhere: every prompt belongs to exactly one machine, and
+a command acts on that machine (\cref{sec:ssh}).
+After an [[ssh]] the prompt looks the same but the machine has changed,
+which is precisely why it is easy to lose track.
+The item asks what a listing shows after connecting to a server.
+The stem does not say \emph{computer}---that would already tell the
+student that the machine is the point, and a test of discernment must
+not point out the aspect \autocite[p.~91]{NCOL}; the alternatives
+cannot avoid naming the machines, and that is the discerning they do for
+the student.
+The correct answer follows the shell to the server; the leading
+distractor stays with the laptop the student is sitting at---the
+undiscerned-aspect case of not knowing which machine the command acts
+on.
+Its open twin, \emph{what ls lists after ssh} (\cref{app:open-items}),
+asks the same thing without alternatives; the two answers of one student
+show how much of the discernment the alternatives do.
+
+<<item: which computer answers>>=
+{
+  "position": 23,
+  "points_possible": 1,
+  "entry": {
+    "title": "Which computer answers",
+    "item_body": "<p>A student is working in a terminal on their laptop. They run:</p><pre>$ ssh server.example.edu</pre><p>and a new prompt appears after the password. They now run:</p><pre>$ ls</pre><p>What is listed?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>The files on the laptop, because that is where the student is sitting</p>"},
+        {"position": 2, "item_body": "<p>The files on both machines together, merged into one listing</p>"},
+        {"position": 3, "item_body": "<p>The files on server.example.edu, because the shell is now on that machine</p>"},
+        {"position": 4, "item_body": "<p>No files, because ls does not work over a network connection</p>"}
+      ]
+    },
+    "scoring_data": {"value": 3},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: which computer answers>>
+  }
+}
+<<feedback: which computer answers>>=
+"feedback": {"neutral": "<p>After ssh the shell runs on server.example.edu, and every command acts on that machine: ls lists the server&rsquo;s files, in the home folder there. The laptop&rsquo;s files are not involved, nothing is merged, and ls works as anywhere else&mdash;only the machine has changed, which the prompt shows.</p>"}
+@
+
+The interface is invariant while the machine varies (\cref{sec:ssh}):
+a chained [[ssh]] nests one shell inside another, and [[exit]] peels off
+the innermost.
+The item nests two sessions and asks where a single [[exit]] leaves the
+student; it is the discernment behind the ssh-cycle that our course
+observations report---students who chain [[ssh]] onward and back have
+not discerned that each session is one machine and that leaving one
+returns to the one below.
+The correct answer steps back one machine; the distractors collapse the
+whole chain, treat [[exit]] as cosmetic, or close the terminal.
+(An earlier version asked for the \emph{best way} to switch between
+machines, which measured a preferred practice rather than a discerned
+aspect.)
+
+<<item: where exit leaves you>>=
+{
+  "position": 24,
+  "points_possible": 1,
+  "entry": {
+    "title": "Where exit leaves you",
+    "item_body": "<p>In a terminal on their laptop a student runs ssh A, and from A runs ssh B. They then type exit once. Where is their shell now?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>On the laptop, because exit closes every connection at once</p>"},
+        {"position": 2, "item_body": "<p>On A, because exit ended the session with B; the one from A is still open</p>"},
+        {"position": 3, "item_body": "<p>Still on B, because exit only clears the screen of the current shell</p>"},
+        {"position": 4, "item_body": "<p>Nowhere; exit closed the terminal window and all its connections</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence",
+    <<feedback: where exit leaves you>>
+  }
+}
+<<feedback: where exit leaves you>>=
+"feedback": {"neutral": "<p>Each ssh starts a shell on another machine inside the one you came from, and exit ends only the innermost: after one exit the student is back on A, with the session from the laptop to A still open; a second exit returns to the laptop. exit does not close everything, clear the screen or shut the terminal.</p>"}
+@
+
+\subsection{Analysing the results}
+\label{app:quiz-analysis}
+
+Canvas compiles the responses into a student-analysis report: a CSV file
+with one row per student and one column per item, keyed by the item
+titles above.
+The analysis program fetches that report itself---we know the courses
+and the quiz titles, so nothing needs to be clicked or downloaded by
+hand---using the same [[canvaslms]] machinery as the command-line tool.
+It then does three things.
+For the closed items it reports, item by item, how many students chose
+each alternative: the share choosing the correct one is the item's
+facility, and the shares choosing the distractors are the prevalence of
+the misconceptions the distractors encode (\cref{app:knowledge-items}),
+which a total score would hide.
+Given both quizzes it pairs each student's two rows and counts, per
+item, who went from wrong to right and from right to wrong---the gain
+per aspect that \cref{sec:instruments} asks for.
+For the open items it writes the accounts to a coding sheet: one row per
+student, quiz and item, with empty columns for the codes, so that every
+collected account is read and coded.
+
+The coding is done by a human, but a large language model prepares it:
+with [[--llm]] the program asks a model (via the [[llm]] package) to
+suggest, for each account, a category in the student's own terms and
+what the student discerns and does not, and the coder verifies, merges
+or overrides these in the sheet.
+The suggestions are kept in separate columns from the verified codes, so
+the sheet always shows which is which; and they are deliberately not
+drawn from a fixed list, since the categories are what the analysis is
+to find.
+
+<<[[analyze_quiz.py]]>>=
+"""Fetch and summarise the terminal-quiz results, and prepare the coding
+sheet.
+
+The quizzes are defined in the two quiz-knowledge-*.json files, tangled
+from the same literate source (the appendix of the paper).  The results
+come straight from Canvas via canvaslms; the item titles are the column
+keys, and the answer key is read from the quiz description.
+
+Requires canvaslms and its configured credentials; the optional LLM
+pre-coding requires the llm package with a default model.
+"""
+
+import argparse
+import collections
+import csv
+import html
+import json
+import os
+import re
+import statistics
+import sys
+
+<<the courses and the item titles are the keys>>
+<<the answer key from the quiz description>>
+<<fetch the results from Canvas>>
+<<attach the login IDs>>
+<<the consent filter>>
+<<tabulate the closed items>>
+<<per-item facility and distractor frequencies>>
+<<paired pre/post gain>>
+<<pre-code the open accounts with an LLM>>
+<<write the coding sheet>>
+<<analysis main>>
+
+if __name__ == "__main__":
+    main()
+@
+
+The course names and the item titles are the join keys between the
+tangled files: if a title changes in a quiz, this block is the only
+other place to change---and they live in the same source, side by side.
+The module runs in two courses: datintro26, where this program created
+the quizzes, and the CS programme's course alongside it, into which the
+teachers copy the module---quizzes included---by hand.
+The analysis therefore fetches the report from every course in the list
+that has the quiz, pools the rows, and tags each row with its course, so
+the cohorts stay separable; a course or quiz not found is noted and
+skipped, since the copy is made by hand and may lag this source.
+A name cannot identify a student: two students may share one even
+within a course, let alone across the pooled ones.
+The identifier is the student's \emph{login ID}---an email address,
+unique across the institution and beyond, and the identifier the
+surrounding tooling already keys results by---which the report does not
+carry, so [[fetch_results]] attaches it to every row from the course's
+own roster (\cref{app:quiz-analysis}).
+Every join below goes through [[student_of]], which uses the login ID
+and falls back to the course--name pair only for rows read from a saved
+report, which lack the attached column.
+The coding columns are the open scheme: a category of description, what
+the account shows the student discerning and not discerning, and notes;
+the suggested columns mirror them and add the model's rationale.
+Canvas prefixes the report's columns with item identifiers, so we match
+columns by containment rather than equality.
+
+<<the courses and the item titles are the keys>>=
+# TODO(#7): confirm the CS course's exact Canvas course code when
+# the 2026 instance becomes visible (the 2022 instance's code was
+# progd22, so progd26 is the guess).
+COURSES = ["datintro26", "progd26"]
+COURSE_COLUMN = "course"
+LOGIN_COLUMN = "login"
+QUIZ_TITLES = {
+    "start": "Terminal quiz: what you know already",
+    "end": "Terminal quiz: what you know now",
+}
+QUIZ_FILE = "quiz-knowledge-end.json"
+STUDENT = "name"
+CONSENT = "Consent"
+CLOSED_ITEMS = [CONSENT, "Preparation"]
+OPEN_ITEMS = ["What the terminal is", "What happens to this line",
+              "Getting a file into place", "Explaining a command line",
+              "After ssh", "What ls lists after ssh"]
+CODED_KEYS = ["category", "discerned", "undiscerned"]
+CODING_COLUMNS = CODED_KEYS + ["notes"]
+SUGGESTED_COLUMNS = [f"suggested_{key}" for key in CODED_KEYS + ["rationale"]]
+
+
+def column_for(title, fieldnames):
+    """Return the report column whose name contains the item title."""
+    return next((name for name in fieldnames if title in name), None)
+
+
+def student_of(row):
+    """Return the identifier of the student behind a row.
+
+    The login ID attached by fetch_results when available; rows read
+    from a saved report lack it and fall back to the course--name pair.
+    """
+    return row.get(LOGIN_COLUMN) or (row.get(COURSE_COLUMN, ""), row[STUDENT])
+@
+
+\subsubsection{The answer key}
+
+The report records each closed answer as the text of the chosen
+alternative, not its number, so the program needs the alternatives and
+the key.
+Rather than duplicating them by hand---a second copy that would drift
+from the first---it reads them from the tangled quiz description: the
+end quiz, since it carries every item, whereas the start quiz leaves one
+knowledge item out (\cref{app:knowledge-items}).
+An item a quiz does not carry has no column in that quiz's report, so
+the tables below ask first whether the item was asked at all, and skip
+it rather than count every student as wrong.
+The item bodies are HTML, so the text is stripped of tags and unescaped
+before it is compared with the report; both sides are reduced to single
+spaces, since Canvas is free to rewrap.
+The graded choice items are the knowledge items (the preparation item is
+a choice item too, but carries no points); the essay items are the open
+items, whose stems the pre-coding prompt quotes.
+The feedback under an item---what the end quiz shows afterwards
+(\cref{app:open-items-feedback})---is not read at all: it is written for
+the student, and the coding must not see it.
+
+<<the answer key from the quiz description>>=
+TAGS = re.compile(r"<[^>]+>")
+
+
+def plain(body):
+    """Return the text of an HTML item body, whitespace normalised."""
+    return " ".join(html.unescape(TAGS.sub(" ", body)).split())
+
+
+def load_quiz(path):
+    """Return the knowledge items and the open stems of a quiz file.
+
+    The knowledge items map title -> (alternatives, correct position);
+    the open stems map title -> stem text.
+    """
+    with open(path) as infile:
+        quiz = json.load(infile)
+    knowledge, stems = {}, {}
+    for item in quiz["items"]:
+        entry = item["entry"]
+        kind = entry["interaction_type_slug"]
+        if kind == "choice" and item["points_possible"]:
+            choices = sorted(entry["interaction_data"]["choices"],
+                             key=lambda choice: choice["position"])
+            knowledge[entry["title"]] = (
+                [plain(choice["item_body"]) for choice in choices],
+                entry["scoring_data"]["value"],
+            )
+        elif kind == "essay":
+            stems[entry["title"]] = plain(entry["item_body"])
+    return knowledge, stems
+
+
+def answer_of(row, title):
+    """Return the student's answer to the titled item, normalised."""
+    column = column_for(title, row.keys())
+    return plain(row.get(column, "")) if column else ""
+
+
+def is_correct(row, title, knowledge):
+    """Whether the row's answer to the titled item is the keyed one."""
+    choices, correct = knowledge[title]
+    return answer_of(row, title) == choices[correct - 1]
+
+
+def asked(rows, title):
+    """Whether the report's columns include the titled item at all."""
+    return bool(rows) and column_for(title, rows[0].keys()) is not None
+@
+
+\subsubsection{Fetching the report from Canvas}
+
+Just as we create the quizzes with [[canvaslms]], we extract the results
+with it: the same package provides the credentials, the course lookup and
+the report machinery, so the program reuses them instead of
+reimplementing the Canvas API calls.
+The report is generated on demand by Canvas, so we request it, wait for
+it, and download the CSV it points to---once per course that has the
+quiz, appending the course name to each row under [[COURSE_COLUMN]].
+
+<<fetch the results from Canvas>>=
+def fetch_results(which):
+    """Download the student-analysis rows for the start or end quiz.
+
+    Fetches from every course in COURSES that has the quiz, pools the
+    rows and tags each with its course; missing courses or quizzes are
+    noted and skipped.
+    """
+    import appdirs
+    import requests
+    import canvaslms.cli
+    import canvaslms.cli.login
+    from canvasapi import Canvas
+    from canvaslms.cli.quizzes import (
+        create_new_quiz_report,
+        filter_quizzes,
+        is_new_quiz,
+        poll_progress,
+    )
+
+    config_file = os.path.join(
+        appdirs.user_config_dir("canvaslms"), "config.json"
+    )
+    config = canvaslms.cli.read_configuration(config_file)
+    hostname, token = canvaslms.cli.login.load_credentials(config)
+    if not hostname.startswith("http"):
+        hostname = f"https://{hostname}"
+    canvas = Canvas(hostname, token)
+
+    rows = []
+    for name in COURSES:
+        course = next(
+            (c for c in canvas.get_courses()
+             if name in (c.name or "") or name in (c.course_code or "")),
+            None,
+        )
+        if course is None:
+            print(f"note: no course matching {name}, skipping")
+            continue
+        quiz = next(filter_quizzes([course], QUIZ_TITLES[which]), None)
+        if quiz is None:
+            print(f"note: {name} has no quiz {QUIZ_TITLES[which]!r}, skipping")
+            continue
+        if not is_new_quiz(quiz):
+            sys.exit(f"quiz {quiz.title!r} in {name} is not a New Quiz")
+
+        progress = poll_progress(
+            create_new_quiz_report(course, quiz.id, canvas._Canvas__requester)
+        )
+        url = progress.results.get("url") if progress else None
+        if not url:
+            sys.exit(f"Canvas did not produce the report for {name}")
+        response = requests.get(url)
+        response.raise_for_status()
+        course_rows = list(csv.DictReader(response.text.splitlines()))
+        for row in course_rows:
+            row[COURSE_COLUMN] = name
+        attach_logins(course_rows, course, name)
+        rows.extend(course_rows)
+    return rows
+@
+
+The report identifies its rows by name and, in its [[id]] and [[sis_id]]
+columns, by the platform's and the institution's identifiers; the login
+ID lives in the course roster.
+So each row is looked up in the roster: by the platform ID, else by the
+institutional ID, else---for a report that carries neither---by name,
+which is accepted only when exactly one enrolled student bears it; an
+ambiguous name is reported rather than silently mis-joined, and such
+rows keep the course--name fallback of [[student_of]].
+
+<<attach the login IDs>>=
+def attach_logins(rows, course, name):
+    """Attach each row's student login ID from the course roster."""
+    by_id, by_sis, by_name = {}, {}, {}
+    try:
+        students = list(course.get_users(enrollment_type=["student"]))
+    except Exception as error:
+        print(f"warning: cannot read the roster of {name}: {error}")
+        return
+    for user in students:
+        login = getattr(user, "login_id", None)
+        if not login:
+            continue
+        by_id[str(user.id)] = login
+        sis = getattr(user, "sis_user_id", None)
+        if sis:
+            by_sis[str(sis)] = login
+        by_name.setdefault(user.name, []).append(login)
+    if not rows:
+        return
+    id_column = next((c for c in rows[0] if c.strip().lower() == "id"), None)
+    sis_column = next((c for c in rows[0]
+                       if c.strip().lower() == "sis_id"), None)
+    for row in rows:
+        login = None
+        if id_column and row.get(id_column):
+            login = by_id.get(str(row[id_column]).strip())
+        if not login and sis_column and row.get(sis_column):
+            login = by_sis.get(str(row[sis_column]).strip())
+        if not login:
+            candidates = by_name.get(row[STUDENT], [])
+            if len(candidates) == 1:
+                login = candidates[0]
+            elif len(candidates) > 1:
+                print(f"warning: several students in {name} are named"
+                      f" {row[STUDENT]!r} and the report has no usable ID"
+                      f" column; falling back to course and name")
+        if login:
+            row[LOGIN_COLUMN] = login
+@
+
+\subsubsection{Consent}
+
+Consent is asked once, in the start quiz, and covers both; the end quiz
+has no consent item of its own, so its rows are filtered by the
+students that consented at the start (\cref{sec:instruments}).
+Analysed on its own, the end quiz therefore cannot be filtered, and the
+program says so rather than silently keeping everyone.
+
+<<the consent filter>>=
+def consenting(rows):
+    """Return the students who consented, or None if unasked.
+
+    Students are login IDs (or the course--name fallback), so namesakes
+    stay distinct.
+    """
+    column = column_for(CONSENT, rows[0].keys())
+    if column is None:
+        return None
+    return {student_of(row) for row in rows
+            if row[column].strip().lower() in ("yes", "true")}
+
+
+def filter_consent(rows, students):
+    """Keep the rows of the given students; None keeps every row."""
+    if students is None:
+        print("note: no consent item in these rows, so no filtering")
+        return rows
+    return [row for row in rows if student_of(row) in students]
+@
+
+\subsubsection{Summaries}
+
+Tabulating a closed item is counting its answer frequencies; we print one
+table per opening item present in the report (the consent item only
+exists in the start quiz, the preparation item only in the end quiz).
+Since Canvas grades the knowledge items, each report carries a score
+column, which we summarise: the score distribution at the start measures
+what the students bring, and at the end, the gain.
+
+<<tabulate the closed items>>=
+def tabulate(rows, item):
+    """Print the answer frequencies for one closed item."""
+    column = column_for(item, rows[0].keys())
+    if column is None:
+        return
+    counts = collections.Counter(row[column] for row in rows)
+    print(f"\n{item}")
+    for answer, count in counts.most_common():
+        print(f"  {answer or '(no answer)'}: {count}")
+
+
+def summarize_scores(rows):
+    """Print the score distribution, if the report has scores."""
+    column = column_for("score", rows[0].keys())
+    if column is None:
+        return
+    scores = [float(row[column]) for row in rows if row[column]]
+    if scores:
+        print(f"\nscores: n={len(scores)}"
+              f", mean={statistics.mean(scores):.1f}"
+              f", median={statistics.median(scores):.1f}"
+              f", max={max(scores):.0f}")
+@
+
+The total score says how much the students discern; which aspects they
+discern, and which misconceptions they hold instead, is in the
+alternatives.
+So the knowledge items are reported one by one: the facility, that is
+the share of answering students who chose the keyed alternative, and the
+count for every alternative, the key marked with a star.
+A distractor chosen by a third of the students at the start and by
+nobody at the end is the clearest evidence the instrument can give that
+the module made the aspect discernible; a distractor that survives the
+module is where the teaching must change.
+
+<<per-item facility and distractor frequencies>>=
+def item_table(rows, knowledge):
+    """Print, per knowledge item, the facility and each alternative's count."""
+    for title, (choices, correct) in knowledge.items():
+        if not asked(rows, title):
+            continue
+        answers = [answer_of(row, title) for row in rows]
+        answered = [answer for answer in answers if answer]
+        counts = collections.Counter(answered)
+        facility = (counts[choices[correct - 1]] / len(answered)
+                    if answered else float("nan"))
+        print(f"\n{title}: n={len(answered)}, facility={facility:.2f}")
+        for position, choice in enumerate(choices, start=1):
+            mark = "*" if position == correct else " "
+            print(f"  {mark} {counts[choice]:3d}  {choice}")
+@
+
+\subsubsection{Paired gains}
+
+The gain is a within-student quantity: the same student, the same item,
+before and after.
+The two reports are joined on the student---the login ID, so that
+namesakes never pair, not even within one course---and for each item the
+program counts how many of the paired students were right at the start,
+how many at the end, and---the two numbers that matter---how many moved
+from wrong to right and from right to wrong; they are the discordant
+cells of McNemar's test, should the numbers warrant one, and they are
+reported as counts so that the reader can judge them without one.
+The score gain is reported as a mean over the same pairs.
+
+<<paired pre/post gain>>=
+def paired_gain(start, end, knowledge):
+    """Print, per item, how the students who took both quizzes moved."""
+    at_end = {student_of(row): row for row in end}
+    pairs = [(row, at_end[student_of(row)])
+             for row in start if student_of(row) in at_end]
+    print(f"\n{len(pairs)} students took both quizzes")
+    print(f"{'item':42s} {'start':>5s} {'end':>5s} {'+':>4s} {'-':>4s}")
+    for title in knowledge:
+        if not (asked(start, title) and asked(end, title)):
+            continue
+        before = [is_correct(row, title, knowledge) for row, _ in pairs]
+        after = [is_correct(row, title, knowledge) for _, row in pairs]
+        gained = sum(1 for b, a in zip(before, after) if a and not b)
+        lost = sum(1 for b, a in zip(before, after) if b and not a)
+        print(f"{title:42s} {sum(before):5d} {sum(after):5d}"
+              f" {gained:4d} {lost:4d}")
+    <<the mean score gain over the pairs>>
+@
+
+The score columns may be missing (a report without grades) or empty for
+a student who never submitted, so only pairs with both scores count.
+
+<<the mean score gain over the pairs>>=
+gains = []
+for first, second in pairs:
+    before = column_for("score", first.keys())
+    after = column_for("score", second.keys())
+    if before and after and first[before] and second[after]:
+        gains.append(float(second[after]) - float(first[before]))
+if gains:
+    print(f"mean score gain={statistics.mean(gains):.2f} over {len(gains)}")
+@
+
+\subsubsection{The coding sheet}
+
+The accounts are coded one at a time, each against the stem it answers,
+so the model is given one account and one stem per call.
+The prompt states the purpose---to find the qualitatively different ways
+the students experience the phenomenon---and asks for a category in the
+student's own terms and for what the account shows the student
+discerning and not discerning; it does not offer a list to choose from,
+because a list would turn the finding into confirming.
+The model must answer in JSON so that the suggestions land in columns;
+an unparseable answer leaves the suggestion empty rather than stopping
+the run.
+The suggestions are exactly that: \cref{sec:instruments} requires a human
+coder, who forms the categories by comparing the accounts with each
+other, and the verified codes go in the bare columns.
+
+<<pre-code the open accounts with an LLM>>=
+CODING_PROMPT = """\
+You are pre-coding one written answer from a diagnostic quiz on the
+Unix terminal, for a phenomenographic analysis.  The aim is to find
+the qualitatively different ways the students experience the
+phenomenon, in their own terms; do not map the answer onto a fixed
+list of codes.
+Answer in JSON with keys "category" (one short phrase for what the
+student seems to take the phenomenon to be), "discerned" (short
+phrases: the distinctions the student makes), "undiscerned" (short
+phrases: what the student treats as the same, or leaves out, that
+matters for the task), and "rationale" (one sentence pointing at the
+words in the answer).
+
+Question: {question}
+Answer: {answer}
+"""
+
+
+def llm_precode(records):
+    """Ask the default llm model to suggest codes for each account."""
+    import llm
+
+    model = llm.get_model()
+    suggestions = []
+    for record in records:
+        prompt = CODING_PROMPT.format(question=record["stem"],
+                                      answer=record["answer"])
+        try:
+            suggestion = json.loads(model.prompt(prompt).text())
+        except Exception:
+            suggestion = {}
+        suggestions.append(
+            {f"suggested_{key}": suggestion.get(key, "")
+             for key in CODED_KEYS + ["rationale"]}
+        )
+    return suggestions
+@
+
+The sheet is in long format---one row per student, quiz and item, with the course the
+student belongs to and the login ID that identifies them---for
+two reasons.
+The categories are formed per phenomenon, so the coder reads all the
+accounts of one item together, which a sort on the item column gives;
+and the movement of a student between categories from start to end is a
+comparison of two rows of the same student and item, which the quiz
+column makes possible.
+Empty accounts are left out: a box the student skipped is not an account
+to code.
+The verbatim answer is kept as the student typed it, not normalised, so
+the coder reads what the student wrote.
+
+<<write the coding sheet>>=
+def open_records(rows, quiz, stems):
+    """Return one record per student and open item, with the stem."""
+    records = []
+    for row in rows:
+        for item in OPEN_ITEMS:
+            column = column_for(item, row.keys())
+            answer = row.get(column, "").strip() if column else ""
+            if answer:
+                records.append({"quiz": quiz, STUDENT: row[STUDENT],
+                                COURSE_COLUMN: row.get(COURSE_COLUMN, ""),
+                                LOGIN_COLUMN: row.get(LOGIN_COLUMN, ""),
+                                "item": item, "stem": stems.get(item, item),
+                                "answer": answer})
+    return records
+
+
+def write_coding_sheet(records, path, suggestions=None):
+    """Write the accounts with coding columns to path."""
+    fields = (["quiz", STUDENT, LOGIN_COLUMN, COURSE_COLUMN, "item", "answer"]
+              + (SUGGESTED_COLUMNS if suggestions else []) + CODING_COLUMNS)
+    with open(path, "w", newline="") as out:
+        writer = csv.DictWriter(out, fieldnames=fields, extrasaction="ignore")
+        writer.writeheader()
+        for index, record in enumerate(records):
+            if suggestions:
+                record = {**record, **suggestions[index]}
+            writer.writerow(record)
+@
+
+\subsubsection{Putting it together}
+
+The main function reads or fetches one or both reports, filters by
+consent, and reports each quiz: the opening item, the knowledge items
+one by one, the scores.
+With both quizzes it adds the paired gains, and it always writes the
+coding sheet for whatever accounts it has read.
+The quiz file defaults to the tangled end quiz next to the program,
+since that is the one that carries every item.
+
+<<analysis main>>=
+def read_rows(path):
+    """Read a saved student-analysis report."""
+    with open(path, newline="") as infile:
+        return list(csv.DictReader(infile))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--quiz", choices=["start", "end", "both"],
+                        default="start", help="which quiz to analyse")
+    parser.add_argument("--results", nargs="+", metavar="CSV",
+                        help="read these CSVs (start, end) instead of "
+                             "fetching from Canvas")
+    parser.add_argument("--quiz-file",
+                        default=os.path.join(
+                            os.path.dirname(os.path.abspath(__file__)),
+                            QUIZ_FILE),
+                        help="quiz description to read the answer key from")
+    parser.add_argument("--llm", action="store_true",
+                        help="pre-code the open accounts with an LLM")
+    parser.add_argument("--coding-sheet", default="quiz-coding-sheet.csv",
+                        help="output CSV for the coding of the accounts")
+    args = parser.parse_args()
+
+    which = ["start", "end"] if args.quiz == "both" else [args.quiz]
+    if args.results:
+        if len(args.results) != len(which):
+            sys.exit(f"expected {len(which)} results file(s) for {args.quiz}")
+        rows = dict(zip(which, map(read_rows, args.results)))
+    else:
+        rows = {quiz: fetch_results(quiz) for quiz in which}
+    if not all(rows.values()):
+        sys.exit("no responses")
+    knowledge, stems = load_quiz(args.quiz_file)
+
+    students = consenting(rows["start"]) if "start" in rows else None
+    for quiz in which:
+        rows[quiz] = filter_consent(rows[quiz], students)
+        print(f"\n== {QUIZ_TITLES[quiz]}: {len(rows[quiz])} students")
+        for item in CLOSED_ITEMS:
+            tabulate(rows[quiz], item)
+        item_table(rows[quiz], knowledge)
+        summarize_scores(rows[quiz])
+    if args.quiz == "both":
+        paired_gain(rows["start"], rows["end"], knowledge)
+
+    records = [record for quiz in which
+               for record in open_records(rows[quiz], quiz, stems)]
+    suggestions = llm_precode(records) if args.llm else None
+    write_coding_sheet(records, args.coding_sheet, suggestions)
+    print(f"\ncoding sheet written to {args.coding_sheet}"
+          f" ({len(records)} accounts)")
+@
