@@ -179,6 +179,16 @@ the answers: it shows, item by item, whether the answer was right and
 which alternative was, so that the diagnostic also teaches---the
 distractor a student chose is the misconception they can now read against
 the correct account.
+It also shows, under each item, a short text of ours: for a closed item
+why the keyed alternative is right and what each distractor assumes, and
+for an open item the ways of seeing we expect, from the first impression
+to the one the module aims at (\cref{app:open-items-feedback}).
+That text travels with the item, and the items are shared by the two
+quizzes, so the start quiz carries it too; the last key of each object is
+the one switch that hides it there and shows it at the end, and the
+deployment reads the settings back to confirm the switch took.
+The platform applies none of this unless the view is declared
+restricted, hence the first key of each object.
 
 <<start result view>>=
 "result_view_settings": {
@@ -188,7 +198,8 @@ the correct account.
   "display_item_response_correctness": false,
   "display_item_correct_answer": false,
   "display_points_awarded": true,
-  "display_points_possible": true
+  "display_points_possible": true,
+  "display_item_feedback": false
 }
 <<end result view>>=
 "result_view_settings": {
@@ -198,7 +209,8 @@ the correct account.
   "display_item_response_correctness": true,
   "display_item_correct_answer": true,
   "display_points_awarded": true,
-  "display_points_possible": true
+  "display_points_possible": true,
+  "display_item_feedback": true
 }
 @
 
@@ -331,7 +343,8 @@ doing the discerning \autocite[p.~91]{NCOL}.
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
-    "scoring_algorithm": "None"
+    "scoring_algorithm": "None",
+    <<outcome space: what the terminal is>>
   }
 }
 @
@@ -355,7 +368,8 @@ point against which the closed item at the end is read.
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
-    "scoring_algorithm": "None"
+    "scoring_algorithm": "None",
+    <<outcome space: what happens to this line>>
   }
 }
 @
@@ -390,7 +404,8 @@ supply, or not \autocite[p.~91]{NCOL}.
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
-    "scoring_algorithm": "None"
+    "scoring_algorithm": "None",
+    <<outcome space: getting a file into place>>
   }
 }
 @
@@ -413,7 +428,8 @@ stream---show themselves unprompted.
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
-    "scoring_algorithm": "None"
+    "scoring_algorithm": "None",
+    <<outcome space: explaining a command line>>
   }
 }
 @
@@ -455,7 +471,8 @@ on machines.
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
-    "scoring_algorithm": "None"
+    "scoring_algorithm": "None",
+    <<outcome space: after ssh>>
   }
 }
 @
@@ -493,9 +510,60 @@ closed item's title as a substring, since the analysis
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
-    "scoring_algorithm": "None"
+    "scoring_algorithm": "None",
+    <<outcome space: which computer answers, in words>>
   }
 }
+@
+
+\subsubsection{What the end quiz shows for an account}
+\label{app:open-items-feedback}
+
+The end quiz has an answer for the open items too.
+Under each account it shows the ways of seeing we expect for that
+stimulus, from the first impression to the one the module aims at---an
+outcome space, ordered as phenomenography orders one: each level
+discerns something the level before it does not
+\autocite[Ch.~2]{NCOL}.
+The levels are \emph{provisional}: no account has been read yet, so they
+are posited from the candidate critical aspects of the chapter each item
+belongs to
+(\cref{sec:shell-aspects,sec:filesystem-aspects,sec:composition-aspects,sec:ssh-aspects})
+and, for the terminal itself, from the outcome space of the one earlier
+phenomenographic study of Unix---a set of commands, a tool for solving
+problems, a working environment \autocite{DoyleLister2006Unix}---and
+they are written for the student, in the words of the stem.
+Three things keep them from contaminating the data.
+They are shown only after submission, so the account is written first;
+they are shown only in the end quiz, since the start quiz hides all
+feedback (\cref{app:quiz}); and they are never given to the coder or to
+the model that pre-codes the accounts
+(\cref{app:quiz-analysis})---the categories are what the analysis is to
+find, and a coder who had our expectation in front of them would be
+confirming it.
+Once the first cohort's accounts are coded, the empirical outcome space
+replaces these lists, and the closed items' explanations are revisited
+against the distractor frequencies.
+% TODO(#6): replace the provisional outcome spaces below with the
+% empirical ones after the first cohort's accounts are coded; re-apply
+% both quizzes with canvaslms quizzes edit --replace-items.
+
+The platform shows such a text as the item's feedback; the first line
+says what the list is, and the list runs from the least to the most
+powerful way of seeing.
+
+<<outcome space: what the terminal is>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>A black window for experts, where you type commands you have memorised and hope they work.</li><li>A place to type commands: each line names a program, and the text that comes back is the program&rsquo;s answer&mdash;or the shell saying it could not find or run it.</li><li>Another way into the same computer as the desktop: the shell reads the line as a sentence of a small language&mdash;a program and its arguments&mdash;runs the program on the same files and folders the desktop shows, and whatever comes back, output, silence or an error message, is information about what happened.</li></ol>"}
+<<outcome space: what happens to this line>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>The computer reads the words and shows the files, or searches for whatever they mean.</li><li>It does not work: the shell does not understand English, so some error appears.</li><li>The shell takes the first word, show, as the name of a program to run and the rest as its arguments; there is no program called show, so it says so&mdash;command not found&mdash;and nothing else happens. The same wish, said in the shell&rsquo;s language, is ls.</li></ol>"}
+<<outcome space: getting a file into place>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>Open Downloads in a window, find the file and drag it across; the terminal is not where this happens.</li><li>Type a copy or move command with the file&rsquo;s name, and look for the file afterwards in a window.</li><li>Name two places in the tree from where the shell stands: the file is at Downloads/data.csv and is to be at project/data.csv, so mv Downloads/data.csv project/ moves it, and ls project, run from the same place, shows it there&mdash;every command acts from the shell&rsquo;s working directory, and the window would show the same tree.</li></ol>"}
+<<outcome space: explaining a command line>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>grep finds the lines and prints them; then wc counts something; 42 is the answer.</li><li>grep writes the lines it found into a file, and wc then counts the lines of that file.</li><li>The lines grep would have printed go, as they are produced, straight into wc instead of onto the screen; wc counts them and prints 42. The pipe connects the output of one program to the input of the next, and nothing is stored in between.</li></ol>"}
+<<outcome space: after ssh>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>I am connected to the server: my commands travel over the network, and the files I make come back to my laptop.</li><li>A window on the server has opened; commands run there, and to see what they made I have to be in that window again.</li><li>My shell now runs on the server: every command acts on its files and programs, and a file made there stays there. To look at it from the laptop I copy it across&mdash;scp&mdash;or log in again; the two machines are separate, and the prompt tells me which one I am on.</li></ol>"}
+<<outcome space: which computer answers, in words>>=
+"feedback": {"neutral": "<p>Different answers to this question show different ways of seeing the terminal. In order, from a first impression to the way of seeing the module aims at:</p><ol><li>The files in my folder&mdash;the same listing as before the ssh.</li><li>Files from the server and the laptop together, or whichever the connection happens to reach.</li><li>The files in the home folder on server.example.edu: after ssh the shell runs there, and every command, ls included, acts on that machine&rsquo;s files.</li></ol>"}
 @
 
 \subsection{The knowledge items}
@@ -518,6 +586,13 @@ the longest alternative is a known cue for test-wise students.
 All items weigh one point: we measure knowledge by counting correct
 answers, and \cref{app:quiz-analysis} reports them item by item, since
 each item stands for one aspect.
+Each item is followed by the text the end quiz shows under it, with the
+correct alternative: a short account of why that alternative is right and
+what each distractor assumes---the distractor a student chose is the
+misconception they can now read against it.
+The text may name the aspect, since it is shown only after the answer and
+only at the end; it paraphrases the rationale given before the item, and
+the two must be kept in step.
 
 The items are numbered from position 11, so that their placement is
 independent of the quiz they appear in: Canvas orders by position, gaps
@@ -580,9 +655,12 @@ gap there.
       ]
     },
     "scoring_data": {"value": 3},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: the command line reads a language>>
   }
 }
+<<feedback: the command line reads a language>>=
+"feedback": {"neutral": "<p>The shell does not read English: it takes the first word of the line as the name of a program to run and the rest as that program&rsquo;s arguments. There is no program called show, so it reports that and does nothing else&mdash;it neither searches, nor guesses the nearest command, nor understands the words. The program that lists files is ls.</p>"}
 @
 
 Textual feedback is the system's response, and an error message is
@@ -610,9 +688,12 @@ terminal, or take one message to mean the shell itself has stopped.
       ]
     },
     "scoring_data": {"value": 1},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: a message after a command>>
   }
 }
+<<feedback: a message after a command>>=
+"feedback": {"neutral": "<p>The message is the shell&rsquo;s report: cd looked for a directory called reports here and found none, so the working directory did not change. An error message is information about what did not happen&mdash;not a warning to ignore, not a broken terminal, not a shell that has stopped; the next command runs as usual.</p>"}
 @
 
 The shell acts on the same system as the graphical desktop---same files,
@@ -640,9 +721,12 @@ expects the shell and the graphical view to show different files.
       ]
     },
     "scoring_data": {"value": 4},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: the same files from two sides>>
   }
 }
+<<feedback: the same files from two sides>>=
+"feedback": {"neutral": "<p>The file manager and the shell are two views of the same file system: a file made in one is there for the other at once. ls lists report.txt; nothing has to restart, and nothing made graphically is hidden from the shell.</p>"}
 @
 
 The shell parses the line into words at the spaces before it knows
@@ -672,9 +756,12 @@ parsing.
       ]
     },
     "scoring_data": {"value": 1},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: a space in a file name>>
   }
 }
+<<feedback: a space in a file name>>=
+"feedback": {"neutral": "<p>The shell splits the line at spaces before cp sees it, so cp was given two files, my and report.txt, and could not find the first. That is the shell reading the line as words, not cp stopping early, the order being wrong or the name being too long; quoting the name, or writing my\\ report.txt, keeps it one word.</p>"}
 @
 
 \subsubsection{The file system}
@@ -705,9 +792,12 @@ command acted from the working directory.
       ]
     },
     "scoring_data": {"value": 2},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: which directory the command uses>>
   }
 }
+<<feedback: which directory the command uses>>=
+"feedback": {"neutral": "<p>Every command acts from the working directory: ls notes.txt looked for the file in /home/lee, where the shell stood, and the file is in /home/lee/reports. The file exists, ls lists single files, and no editor is needed&mdash;only the place was wrong: ls reports/notes.txt, or cd reports first.</p>"}
 @
 
 The same file has many names depending on where you stand: an absolute
@@ -736,9 +826,12 @@ is legitimate, or read the absolute path as making a copy.
       ]
     },
     "scoring_data": {"value": 2},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: two names for one file>>
   }
 }
+<<feedback: two names for one file>>=
+"feedback": {"neutral": "<p>Both names lead to the same file: report.txt is read from the working directory, /home/lee, and /home/lee/report.txt is the same place named from the root of the tree. Neither is a copy and neither works by chance&mdash;a relative name is resolved against where the shell stands, an absolute one from the root.</p>"}
 @
 
 Everything has a place: every file lives at exactly one path in one
@@ -767,9 +860,12 @@ having a spatial model of the file system at all.
       ]
     },
     "scoring_data": {"value": 1},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: where a saved file is>>
   }
 }
+<<feedback: where a saved file is>>=
+"feedback": {"neutral": "<p>The file is in Documents under Lee&rsquo;s home folder: every file has one place in the directory tree, whichever program made it, and the save dialog showed that place. It is not inside the editor, not in a separate area for graphical programs, and not found by name alone&mdash;the terminal reaches it by that same place.</p>"}
 @
 
 \subsubsection{Composition}
@@ -809,9 +905,12 @@ Shown first, the student has to judge the line on its own.
       ]
     },
     "scoring_data": {"value": 2},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: a file on the pipe>>
   }
 }
+<<feedback: a file on the pipe>>=
+"feedback": {"neutral": "<p>A pipe connects one program&rsquo;s output to another program&rsquo;s input, and report.txt is not a program: the shell looks for one by that name, finds none, and reports an error; wc receives nothing. Naming a file does not send its contents anywhere&mdash;a program has to read it, as in cat report.txt | wc -l, or wc -l report.txt directly.</p>"}
 @
 
 The pipe is not the file (\cref{sec:composition}): a pipe carries one
@@ -843,9 +942,12 @@ program's name; the others reverse the order or deny the connection.
       ]
     },
     "scoring_data": {"value": 4},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: sending output into a pipe>>
   }
 }
+<<feedback: sending output into a pipe>>=
+"feedback": {"neutral": "<p>cat prints the file&rsquo;s text, and the pipe feeds that text straight into wc, which counts its lines. Nothing is saved in a file called wc, the programs do not run in reverse or separately, and only wc&rsquo;s count reaches the screen.</p>"}
 @
 
 Programs read text in and write text out, which is why any producer can
@@ -874,9 +976,12 @@ is possible.
       ]
     },
     "scoring_data": {"value": 1},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: the same sort after different programs>>
   }
 }
+<<feedback: the same sort after different programs>>=
+"feedback": {"neutral": "<p>Programs read text in and write text out, so sort reads whatever text the program before it produced&mdash;ls&rsquo;s listing or ps&rsquo;s process list&mdash;without knowing which. It has no special modes, ls and ps are different programs, and any program that writes text can be followed by sort.</p>"}
 @
 
 A script is nothing new: the same commands, replayed from a file
@@ -905,9 +1010,12 @@ kind of thing from the commands.
       ]
     },
     "scoring_data": {"value": 1},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: running the same commands from a file>>
   }
 }
+<<feedback: running the same commands from a file>>=
+"feedback": {"neutral": "<p>bash reads steps.sh line by line and runs each line exactly as if it had been typed at the prompt: three commands, one after another. A script is nothing new&mdash;no translation, no limit of one command&mdash;and the file runs because bash is the program being run, with the file as its input.</p>"}
 @
 
 \subsubsection{The remote shell}
@@ -940,9 +1048,12 @@ the two items that follow ask where the shell itself is.
       ]
     },
     "scoring_data": {"value": 2},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: where the remote file ends up>>
   }
 }
+<<feedback: where the remote file ends up>>=
+"feedback": {"neutral": "<p>The program ran on the server, so the file it created is on the server, in the folder the shell stood in there; nothing copies it to the laptop, and closing the connection deletes nothing. To have it on the laptop, fetch it&mdash;with scp, for example.</p>"}
 @
 
 A shell runs somewhere: every prompt belongs to exactly one machine, and
@@ -980,9 +1091,12 @@ show how much of the discernment the alternatives do.
       ]
     },
     "scoring_data": {"value": 3},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: which computer answers>>
   }
 }
+<<feedback: which computer answers>>=
+"feedback": {"neutral": "<p>After ssh the shell runs on server.example.edu, and every command acts on that machine: ls lists the server&rsquo;s files, in the home folder there. The laptop&rsquo;s files are not involved, nothing is merged, and ls works as anywhere else&mdash;only the machine has changed, which the prompt shows.</p>"}
 @
 
 The interface is invariant while the machine varies (\cref{sec:ssh}):
@@ -1016,9 +1130,12 @@ aspect.)
       ]
     },
     "scoring_data": {"value": 2},
-    "scoring_algorithm": "Equivalence"
+    "scoring_algorithm": "Equivalence",
+    <<feedback: where exit leaves you>>
   }
 }
+<<feedback: where exit leaves you>>=
+"feedback": {"neutral": "<p>Each ssh starts a shell on another machine inside the one you came from, and exit ends only the innermost: after one exit the student is back on A, with the session from the laptop to A still open; a second exit returns to the laptop. exit does not close everything, clear the screen or shut the terminal.</p>"}
 @
 
 \subsection{Analysing the results}
@@ -1143,6 +1260,9 @@ spaces, since Canvas is free to rewrap.
 The graded choice items are the knowledge items (the preparation item is
 a choice item too, but carries no points); the essay items are the open
 items, whose stems the pre-coding prompt quotes.
+The feedback under an item---what the end quiz shows afterwards
+(\cref{app:open-items-feedback})---is not read at all: it is written for
+the student, and the coding must not see it.
 
 <<the answer key from the quiz description>>=
 TAGS = re.compile(r"<[^>]+>")

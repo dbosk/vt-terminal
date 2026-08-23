@@ -91,6 +91,12 @@ must-submit item of its own datintro26 module ("Terminal pre-test" /
 "Terminal post-test"), and the appendix prose gives the `modules
 create`/`modules edit --prerequisite` commands that chain pre-test →
 The terminal → post-test. Deployed 2026-08-23, unpublished.
+The start quiz hides correctness, correct answers and item feedback, the
+end quiz shows them all. Every item carries `feedback.neutral`: for closed
+items why the key is right and what each distractor assumes, for open
+items a *provisional* outcome space (ordered levels posited from the
+aspects; replace with the empirical one after cohort 1, issue #6); the
+analysis program ignores it.
 Items are keyed by title in the Canvas report; `analyze_quiz.py` reads the
 answer key from the tangled start-quiz JSON, filters by consent, prints
 per-item facility and distractor counts, paired pre/post gains
