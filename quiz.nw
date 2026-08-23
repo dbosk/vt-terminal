@@ -28,6 +28,10 @@ canvaslms modules create -c datintro26 -p 2 "Terminal pre-test"
 canvaslms modules create -c datintro26 -p 4 "Terminal post-test"
 canvaslms quizzes create -c datintro26 -f quiz-knowledge-start.json
 canvaslms quizzes create -c datintro26 -f quiz-knowledge-end.json
+canvaslms modules edit -c datintro26 \
+  --prerequisite "^Terminal pre-test$" "^The terminal$"
+canvaslms modules edit -c datintro26 \
+  --prerequisite "^The terminal$" "^Terminal post-test$"
 \end{minted}
 Each quiz is the only item of a module of its own, created first: the
 pre-test module sits just before the terminal module and the post-test
@@ -39,10 +43,14 @@ With the pre-test in its own module, the terminal module can require
 it, so that no student reads the material before writing the pre-test;
 with the post-test in its own module, it can require the terminal
 module, so that no student writes the post-test before the material.
+The last two commands set up exactly that chain.
 The placement is part of the quiz description, under the key
 [[modules]], which [[canvaslms]] reads and strips before it talks to
 Canvas: a module name, anchored so that the pre-test module cannot match
-the post-test module, and the position within it.
+the post-test module, the position within it, and the completion
+requirement---submitting the quiz---without which a module counts as
+complete the moment it is opened and the prerequisite would lock
+nothing.
 The modules and the quizzes are created unpublished; the teacher
 releases them when the course opens.
 The two quizzes share their open items and, with one exception explained
@@ -113,12 +121,15 @@ the start quiz asks only in the open form
 @
 
 The module keys name the modules created above; the quiz is the first
-and only item of its module.
+and only item of its module, and the module is complete once the quiz
+is submitted.
 
 <<start-quiz module>>=
-"modules": [{"module": "^Terminal pre-test$", "position": 1}],
+"modules": [{"module": "^Terminal pre-test$", "position": 1,
+             "completion_requirement": "must_submit"}],
 <<end-quiz module>>=
-"modules": [{"module": "^Terminal post-test$", "position": 1}],
+"modules": [{"module": "^Terminal post-test$", "position": 1,
+             "completion_requirement": "must_submit"}],
 @
 
 Both quizzes are diagnostics: there is no time limit, a single attempt
