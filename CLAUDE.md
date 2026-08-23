@@ -78,8 +78,9 @@ concept inventory). `% TODO`/`% XXX` comments mark the open work.
 
 `quiz.nw` is a literate program (noweb; `make programs` tangles
 `quiz-knowledge-{start,end}.json` and `analyze_quiz.py`, all gitignored).
-Each quiz has an opener (consent / preparation, position 1), five open
-essay items (positions 3–7, the phenomenographic accounts — placed *before*
+Each quiz has an opener (consent / preparation, position 1), six open
+essay items (positions 3–8, the phenomenographic accounts; item 8 is the
+open twin of the closed *which computer answers* — placed *before*
 the closed items and shown one at a time without backtracking so the
 distractors cannot seed the accounts) and the closed knowledge items
 (positions 11–24, one per candidate critical aspect, in chapter order;

@@ -73,7 +73,7 @@ does not skip them as odd.
   "quiz_type": "new",
   "settings": {
     "title": "Terminal quiz: what you know already",
-    "instructions": "<p>This quiz checks what you already know about working in a terminal, so that we can adapt the course and, together with the quiz at the end of the module, measure how well the material works. If you have not used a shell before, answer as well as you can&mdash;guessing is fine, and a low score is expected and completely okay. Five questions ask you to write in your own words; there are no wrong answers there, and they carry no points. You will see your score afterwards, but not the correct answers&mdash;the course will teach you those. The score does not affect your grade. Please answer on your own, without help from others or from tools.</p>",
+    "instructions": "<p>This quiz checks what you already know about working in a terminal, so that we can adapt the course and, together with the quiz at the end of the module, measure how well the material works. If you have not used a shell before, answer as well as you can&mdash;guessing is fine, and a low score is expected and completely okay. Six questions ask you to write in your own words; there are no wrong answers there, and they carry no points. You will see your score afterwards, but not the correct answers&mdash;the course will teach you those. The score does not affect your grade. Please answer on your own, without help from others or from tools.</p>",
     "points_possible": 13,
     <<start-quiz module>>
     <<scheduling settings>>
@@ -102,7 +102,7 @@ the start quiz asks only in the open form
   "quiz_type": "new",
   "settings": {
     "title": "Terminal quiz: what you know now",
-    "instructions": "<p>This quiz repeats the terminal questions from the start-of-course quiz, so that we can see what you have learned during the course. Five questions ask you to write in your own words; there are no wrong answers there, and they carry no points. Afterwards you will see your score and, for each question, the correct answer. The score does not affect your grade. Please answer on your own, without preparation, help or tools.</p>",
+    "instructions": "<p>This quiz repeats the terminal questions from the start-of-course quiz, so that we can see what you have learned during the course. Six questions ask you to write in your own words; there are no wrong answers there, and they carry no points. Afterwards you will see your score and, for each question, the correct answer. The score does not affect your grade. Please answer on your own, without preparation, help or tools.</p>",
     "points_possible": 14,
     <<end-quiz module>>
     <<scheduling settings>>
@@ -249,7 +249,8 @@ wrinkle of the platform, not of the design.
 The open items are the phenomenographic data: the students' own
 accounts of what the terminal is, of what happens to a line of plain
 English typed at the prompt, of getting a file into place, of a
-pipeline, and of a remote shell.
+pipeline, of a remote shell, and of which computer answers a listing
+after logging in.
 Every student writes about the same stimulus, so the accounts are
 comparable across students and between the start and the end of the
 module; they are read for qualitatively different ways of experiencing
@@ -283,13 +284,14 @@ This is why the quizzes show one item at a time without backtracking
 <<item: what happens to this line>>,
 <<item: getting a file into place>>,
 <<item: explaining a command line>>,
-<<item: after ssh>>
+<<item: after ssh>>,
+<<item: which computer answers, in words>>
 @
 
 All open items carry no points and no correct answer; Canvas's essay
 interaction needs only the flag that turns off the rich-text editor (a
 plain box invites plain prose) and the word limit.
-The items occupy positions 3--7, leaving position 2 free for a further
+The items occupy positions 3--8, leaving position 2 free for a further
 opening item, just as the knowledge items leave room below 11.
 
 The first item asks for the student's conception of the terminal itself
@@ -401,6 +403,26 @@ stream---show themselves unprompted.
 }
 @
 
+The gloss does teach two command names, and one may ask whether that
+spoils anything.
+It does not.
+No item depends on the student not knowing [[grep]] or [[wc]]: the
+closed items that use [[wc]] (\cref{app:knowledge-items}) gloss it in
+their own stems, since what they test is the pipe, not the program.
+Nor does the gloss hand over the account: it describes each program on
+its own---[[grep]] prints lines, [[wc -l]] counts lines---and says
+nothing about what passes between them, which is the question; the
+conceptions of \cref{sec:composition} stay open, and a student may still
+have [[grep]] save its lines in a file for [[wc]], or the two programs
+run one after the other.
+If anything the gloss sharpens the question: [[grep]] is said to print,
+yet the screen shows only [[42]], so the account has to say where the
+lines went---the gap between the gloss and the output is the pipe.
+What the student takes away is two names, not an aspect, and the same
+gloss is read at both administrations, so the gain is untouched; without
+it, the many students who have never seen [[grep]] at the start of the
+module would write nothing, and the account is what we are after.
+
 The fifth item describes logging in to a server and asks what has
 happened, what the student pictures when typing commands there, and how
 they would get at results produced there from the laptop.
@@ -415,6 +437,36 @@ on machines.
   "entry": {
     "title": "After ssh",
     "item_body": "<p>In a terminal on your laptop you type ssh student@server.example.edu, give your password, and get a prompt. Describe in your own words what has happened, and what you picture when you now type commands. Later you want to look, on your laptop, at the results of a program you ran there&mdash;how do you go about that?</p>",
+    "interaction_type_slug": "essay",
+    "interaction_data": {"rce": false, "word_limit_enabled": false},
+    "scoring_data": {"value": ""},
+    "scoring_algorithm": "None"
+  }
+}
+@
+
+The sixth item is the open twin of the closed item \emph{which computer
+answers} (\cref{app:knowledge-items}): the same situation---an [[ssh]],
+a new prompt, an [[ls]]---and the same question, but no alternatives.
+The closed item shows whether the student picks the right machine once
+the candidate machines are laid out before them; the open item shows
+whether they find the machine unprompted, and how they account for it.
+Comparing the two answers of one student tells how much of the
+discernment the alternatives do for them: an account that hedges, or
+names the laptop, followed by the correct choice, is the alternatives
+doing the work.
+The item follows the general account of the remote shell so that its
+pointed question does not steer that account, and its title differs
+from the closed item's in more than a suffix, since the analysis
+(\cref{app:quiz-analysis}) finds the report columns by title.
+
+<<item: which computer answers, in words>>=
+{
+  "position": 8,
+  "points_possible": 0,
+  "entry": {
+    "title": "Which computer's files, in your own words",
+    "item_body": "<p>A student is working in a terminal on their laptop. They run:</p><pre>$ ssh server.example.edu</pre><p>and a new prompt appears after the password. They now run:</p><pre>$ ls</pre><p>Which computer's files are listed, and why? Write in your own words.</p>",
     "interaction_type_slug": "essay",
     "interaction_data": {"rce": false, "word_limit_enabled": false},
     "scoring_data": {"value": ""},
@@ -456,13 +508,13 @@ item (consent or preparation) and the open accounts before them.
 <<item: which directory the command uses>>,
 <<item: two names for one file>>,
 <<item: where a saved file is>>,
-<<item: sending output into a pipe>>,
 <<item: a file on the pipe>>,
+<<item: sending output into a pipe>>,
 <<item: the same sort after different programs>>,
 <<item: running the same commands from a file>>,
+<<item: where the remote file ends up>>,
 <<item: which computer answers>>,
-<<item: where exit leaves you>>,
-<<item: where the remote file ends up>>
+<<item: where exit leaves you>>
 @
 
 \subsubsection{The command model}
@@ -699,55 +751,27 @@ having a spatial model of the file system at all.
 
 \subsubsection{Composition}
 
-The pipe is not the file (\cref{sec:composition}): a pipe carries one
-program's output straight into another program, rather than storing it.
-Composite commands are exactly where the difficulty is documented---users
-can know the component commands yet fail to compose them
-\autocite{Doane1992UnixPrompts}---so the distractors are the plausible
-wrong models of what the pipe does.
-The correct answer streams [[cat]]'s output into the reader; the leading
-distractor treats the pipe as a file, saving the output under the second
-program's name; the others reverse the order or deny the connection.
-
-<<item: sending output into a pipe>>=
-{
-  "position": 18,
-  "points_possible": 1,
-  "entry": {
-    "title": "Sending output into a pipe",
-    "item_body": "<p>A student wants to count the lines of the file report.txt and writes:</p><pre>$ cat report.txt | wc -l</pre><p>Which statement is true?</p>",
-    "interaction_type_slug": "choice",
-    "interaction_data": {
-      "choices": [
-        {"position": 1, "item_body": "<p>cat first saves the file's text in a file called wc, which is then counted</p>"},
-        {"position": 2, "item_body": "<p>wc -l runs first, and its count is handed to cat</p>"},
-        {"position": 3, "item_body": "<p>The two programs run separately, one after the other, and each prints its own output to the screen</p>"},
-        {"position": 4, "item_body": "<p>The text that cat prints is fed straight into wc, which counts its lines</p>"}
-      ]
-    },
-    "scoring_data": {"value": 4},
-    "scoring_algorithm": "Equivalence"
-  }
-}
-@
-
 A file is not a program.
 The source end of a pipe is a program's output, and a file enters a
 pipeline only through a program that reads it; the pipe is not the file
 at either end.
 It is common in our course to see the file itself named on the left of
 the pipe, as if naming it would send its contents on---a course
-observation (\cref{sec:method-vt-analysis}) that this partner of the
-previous item tests.
+observation (\cref{sec:method-vt-analysis}) that this item tests.
 The item shows that line and asks what happens.
 The correct answer has the shell look for a program called
 [[report.txt]] and fail; the leading distractor sends the file's
 contents down the pipe; the others have [[wc]] count the name, or have
 the pipe write the count back into the file.
+The item comes before its partner, the working pipeline, on purpose:
+shown after [[cat report.txt | wc -l]], the line with the file on the
+left is wrong by inspection---the [[cat]] is visibly missing---and the
+item would measure comparison rather than discernment.
+Shown first, the student has to judge the line on its own.
 
 <<item: a file on the pipe>>=
 {
-  "position": 19,
+  "position": 18,
   "points_possible": 1,
   "entry": {
     "title": "A file on the pipe",
@@ -762,6 +786,40 @@ the pipe write the count back into the file.
       ]
     },
     "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
+The pipe is not the file (\cref{sec:composition}): a pipe carries one
+program's output straight into another program, rather than storing it.
+Composite commands are exactly where the difficulty is documented---users
+can know the component commands yet fail to compose them
+\autocite{Doane1992UnixPrompts}---so the distractors are the plausible
+wrong models of what the pipe does.
+The item shows the working form of the previous item's line and asks
+what is true of it.
+The correct answer streams [[cat]]'s output into the reader; the leading
+distractor treats the pipe as a file, saving the output under the second
+program's name; the others reverse the order or deny the connection.
+
+<<item: sending output into a pipe>>=
+{
+  "position": 19,
+  "points_possible": 1,
+  "entry": {
+    "title": "Sending output into a pipe",
+    "item_body": "<p>A student wants to count the lines of the file report.txt and writes:</p><pre>$ cat report.txt | wc -l</pre><p>Which statement is true?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>cat first saves the file's text in a file called wc, which is then counted</p>"},
+        {"position": 2, "item_body": "<p>wc -l runs first, and its count is handed to cat</p>"},
+        {"position": 3, "item_body": "<p>The two programs run separately, one after the other, and each prints its own output to the screen</p>"},
+        {"position": 4, "item_body": "<p>The text that cat prints is fed straight into wc, which counts its lines</p>"}
+      ]
+    },
+    "scoring_data": {"value": 4},
     "scoring_algorithm": "Equivalence"
   }
 }
@@ -831,6 +889,39 @@ kind of thing from the commands.
 
 \subsubsection{The remote shell}
 
+Files live on machines: a file created on the remote host is on that
+host, not on the laptop (\cref{sec:ssh}).
+The item runs a program over SSH that writes a file, closes the
+connection, and asks where the file is.
+The correct answer keeps the file on the server where the program ran;
+the distractors bring it home to the laptop, sync it to both, or treat it
+as vanishing with the connection.
+It opens the remote-shell items: a concrete round trip whose answer
+shows at once whether files live on machines for the student, before
+the two items that follow ask where the shell itself is.
+
+<<item: where the remote file ends up>>=
+{
+  "position": 22,
+  "points_possible": 1,
+  "entry": {
+    "title": "Where the remote file ends up",
+    "item_body": "<p>Connected by SSH to a remote server, a student runs a program that creates results.txt. They then close the connection and look in the file manager on their laptop. Where is results.txt?</p>",
+    "interaction_type_slug": "choice",
+    "interaction_data": {
+      "choices": [
+        {"position": 1, "item_body": "<p>On the laptop, because that is the computer the student is using</p>"},
+        {"position": 2, "item_body": "<p>On the server, because that is where the program ran; it is not on the laptop</p>"},
+        {"position": 3, "item_body": "<p>On both, because SSH keeps the two machines' files in sync</p>"},
+        {"position": 4, "item_body": "<p>Nowhere; files made over SSH are temporary and vanish when the connection closes</p>"}
+      ]
+    },
+    "scoring_data": {"value": 2},
+    "scoring_algorithm": "Equivalence"
+  }
+}
+@
+
 A shell runs somewhere: every prompt belongs to exactly one machine, and
 a command acts on that machine (\cref{sec:ssh}).
 After an [[ssh]] the prompt looks the same but the machine has changed,
@@ -840,10 +931,14 @@ The correct answer follows the shell to the server; the leading
 distractor stays with the laptop the student is sitting at---the
 undiscerned-aspect case of not knowing which machine the command acts
 on.
+Its open twin, \emph{which computer's files, in your own words}
+(\cref{app:open-items}), asks the same question without alternatives;
+the two answers of one student show how much of the discernment the
+alternatives do.
 
 <<item: which computer answers>>=
 {
-  "position": 22,
+  "position": 23,
   "points_possible": 1,
   "entry": {
     "title": "Which computer answers",
@@ -879,7 +974,7 @@ aspect.)
 
 <<item: where exit leaves you>>=
 {
-  "position": 23,
+  "position": 24,
   "points_possible": 1,
   "entry": {
     "title": "Where exit leaves you",
@@ -891,36 +986,6 @@ aspect.)
         {"position": 2, "item_body": "<p>On A, because exit ended the session with B; the one from A is still open</p>"},
         {"position": 3, "item_body": "<p>Still on B, because exit only clears the screen of the current shell</p>"},
         {"position": 4, "item_body": "<p>Nowhere; exit closed the terminal window and all its connections</p>"}
-      ]
-    },
-    "scoring_data": {"value": 2},
-    "scoring_algorithm": "Equivalence"
-  }
-}
-@
-
-Files live on machines: a file created on the remote host is on that
-host, not on the laptop (\cref{sec:ssh}).
-The item runs a program over SSH that writes a file, closes the
-connection, and asks where the file is.
-The correct answer keeps the file on the server where the program ran;
-the distractors bring it home to the laptop, sync it to both, or treat it
-as vanishing with the connection.
-
-<<item: where the remote file ends up>>=
-{
-  "position": 24,
-  "points_possible": 1,
-  "entry": {
-    "title": "Where the remote file ends up",
-    "item_body": "<p>Connected by SSH to a remote server, a student runs a program that creates results.txt. They then close the connection and look in the file manager on their laptop. Where is results.txt?</p>",
-    "interaction_type_slug": "choice",
-    "interaction_data": {
-      "choices": [
-        {"position": 1, "item_body": "<p>On the laptop, because that is the computer the student is using</p>"},
-        {"position": 2, "item_body": "<p>On the server, because that is where the program ran; it is not on the laptop</p>"},
-        {"position": 3, "item_body": "<p>On both, because SSH keeps the two machines' files in sync</p>"},
-        {"position": 4, "item_body": "<p>Nowhere; files made over SSH are temporary and vanish when the connection closes</p>"}
       ]
     },
     "scoring_data": {"value": 2},
@@ -1022,7 +1087,7 @@ CONSENT = "Consent"
 CLOSED_ITEMS = [CONSENT, "Preparation"]
 OPEN_ITEMS = ["What the terminal is", "What happens to this line",
               "Getting a file into place", "Explaining a command line",
-              "After ssh"]
+              "After ssh", "Which computer's files, in your own words"]
 CODED_KEYS = ["category", "discerned", "undiscerned"]
 CODING_COLUMNS = CODED_KEYS + ["notes"]
 SUGGESTED_COLUMNS = [f"suggested_{key}" for key in CODED_KEYS + ["rationale"]]
