@@ -225,7 +225,7 @@ The item titles double as the keys under which Canvas reports the
 answers, so the analysis program (\cref{app:quiz-analysis}) refers to
 the items by these titles.
 
-% XXX The consent wording must follow the approved ethics application for
+% XXX(#8) The consent wording must follow the approved ethics application for
 % the datintro data collection; update it when the application is decided.
 
 <<start-quiz consent item>>=
