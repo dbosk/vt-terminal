@@ -12,20 +12,47 @@ Composite command production is exactly where
 \textcite{Doane1992UnixPrompts} located the difficulty: users could know
 the component commands yet fail to compose them, and even targeted help
 prompts did not suffice for novices.
-% TODO(#1): The systematic phase should search for later replications or
-% CS-education studies of pipeline construction difficulties.
+The systematic search (\cref{app:protocol}) found no later replication or
+CS-education study of pipeline-construction difficulty specifically, so this
+classic result still stands largely alone.
 
 \subsection{Candidate critical aspects}
+\label{sec:composition-aspects}
 
-% XXX Preliminary; to be consolidated once the review phase is complete.
-\begin{itemize}
-  \item \emph{Uniform interfaces}: programs read text in and write text
-    out, which is why any producer can feed any consumer.
-  \item \emph{The pipe is not the file}: redirection to a file versus
-    piping to a program.
-  \item \emph{A script is nothing new}: the same commands, replayable
-    (cf.\ the history-to-script demonstration used in the course).
-\end{itemize}
+\Textcite{Doane1992UnixPrompts} locate the difficulty but do not report
+the wrong conceptions behind it, so the three aspects below are our
+decomposition of what composing a command requires, with the first
+resting on that documented difficulty and the other two posited from the
+object of learning.
+
+\begin{description}
+  \item[The pipe is not the file]
+    A pipe carries one program's output straight into another program;
+    redirection stores it in a file.
+    Read off the documented difficulty: users who could produce the
+    components could not produce the composite
+    \autocite{Doane1992UnixPrompts}, and what the connector between the
+    components does is the first thing that must be discerned for the
+    composite to make sense.
+    The file is not the pipe's source either: a file enters a pipeline
+    through a program that reads it, and naming the file on the left of
+    the pipe---as our students commonly do---is the observed form of
+    not having discerned this (\cref{sec:method-vt-analysis}).
+    Tested by the items \emph{a file on the pipe} and \emph{sending
+    output into a pipe} (\cref{app:knowledge-items}).
+  \item[Uniform interfaces]
+    Programs read text in and write text out, which is why any producer
+    can feed any consumer.
+    Posited: it is the invariant that makes composition possible at all,
+    and a learner who has not discerned it must learn each pipeline as
+    a separate recipe.
+    Tested by the item \emph{the same sort after different programs}.
+  \item[A script is nothing new]
+    A script is the same commands, replayable from a file.
+    Posited from the object of learning; the course's
+    history-to-script demonstration is built on it.
+    Tested by the item \emph{running the same commands from a file}.
+\end{description}
 
 \subsection{Patterns of variation}
 

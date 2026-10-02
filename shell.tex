@@ -11,31 +11,86 @@ system that the graphical desktop is another interface to.
 
 Research on how learners get the command model wrong is scarce
 \autocite{Winder2024ShellTutor}; what exists comes largely from
-cognitive-psychology studies of Unix users.
+cognitive-psychology studies of Unix users, and the one phenomenographic
+study of students learning Unix describes their conceptions of Unix as a
+whole---a set of commands, a tool, a professional environment---rather
+than the command model \autocite{DoyleLister2006Unix}.
 Producing correct composite commands is demanding, and help that states
 concrete information supports novices where abstract information only helps
 experts \autocite{Doane1992UnixPrompts}.
 Beginning programming students are commonly introduced through visual
 environments rather than the command line \autocite{Dillon2012MentalModels},
 so we must assume no prior CLI exposure.
-% TODO(#1): The systematic search phase (cf. \cref{sec:method-litreview}) must
-% look for newer CS-education sources on CLI misconceptions specifically;
-% the Shell Tutor group's logging data may be the closest existing corpus.
+The difficulty begins even before the first command: novices installing
+development tools face unclear documentation, complicated installation
+processes, version and operating-system incompatibility, and missing
+feedback \autocite{Salerno2026ToolInstallation}---the tool environment
+around the shell is itself a documented hurdle.
+The systematic search (\cref{app:protocol}) confirmed this scarcity: it
+turned up teaching interventions and command-logging tools rather than
+studies of shell misconceptions.
+The closest data on how students actually use the command line come from
+logging the commands they run, which reveals their solution patterns and
+misconceptions \autocite{Svabensky2021ShellCommands}.
+As for the feedback the shell gives back, the programming-education
+literature finds that error-message presentation is one of the main
+mechanisms through which novices interact with a system, and that changing it
+markedly affects their behaviour \autocite{Karvelas2020ErrorMessages}---a
+reason to treat the shell's textual feedback as something the learner must
+come to read.
 % TODO(#3): Add misconceptions observed in our own course's grading and
 % tutoring data (datintro), clearly separated from the literature-derived
 % ones.
 
 \subsection{Candidate critical aspects}
+\label{sec:shell-aspects}
 
-% XXX Preliminary; to be consolidated once the review phase is complete.
-\begin{itemize}
-  \item \emph{The command line is a language, not a search box}: the shell
-    parses; it does not guess. (Word order, spaces, quoting matter.)
-  \item \emph{Textual feedback}: output--and silence--is the system's
-    response; error messages are information, not failure.
-  \item \emph{The shell acts on the same system as the GUI}: same files,
-    same processes---only the interface varies.
-\end{itemize}
+Reading the difficulties above for the aspect the learner had not
+discerned gives three candidates.
+Because the literature on the command model is so thin, we say for each
+what it rests on: a documented difficulty, an observation from our own
+course, or the structure of the object of learning itself.
+
+\begin{description}
+  \item[The command line is a language, not a search box]
+    The shell parses the line into words and runs the first as a program;
+    it does not guess what the words mean, so word order, spaces and
+    quoting matter.
+    This is read off the classic finding that users who knew the
+    component commands still could not produce the composite command,
+    and that even concrete prompts did not suffice
+    \autocite{Doane1992UnixPrompts}: a command line has to be
+    \emph{composed}, exactly, not approximated.
+    The search-box reading is what we expect of students whose prior
+    interface is a visual environment \autocite{Dillon2012MentalModels};
+    its everyday forms in our course---a space in a file name splitting
+    it in two, an option in the wrong place---are course observations
+    (\cref{sec:method-vt-analysis}), not literature.
+    Tested by the items \emph{the command line reads a language} and
+    \emph{a space in a file name} (\cref{app:knowledge-items}).
+  \item[Textual feedback]
+    Output, error messages and silence are the system's response, and
+    have to be read.
+    This is read off the finding that how error messages are presented
+    changes novices' behaviour \autocite{Karvelas2020ErrorMessages}, and
+    that missing feedback is among the hurdles novices meet when
+    installing their tools \autocite{Salerno2026ToolInstallation}: the
+    shell's terse text is the extreme case, and a learner who does not
+    read it has nothing else to go on.
+    Tested by the item \emph{a message after a command}.
+  \item[The shell acts on the same system as the GUI]
+    Same files, same processes---only the interface varies.
+    No study documents the opposite conception; the aspect is posited
+    from the object of learning and from the students' visual starting
+    point \autocite{Dillon2012MentalModels}.
+    Its file-system instance is \emph{one tree, two views} in
+    \cref{sec:filesystem}; the two share the item \emph{the same files
+    from two sides}.
+\end{description}
+
+None of the three rests on a misconception of the shell reported by
+learners, because none has been reported (\cref{app:protocol}); the open
+accounts of \cref{sec:instruments} are where one would first show.
 
 \subsection{Patterns of variation}
 

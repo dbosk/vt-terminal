@@ -21,6 +21,10 @@
 \fi
 \usepackage[british]{babel}
 \usepackage{booktabs}
+% The verbose margin citations queue as floats; a citation-dense page
+% can exhaust the default float registers ("Too many unprocessed
+% floats").
+\extrafloats{64}
 
 % Verbose citation style (full reference on first use, short form on repeats):
 % \autocite produces a footnote citation, which didactic places in the margin in

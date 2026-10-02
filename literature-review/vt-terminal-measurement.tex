@@ -1,0 +1,2174 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{vt-terminal-measurement.bib}
+
+\title{Literature Review Report}
+\date{2026-08-21}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Research question: has learners' understanding of the Unix shell, the command line, the user-level file system (directories, paths, folders) or SSH/remote shells been MEASURED -- by a phenomenographic or interview study of learners' conceptions, by a validated diagnostic instrument or concept inventory, or by a knowledge pre-test/post-test? And what do the existing empirical studies of shell/command-line teaching actually measure (understanding vs. perception/confidence/satisfaction surveys vs. command-log behaviour)? A secondary question: method precedents for a pre-test/post-test on critical aspects in learning studies (variation theory, Marton, Pang, Kullberg) and the typology of diagnostic instruments for misconceptions (interviews, open-ended tests, multiple-choice, multi-tier tests, concept inventories) in any discipline. KEEP a paper if it (a) studies learners'/students'/novices' conceptions, misconceptions, mental models or understanding of the Unix/Linux shell, command line, terminal, file system hierarchy, or SSH, by any method; (b) presents or reviews a diagnostic instrument or concept inventory for computing topics (shell, OS, CS1), or a review of concept inventories in computing; (c) evaluates a shell/command-line/terminal teaching intervention or workshop (e.g. Software Carpentry) and reports what was measured, even if only perception or confidence; (d) analyses command logs / terminal histories of students; (e) is a learning-study or variation-theory paper describing pre-/post-tests and critical aspects; (f) reviews diagnostic-instrument types for misconceptions across a discipline. DISCARD papers on other domains (chemistry, physics, biology, nursing, psychology, medicine, management), general software tools or manuals that merely mention a command line, psychometric scale development unrelated to education in computing, generic self-efficacy studies not about the command line, and single-topic science diagnostic tests (two-tier tests on e.g. acids, circuits) unless they are reviews of instrument types. The search covered openalex, dblp, scopus and yielded 522 papers (32 kept, 490 discarded, 0 pending).
+\end{abstract}
+\clearpage
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Research Context}
+Research question: has learners' understanding of the Unix shell, the
+command line, the user-level file system (directories, paths, folders)
+or SSH/remote shells been MEASURED -- by a phenomenographic or interview
+study of learners' conceptions, by a validated diagnostic instrument or
+concept inventory, or by a knowledge pre-test/post-test? And what do the
+existing empirical studies of shell/command-line teaching actually
+measure (understanding vs.~perception/confidence/satisfaction surveys
+vs.~command-log behaviour)? A secondary question: method precedents for
+a pre-test/post-test on critical aspects in learning studies (variation
+theory, Marton, Pang, Kullberg) and the typology of diagnostic
+instruments for misconceptions (interviews, open-ended tests,
+multiple-choice, multi-tier tests, concept inventories) in any
+discipline. KEEP a paper if it (a) studies learners'/students'/novices'
+conceptions, misconceptions, mental models or understanding of the
+Unix/Linux shell, command line, terminal, file system hierarchy, or SSH,
+by any method; (b) presents or reviews a diagnostic instrument or
+concept inventory for computing topics (shell, OS, CS1), or a review of
+concept inventories in computing; (c) evaluates a
+shell/command-line/terminal teaching intervention or workshop
+(e.g.~Software Carpentry) and reports what was measured, even if only
+perception or confidence; (d) analyses command logs / terminal histories
+of students; (e) is a learning-study or variation-theory paper
+describing pre-/post-tests and critical aspects; (f) reviews
+diagnostic-instrument types for misconceptions across a discipline.
+DISCARD papers on other domains (chemistry, physics, biology, nursing,
+psychology, medicine, management), general software tools or manuals
+that merely mention a command line, psychometric scale development
+unrelated to education in computing, generic self-efficacy studies not
+about the command line, and single-topic science diagnostic tests
+(two-tier tests on e.g.~acids, circuits) unless they are reviews of
+instrument types.
+
+\section{Search Parameters}
+
+\begin{description}
+\item[Base query] uAssign Unix terminal
+\item[Providers] openalex, dblp, scopus
+\end{description}
+
+\subsection{Provider-specific queries}
+\begin{longtable}{lp{10cm}}
+\toprule
+Provider & Query \\
+\midrule
+openalex, dblp, scopus & uAssign Unix terminal | uAssign Unix terminal | uAssign Unix terminal \\
+openalex, dblp, scopus & computer science concept inventories past and future | computer science concept inventories past and future | computer science concept inventories past and future \\
+openalex, dblp, scopus & operating systems concept inventory pre post course | operating systems concept inventory pre post course | operating systems concept inventory pre post course \\
+openalex, scopus, wos, dblp & Unix shell learners think-aloud protocol study | Unix shell learners think-aloud protocol study | Unix shell learners think-aloud protocol study | Unix shell learners think-aloud protocol study \\
+openalex, scopus, wos & students conceptions files folders directories interview study understanding | students conceptions files folders directories interview study understanding | students conceptions files folders directories interview study understanding \\
+openalex, scopus, wos & ways of experiencing command line terminal students conceptions interviews | ways of experiencing command line terminal students conceptions interviews | ways of experiencing command line terminal students conceptions interviews \\
+openalex, scopus, wos & learning study pre-test post-test critical aspects Marton Pang | learning study pre-test post-test critical aspects Marton Pang | learning study pre-test post-test critical aspects Marton Pang \\
+openalex, scopus, wos, dblp & concept inventory computer science development validation interviews | concept inventory computer science development validation interviews | concept inventory computer science development validation interviews | concept inventory computer science development validation interviews \\
+openalex, scopus, wos & two-tier diagnostic test misconceptions development | two-tier diagnostic test misconceptions development | two-tier diagnostic test misconceptions development \\
+openalex, scopus, wos & command line self-efficacy survey students computing course | command line self-efficacy survey students computing course | command line self-efficacy survey students computing course \\
+openalex, scopus, wos & unix shell course learning outcomes pre post quiz students | unix shell course learning outcomes pre post quiz students | unix shell course learning outcomes pre post quiz students \\
+openalex, scopus, wos & bash shell novice errors study terminal usability | bash shell novice errors study terminal usability | bash shell novice errors study terminal usability \\
+openalex, scopus, wos & Software Carpentry shell workshop assessment learning | Software Carpentry shell workshop assessment learning | Software Carpentry shell workshop assessment learning \\
+openalex, scopus, wos & students mental model file system hierarchy folders | students mental model file system hierarchy folders | students mental model file system hierarchy folders \\
+openalex, scopus, wos, dblp & concept inventory Linux command line | concept inventory Linux command line | concept inventory Linux command line | concept inventory Linux command line \\
+openalex, scopus, wos, dblp & phenomenographic UNIX students | phenomenographic UNIX students | phenomenographic UNIX students | phenomenographic UNIX students \\
+openalex, scopus, wos & phenomenographic study students understanding command line | phenomenographic study students understanding command line | phenomenographic study students understanding command line \\
+openalex, scopus, wos & command line misconceptions students pre-test post-test | command line misconceptions students pre-test post-test | command line misconceptions students pre-test post-test \\
+\bottomrule
+\end{longtable}
+
+\begin{description}
+\item[Date] 2026-08-21 10:10
+\item[Total Papers] 522
+\end{description}
+
+\section{Summary}
+\begin{description}
+\item[Kept] 32
+\item[Discarded] 490
+\item[Pending] 0
+\item[LLM confirmed] 0
+\item[LLM changed] 0
+\item[LLM changed (kept->discarded)] 0
+\item[LLM changed (discarded->kept)] 0
+\end{description}
+
+\section{Summary Tables}
+
+\subsection{Kept Papers Overview}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.55\textwidth}c>{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+\textbf{Title} & \textbf{Year} & \textbf{Themes} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{s2024_0} & 2024 & conceptions-from-pre-post-tests-in-OS-course-qualifies-claim, cs1-learning-outcomes, pre-post-test \\
+\citetitle{doyle2006_1} & 2006 & cs1-learning-outcomes, phenomenographic-unix-students \\
+\citetitle{doyle2007_2} & 2007 & not-about-measurement, phenomenographic-unix-teachers \\
+\citetitle{b2007_3} & 2007 & not-about-measurement, phenomenographic-unix-teachers-duplicate-record \\
+\citetitle{simperler2015_4} & 2015 & cs1-learning-outcomes, perception-survey-corroboration \\
+\citetitle{jordan2018_5} & 2018 & cs1-learning-outcomes, perception-survey-carpentries, pre-post-test \\
+\citetitle{mirković2020_6} & 2020 & command-log-tooling, cs1-learning-outcomes \\
+\citetitle{berengueres2025_7} & 2025 & cs1-learning-outcomes, perception-survey-NPS \\
+\citetitle{švábenský2022_8} & 2022 & command-log-tooling, cs1-learning-outcomes \\
+\citetitle{grant2022_9} & 2022 & cs1-learning-outcomes, perception-survey-self-efficacy \\
+\citetitle{kaltakcigurel2015_10} & 2015 & diagnostic-instrument-typology, pre-post-test \\
+\citetitle{soeharto2019_11} & 2019 & diagnostic-instrument-typology-corroboration, pre-post-test \\
+\citetitle{jan2014_12} & 2014 & CS1-test-items-corroboration, computing-diagnostic-instrument \\
+\citetitle{pang2011_13} & 2011 & learning-study-corroboration, pre-post-test \\
+\citetitle{pang2005_14} & 2005 & learning-study-pre-post-test, pre-post-test \\
+\citetitle{kullberg2017_15} & 2017 & learning-study-pre-post-test, pre-post-test \\
+\citetitle{pang2013_16} & 2013 & learning-study-corroboration, pre-post-test \\
+\citetitle{pang2019_17} & 2019 & learning-study-corroboration, pre-post-test \\
+\citetitle{marton2013_18} & 2013 & learning-study-corroboration, pre-post-test \\
+\citetitle{durden2017_19} & 2017 & learning-study-corroboration, pre-post-test \\
+\citetitle{kullberg2010_20} & 2010 & learning-study-corroboration, pre-post-test \\
+\citetitle{elliott2013_21} & 2013 & learning-study-corroboration, pre-post-test \\
+\citetitle{lindstrand2016_22} & 2016 & learning-study-corroboration, pre-post-test \\
+\citetitle{mf2019_23} & 2019 & learning-study-corroboration, pre-post-test \\
+\citetitle{m2013_24} & 2013 & learning-study-corroboration, pre-post-test \\
+\citetitle{webb2014_25} & 2014 & OS-concept-inventory-nearest-instrument, computing-diagnostic-instrument, pre-post-test \\
+\citetitle{taylor2014_26} & 2014 & CS-concept-inventory-review, computing-diagnostic-instrument \\
+\citetitle{c2026_27} & 2026 & cs1-learning-outcomes, skill-checkoff-assessment-qualifies-claim \\
+\citetitle{j2024_28} & 2024 & cs1-learning-outcomes, perception-survey-corroboration-shell-tutor-already-cited \\
+\citetitle{v2021_29} & 2021 & command-log-tooling-already-cited, cs1-learning-outcomes \\
+\citetitle{i2020_30} & 2020 & cs1-learning-outcomes, perception-survey-corroboration \\
+\citetitle{j2019_31} & 2019 & cs1-learning-outcomes, perception-survey-confidence \\
+\end{longtable}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.4\textwidth}cccccccccccccccccccccccc}
+\toprule
+\textbf{Title} & \rotatebox{90}{CS-concept-inventory-review} & \rotatebox{90}{CS1-test-items-corroboration} & \rotatebox{90}{OS-concept-inventory-nearest-instrument} & \rotatebox{90}{command-log-tooling} & \rotatebox{90}{command-log-tooling-already-cited} & \rotatebox{90}{computing-diagnostic-instrument} & \rotatebox{90}{conceptions-from-pre-post-tests-in-OS-course-qualifies-claim} & \rotatebox{90}{cs1-learning-outcomes} & \rotatebox{90}{diagnostic-instrument-typology} & \rotatebox{90}{diagnostic-instrument-typology-corroboration} & \rotatebox{90}{learning-study-corroboration} & \rotatebox{90}{learning-study-pre-post-test} & \rotatebox{90}{not-about-measurement} & \rotatebox{90}{perception-survey-NPS} & \rotatebox{90}{perception-survey-carpentries} & \rotatebox{90}{perception-survey-confidence} & \rotatebox{90}{perception-survey-corroboration} & \rotatebox{90}{perception-survey-corroboration-shell-tutor-already-cited} & \rotatebox{90}{perception-survey-self-efficacy} & \rotatebox{90}{phenomenographic-unix-students} & \rotatebox{90}{phenomenographic-unix-teachers} & \rotatebox{90}{phenomenographic-unix-teachers-duplicate-record} & \rotatebox{90}{pre-post-test} & \rotatebox{90}{skill-checkoff-assessment-qualifies-claim} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{s2024_0} &  &  &  &  &  &  & $\checkmark$ & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{doyle2006_1} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{doyle2007_2} &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  & $\checkmark$ &  &  &  \\
+\citetitle{b2007_3} &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  & $\checkmark$ &  &  \\
+\citetitle{simperler2015_4} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  \\
+\citetitle{jordan2018_5} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{mirković2020_6} &  &  &  & $\checkmark$ &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{berengueres2025_7} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{švábenský2022_8} &  &  &  & $\checkmark$ &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{grant2022_9} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  \\
+\citetitle{kaltakcigurel2015_10} &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{soeharto2019_11} &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{jan2014_12} &  & $\checkmark$ &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{pang2011_13} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{pang2005_14} &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{kullberg2017_15} &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{pang2013_16} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{pang2019_17} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{marton2013_18} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{durden2017_19} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{kullberg2010_20} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{elliott2013_21} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{lindstrand2016_22} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{mf2019_23} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{m2013_24} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{webb2014_25} &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{taylor2014_26} & $\checkmark$ &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2026_27} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ \\
+\citetitle{j2024_28} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  \\
+\citetitle{v2021_29} &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2020_30} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  \\
+\citetitle{j2019_31} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  \\
+\end{longtable}
+
+\subsection{Discarded Papers Overview}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.55\textwidth}c>{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+\textbf{Title} & \textbf{Year} & \textbf{Motivations} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{elo2008_32} & 2008 & method-paper-outside-scope, nursing-domain \\
+\citetitle{wu2001_33} & 2001 & chemistry-domain, other-discipline \\
+\citetitle{chin2008_34} & 2008 & other-discipline, science-education-review \\
+\citetitle{oblinger2005_35} & 2005 & general-education, not-about-measurement \\
+\citetitle{kazemitabaar2023_36} & 2023 & non-target-topic, programming-learning-not-shell \\
+\citetitle{graesser2003_37} & 2003 & other-discipline, physics-domain \\
+\citetitle{rudolph2023_38} & 2023 & ai-chatbots-not-shell, higher-education-general \\
+\citetitle{link2011_39} & 2011 & engineering-report, non-education \\
+\citetitle{slater2015_40} & 2015 & astronomy-domain, single-discipline-diagnostic \\
+\citetitle{concannon2019_41} & 2019 & education-technology-general, non-computing-domain \\
+\citetitle{johansen2022_42} & 2022 & academic-integrity, non-target-topic \\
+\citetitle{lee2006_43} & 2006 & other-discipline, science-domain \\
+\citetitle{lee2015_44} & 2015 & CS1-programming-pre-post-test-not-shell, computing-diagnostic-instrument, cs1-learning-outcomes, pre-post-test \\
+\citetitle{zamfirescupereira2023_45} & 2023 & llm-prompting, non-target-topic \\
+\citetitle{abdelkhalick2008_46} & 2008 & other-discipline, textbook-analysis \\
+\citetitle{fakhriyah2019_47} & 2019 & computational-thinking-not-shell, non-target-topic \\
+\citetitle{potgieter2011_48} & 2011 & chemistry-domain, single-discipline-diagnostic \\
+\citetitle{hidayati2023_49} & 2023 & language-education, non-target-topic \\
+\citetitle{wemyss2013_50} & 2013 & other-discipline, physics-misconceptions \\
+\citetitle{haas2019_51} & 2019 & higher-education-review, non-target-topic \\
+\citetitle{mertala2022_52} & 2022 & ai-chatbots-not-shell \\
+\citetitle{carlson2019_53} & 2019 & nursing-domain \\
+\citetitle{filiz2025_54} & 2025 & ai-chatbots-not-shell \\
+\citetitle{lonka2020_55} & 2020 & higher-education-general \\
+\citetitle{jarrett2016_56} & 2016 & other-discipline \\
+\citetitle{pendergast2006_57} & 2006 & programming-learning-not-shell \\
+\citetitle{jamieson2000_58} & 2000 & education-technology-general \\
+\citetitle{meyer2010_59} & 2010 & general-education \\
+\citetitle{fuente2021_60} & 2021 & general-education \\
+\citetitle{werbińska2019_61} & 2019 & language-education \\
+\citetitle{harding2009_62} & 2009 & other-discipline \\
+\citetitle{froehlich2011_63} & 2011 & higher-education-general \\
+\citetitle{choo2006_64} & 2006 & higher-education-general \\
+\citetitle{clercq2000_65} & 2000 & other-discipline \\
+\citetitle{senemoğlu2011_66} & 2011 & general-education \\
+\citetitle{crawford2015_67} & 2015 & higher-education-general \\
+\citetitle{brink2022_68} & 2022 & other-discipline \\
+\citetitle{tena2019_69} & 2019 & non-education \\
+\citetitle{i2024_70} & 2024 & other-discipline \\
+\citetitle{f2024_71} & 2024 & higher-education-general \\
+\citetitle{lm2023_72} & 2023 & non-target-topic \\
+\citetitle{de2022_73} & 2022 & non-education \\
+\citetitle{a2018_74} & 2018 & programming-learning-not-shell \\
+\citetitle{g2006_75} & 2006 & education-technology-general \\
+\citetitle{f2005_76} & 2005 & general-education \\
+\citetitle{hutchison2020_77} & 2020 & engineering-report \\
+\citetitle{bodner2020_78} & 2020 & engineering-report \\
+\citetitle{strömbäck2021_79} & 2021 & programming-learning-not-shell \\
+\citetitle{smith2008_80} & 2008 & programming-learning-not-shell \\
+\citetitle{lönnberg2012_81} & 2012 & programming-learning-not-shell \\
+\citetitle{sumpter2020_82} & 2020 & engineering-report \\
+\citetitle{manueli2012_83} & 2012 & education-technology-general \\
+\citetitle{danielak2019_84} & 2019 & method-paper-outside-scope \\
+\citetitle{diepen2011_85} & 2011 & general-education \\
+\citetitle{tinajero2013_86} & 2013 & general-education \\
+\citetitle{naveed2018_87} & 2018 & programming-learning-not-shell \\
+\citetitle{kilpinen2004_88} & 2004 & education-technology-general \\
+\citetitle{susimetsä2006_89} & 2006 & education-technology-general \\
+\citetitle{lukkarinen2016_90} & 2016 & programming-learning-not-shell \\
+\citetitle{zwaneveld2009_91} & 2009 & general-education \\
+\citetitle{masbah2018_92} & 2018 & programming-learning-not-shell \\
+\citetitle{alänge1998_93} & 1998 & engineering-report \\
+\citetitle{f2020_94} & 2020 & programming-learning-not-shell \\
+\citetitle{c2010_95} & 2010 & general-education \\
+\citetitle{a2009_96} & 2009 & programming-learning-not-shell \\
+\citetitle{i2009_97} & 2009 & programming-learning-not-shell \\
+\citetitle{a2008_98} & 2008 & method-paper-outside-scope \\
+\citetitle{j2006_99} & 2006 & engineering-report \\
+\citetitle{gentleman2004_100} & 2004 & science-domain \\
+\citetitle{ray2016_101} & 2016 & non-education \\
+\citetitle{tejesh2018_102} & 2018 & non-education \\
+\citetitle{ferrari2005_103} & 2005 & non-education \\
+\citetitle{stohl2005_104} & 2005 & science-domain \\
+\citetitle{evans2008_105} & 2008 & physics-domain \\
+\citetitle{19642006_106} & 2006 & non-education \\
+\citetitle{angelopoulos2019_107} & 2019 & science-domain \\
+\citetitle{kent2006_108} & 2006 & non-target-topic \\
+\citetitle{bubeck2023_109} & 2023 & ai-chatbots-not-shell \\
+\citetitle{heller2015_110} & 2015 & chemistry-domain \\
+\citetitle{vences2021_111} & 2021 & science-domain \\
+\citetitle{dagestad2018_112} & 2018 & science-domain \\
+\citetitle{stouffer2015_113} & 2015 & non-target-topic \\
+\citetitle{roussel2020_114} & 2020 & science-domain \\
+\citetitle{kreuzer2017_115} & 2017 & science-domain \\
+\citetitle{indri2019_116} & 2019 & engineering-report \\
+\citetitle{a2005_117} & 2005 & non-education \\
+\citetitle{polese2023_118} & 2023 & non-education \\
+\citetitle{dr2026_119} & 2026 & non-target-topic \\
+\citetitle{y2025_120} & 2025 & education-technology-general \\
+\citetitle{ae2024_121} & 2024 & non-target-topic \\
+\citetitle{y2023_122} & 2023 & non-education \\
+\citetitle{q2017_123} & 2017 & engineering-report \\
+\citetitle{g2016_124} & 2016 & non-education \\
+\citetitle{o2015_125} & 2015 & science-domain \\
+\citetitle{c2015_126} & 2015 & science-domain \\
+\citetitle{t2013_127} & 2013 & non-education \\
+\citetitle{km2012_128} & 2012 & non-education \\
+\citetitle{de2009_129} & 2009 & non-education \\
+\citetitle{j2008_130} & 2008 & education-technology-general \\
+\citetitle{c2008_131} & 2008 & non-education \\
+\citetitle{goldenberg2010_132} & 2010 & non-education \\
+\citetitle{cai2022_133} & 2022 & non-computing-domain \\
+\citetitle{saaty2007_134} & 2007 & method-paper-outside-scope \\
+\citetitle{cannon2014_135} & 2014 & science-domain \\
+\citetitle{stonebraker1990_136} & 1990 & non-education \\
+\citetitle{altmann2009_137} & 2009 & psychology-domain \\
+\citetitle{purgato2018_138} & 2018 & medicine-domain \\
+\citetitle{kessler2004_139} & 2004 & method-paper-outside-scope \\
+\citetitle{heckmann2005_140} & 2005 & non-education \\
+\citetitle{wang2023_141} & 2023 & llm-prompting \\
+\citetitle{edwards2013_142} & 2013 & method-paper-outside-scope \\
+\citetitle{kouřil2020_143} & 2020 & non-education \\
+\citetitle{rockwood2017_144} & 2017 & method-paper-outside-scope \\
+\citetitle{norton2021_145} & 2021 & medicine-domain \\
+\citetitle{michie2015_146} & 2015 & method-paper-outside-scope \\
+\citetitle{manzanares2020_147} & 2020 & education-technology-general \\
+\citetitle{bryfczynski2012_148} & 2012 & education-technology-general \\
+\citetitle{dekeyser2008_149} & 2008 & non-target-topic \\
+\citetitle{sarma2022_150} & 2022 & medicine-domain \\
+\citetitle{rueda1994_151} & 1994 & language-education \\
+\citetitle{n2026_152} & 2026 & ai-chatbots-not-shell \\
+\citetitle{wch2025_153} & 2025 & language-education \\
+\citetitle{q2025_154} & 2025 & non-computing-domain \\
+\citetitle{g2024_155} & 2024 & medicine-domain \\
+\citetitle{dn2024_156} & 2024 & medicine-domain \\
+\citetitle{i2024_157} & 2024 & non-target-topic \\
+\citetitle{d2020_158} & 2020 & medicine-domain \\
+\citetitle{a2020_159} & 2020 & general-education \\
+\citetitle{lv2017_160} & 2017 & medicine-domain \\
+\citetitle{rw2016_161} & 2016 & non-target-topic \\
+\citetitle{c2014_162} & 2014 & psychology-domain \\
+\citetitle{s2012_163} & 2012 & textbook-analysis \\
+\citetitle{c2011_164} & 2011 & psychology-domain \\
+\citetitle{ma2011_165} & 2011 & non-target-topic \\
+\citetitle{s2009_166} & 2009 & non-education \\
+\citetitle{j2007_167} & 2007 & non-education \\
+\citetitle{cd2006_168} & 2006 & non-education \\
+\citetitle{pawlik2017_169} & 2017 & cs1-learning-outcomes, workshop-programme-description-no-measurement \\
+\citetitle{seidlmayer2020_170} & 2020 & cs1-learning-outcomes, library-carpentry-report-no-measurement \\
+\citetitle{anzt2021_171} & 2021 & non-education \\
+\citetitle{anzt2020_172} & 2020 & non-education \\
+\citetitle{wilson2013_173} & 2013 & cs1-learning-outcomes, out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, programme-history-no-measurement \\
+\citetitle{watsonhaigh2013_174} & 2013 & cs1-learning-outcomes, training-demand-report-not-shell \\
+\citetitle{theobold2020_175} & 2020 & cs1-learning-outcomes, workshop-design-not-measurement \\
+\citetitle{lapp2022_176} & 2022 & cs1-learning-outcomes, workshop-curriculum-description-no-measurement \\
+\citetitle{cais2020_177} & 2020 & community-report-no-measurement, cs1-learning-outcomes \\
+\citetitle{jordan2020_178} & 2020 & abstract-not-retrievable-author-bio-only-covered-by-Jordan2018, cs1-learning-outcomes \\
+\citetitle{qian2021_179} & 2021 & non-education \\
+\citetitle{lapp2021_180} & 2021 & cs1-learning-outcomes, preprint-duplicate-of-JOSE-paper \\
+\citetitle{latourrette2021_181} & 2021 & cs1-learning-outcomes, workshop-report-demographics-survey-only \\
+\citetitle{sayres2018_182} & 2018 & science-domain \\
+\citetitle{kim2018_183} & 2018 & science-domain \\
+\citetitle{ďurčo2019_184} & 2019 & education-technology-general \\
+\citetitle{trofimova2023_185} & 2023 & cs1-learning-outcomes, domain-lab-no-measurement-of-shell-understanding \\
+\citetitle{x2024_186} & 2024 & engineering-report \\
+\citetitle{wh2024_187} & 2024 & ai-chatbots-not-shell \\
+\citetitle{p2020_188} & 2020 & science-domain \\
+\citetitle{d2016_189} & 2016 & non-education \\
+\citetitle{j2012_190} & 2012 & non-education \\
+\citetitle{mh2008_191} & 2008 & psychology-domain \\
+\citetitle{i2007_192} & 2007 & non-target-topic \\
+\citetitle{i2007_193} & 2007 & non-target-topic \\
+\citetitle{shen2024_194} & 2024 & science-domain \\
+\citetitle{miller2018_195} & 2018 & non-target-topic \\
+\citetitle{greenberg2021_196} & 2021 & non-target-topic \\
+\citetitle{ahmadi2018_197} & 2018 & chemistry-domain \\
+\citetitle{moran2017_198} & 2017 & non-target-topic \\
+\citetitle{dukovski2021_199} & 2021 & science-domain \\
+\citetitle{carey2018_200} & 2018 & science-domain \\
+\citetitle{sitto2019_201} & 2019 & science-domain \\
+\citetitle{ellis2019_202} & 2019 & chemistry-domain \\
+\citetitle{vaithilingam2019_203} & 2019 & non-target-topic \\
+\citetitle{unknown2014_204} & 2014 & physics-domain \\
+\citetitle{moran2017_205} & 2017 & non-target-topic \\
+\citetitle{sampedro2017_206} & 2017 & HPC-gateway-usability-not-learner-understanding, cs1-learning-outcomes \\
+\citetitle{zhou2024_207} & 2024 & chemistry-domain \\
+\citetitle{paiva2020_208} & 2020 & programming-learning-not-shell \\
+\citetitle{miao2020_209} & 2020 & education-technology-general \\
+\citetitle{kurs2016_210} & 2016 & science-domain \\
+\citetitle{albreiki2021_211} & 2021 & education-technology-general \\
+\citetitle{kurilovas2005_212} & 2005 & education-technology-general \\
+\citetitle{via2020_213} & 2020 & method-paper-outside-scope \\
+\citetitle{purwanto2021_214} & 2021 & HPC-big-data-training-programme-not-shell, cs1-learning-outcomes, pre-post-test \\
+\citetitle{wright2020_215} & 2020 & science-domain \\
+\citetitle{he2016_216} & 2016 & chemistry-domain \\
+\citetitle{reddy2014_217} & 2014 & language-education \\
+\citetitle{adıgüzel2021_218} & 2021 & physics-domain \\
+\citetitle{azcona2019_219} & 2019 & education-technology-general \\
+\citetitle{holland2009_220} & 2009 & programming-learning-not-shell \\
+\citetitle{purwanto2024_221} & 2024 & HPC-big-data-training-programme-not-shell, cs1-learning-outcomes \\
+\citetitle{basiel1999_222} & 1999 & education-technology-general \\
+\citetitle{ramachandran2016_223} & 2016 & education-technology-general \\
+\citetitle{walmsley2015_224} & 2015 & language-education \\
+\citetitle{stahl2009_225} & 2009 & non-education \\
+\citetitle{gordon2004_226} & 2004 & education-technology-general \\
+\citetitle{provine2000_227} & 2000 & programming-learning-not-shell \\
+\citetitle{urban2011_228} & 2011 & non-education \\
+\citetitle{mendonca2022_229} & 2022 & science-domain \\
+\citetitle{adesina2016_230} & 2016 & single-discipline-diagnostic \\
+\citetitle{tm2026_231} & 2026 & ai-chatbots-not-shell \\
+\citetitle{webb2010_232} & 2010 & medicine-domain \\
+\citetitle{zou2016_233} & 2016 & non-education \\
+\citetitle{ulfert2022_234} & 2022 & education-technology-general \\
+\citetitle{liang2023_235} & 2023 & ai-chatbots-not-shell \\
+\citetitle{chowdhury2020_236} & 2020 & non-education \\
+\citetitle{huang2019_237} & 2019 & non-education \\
+\citetitle{mohamed2022_238} & 2022 & non-education \\
+\citetitle{westhead2015_239} & 2015 & higher-education-general \\
+\citetitle{centsboonstra2020_240} & 2020 & general-education \\
+\citetitle{ocan2015_241} & 2015 & medicine-domain \\
+\citetitle{fan2024_242} & 2024 & language-education \\
+\citetitle{wu2023_243} & 2023 & ai-chatbots-not-shell \\
+\citetitle{mukuka2021_244} & 2021 & single-discipline-diagnostic \\
+\citetitle{galindodomínguez2021_245} & 2021 & higher-education-general \\
+\citetitle{tarafdar2014_246} & 2014 & non-education \\
+\citetitle{chen2021_247} & 2021 & llm-prompting \\
+\citetitle{kazu2014_248} & 2014 & general-education \\
+\citetitle{wart2020_249} & 2020 & higher-education-general \\
+\citetitle{lee2024_250} & 2024 & ai-chatbots-not-shell \\
+\citetitle{xz2026_251} & 2026 & non-computing-domain \\
+\citetitle{l2026_252} & 2026 & cs1-learning-outcomes, tool-installation-challenges-not-measurement-of-understanding-already-cited \\
+\citetitle{v2026_253} & 2026 & non-computing-domain \\
+\citetitle{a2026_254} & 2026 & higher-education-review \\
+\citetitle{j2026_255} & 2026 & education-technology-general \\
+\citetitle{as2026_256} & 2026 & higher-education-general \\
+\citetitle{jm2026_257} & 2026 & psychology-domain \\
+\citetitle{ak2026_258} & 2026 & non-target-topic \\
+\citetitle{e2025_259} & 2025 & education-technology-general \\
+\citetitle{v2025_260} & 2025 & programming-learning-not-shell \\
+\citetitle{fv2025_261} & 2025 & education-technology-general \\
+\citetitle{d2025_262} & 2025 & ai-chatbots-not-shell \\
+\citetitle{jp2025_263} & 2025 & ai-chatbots-not-shell \\
+\citetitle{mw2025_264} & 2025 & psychology-domain \\
+\citetitle{m2025_265} & 2025 & non-computing-domain \\
+\citetitle{m2025_266} & 2025 & medicine-domain \\
+\citetitle{m2024_267} & 2024 & higher-education-general \\
+\citetitle{mm2024_268} & 2024 & computational-thinking-not-shell \\
+\citetitle{sfa2024_269} & 2024 & non-computing-domain \\
+\citetitle{f2024_270} & 2024 & programming-learning-not-shell \\
+\citetitle{arslan2012_271} & 2012 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{odom1995_272} & 1995 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{siswaningsih2017_273} & 2017 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{syaifuddin2022_274} & 2022 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{lin2004_275} & 2004 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{taşlıdere2016_276} & 2016 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{kırbulut2014_277} & 2014 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{kaltakcigurel2017_278} & 2017 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{taber2017_279} & 2017 & method-paper-outside-scope \\
+\citetitle{utami2019_280} & 2019 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{sesli2012_281} & 2012 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{habiddin2019_282} & 2019 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{prodjosantoso2018_283} & 2018 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{suwono2019_284} & 2019 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{tüysüz2009_285} & 2009 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{fratiwi2017_286} & 2017 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{putra2020_287} & 2020 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{romine2015_288} & 2015 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{n2026_289} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{c2026_290} & 2026 & physics-domain \\
+\citetitle{j2026_291} & 2026 & science-domain \\
+\citetitle{jd2026_292} & 2026 & physics-domain \\
+\citetitle{a2026_293} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{m2026_294} & 2026 & method-paper-outside-scope \\
+\citetitle{sn2026_295} & 2026 & ai-chatbots-not-shell \\
+\citetitle{d2026_296} & 2026 & chemistry-domain \\
+\citetitle{t2026_297} & 2026 & physics-domain \\
+\citetitle{mk2026_298} & 2026 & science-domain \\
+\citetitle{y2026_299} & 2026 & chemistry-domain \\
+\citetitle{l2026_300} & 2026 & chemistry-domain \\
+\citetitle{e2026_301} & 2026 & single-discipline-diagnostic \\
+\citetitle{aa2026_302} & 2026 & science-domain \\
+\citetitle{y2026_303} & 2026 & education-technology-general \\
+\citetitle{v2026_304} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{cu2026_305} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{f2026_306} & 2026 & science-domain \\
+\citetitle{mami2026_307} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{fk2026_308} & 2026 & physics-domain \\
+\citetitle{emeti2026_309} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{dominik2026_310} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{derching2026_311} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{wei2026_312} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{benjamin2026_313} & 2026 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{n2023_314} & 2023 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{soeharto2022_315} & 2022 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{riza2022_316} & 2022 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{a2020_317} & 2020 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{derching2019_318} & 2019 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{yang2018_319} & 2018 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{jingwen2016_320} & 2016 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{oguz2015_321} & 2015 & out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only, pre-post-test \\
+\citetitle{tennant2007_322} & 2007 & method-paper-outside-scope \\
+\citetitle{hollebeek2014_323} & 2014 & non-education \\
+\citetitle{boateng2018_324} & 2018 & method-paper-outside-scope \\
+\citetitle{anderson2002_325} & 2002 & non-computing-concept-inventory, pre-post-test \\
+\citetitle{gillanders2013_326} & 2013 & psychology-domain \\
+\citetitle{lessiter2001_327} & 2001 & non-education \\
+\citetitle{fleming1992_328} & 1992 & general-education \\
+\citetitle{abeele2019_329} & 2019 & non-education \\
+\citetitle{bartneck2008_330} & 2008 & non-education \\
+\citetitle{paustian2017_331} & 2017 & non-computing-concept-inventory, pre-post-test \\
+\citetitle{schaufeli2020_332} & 2020 & non-education \\
+\citetitle{walsh2019_333} & 2019 & non-computing-concept-inventory, pre-post-test \\
+\citetitle{fleming1992_334} & 1992 & general-education \\
+\citetitle{konrath2014_335} & 2014 & psychology-domain \\
+\citetitle{mahone2002_336} & 2002 & psychology-domain \\
+\citetitle{harris2020_337} & 2020 & method-paper-outside-scope \\
+\citetitle{holling1980_338} & 1980 & non-computing-domain \\
+\citetitle{x2026_339} & 2026 & language-education \\
+\citetitle{s2026_340} & 2026 & medicine-domain \\
+\citetitle{i2026_341} & 2026 & psychology-domain \\
+\citetitle{m2026_342} & 2026 & nursing-domain \\
+\citetitle{ai2026_343} & 2026 & non-computing-domain \\
+\citetitle{ac2026_344} & 2026 & medicine-domain \\
+\citetitle{ee2026_345} & 2026 & psychology-domain \\
+\citetitle{f2026_346} & 2026 & medicine-domain \\
+\citetitle{eg2026_347} & 2026 & medicine-domain \\
+\citetitle{sf2026_348} & 2026 & medicine-domain \\
+\citetitle{f2026_349} & 2026 & medicine-domain \\
+\citetitle{b2026_350} & 2026 & language-education \\
+\citetitle{s2026_351} & 2026 & medicine-domain \\
+\citetitle{l2026_352} & 2026 & psychology-domain \\
+\citetitle{jtt2026_353} & 2026 & psychology-domain \\
+\citetitle{t2026_354} & 2026 & ai-chatbots-not-shell \\
+\citetitle{i2026_355} & 2026 & medicine-domain \\
+\citetitle{guerra2016_356} & 2016 & science-domain \\
+\citetitle{bernhard2018_357} & 2018 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{robutti2016_358} & 2016 & general-education \\
+\citetitle{smit2011_359} & 2011 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{hoque2021_360} & 2021 & non-education \\
+\citetitle{tan2019_361} & 2019 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{goodchild2020_362} & 2020 & single-discipline-diagnostic \\
+\citetitle{basu2015_363} & 2015 & biology-domain \\
+\citetitle{rongjin2019_364} & 2019 & general-education \\
+\citetitle{åkerlind2011_365} & 2011 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{c2024_366} & 2024 & medicine-domain \\
+\citetitle{c2024_367} & 2024 & medicine-domain \\
+\citetitle{cm2022_368} & 2022 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{i2020_369} & 2020 & engineering-report \\
+\citetitle{mh2014_370} & 2014 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{m2012_371} & 2012 & pre-post-test, variation-theory-application-other-domain-not-design-precedent \\
+\citetitle{kling1992_372} & 1992 & non-target-topic \\
+\citetitle{odden2018_373} & 2018 & science-education-review \\
+\citetitle{beamish1995_374} & 1995 & non-education \\
+\citetitle{behuniak2010_375} & 2010 & psychology-domain \\
+\citetitle{dow2005_376} & 2005 & general-education \\
+\citetitle{brown2018_377} & 2018 & method-paper-outside-scope \\
+\citetitle{battarbee2004_378} & 2004 & non-education \\
+\citetitle{alahmadi2008_379} & 2008 & physics-domain \\
+\citetitle{nichols1993_380} & 1993 & education-technology-general \\
+\citetitle{karen1914_381} & 1914 & general-education \\
+\citetitle{lala2011_382} & 2011 & nursing-domain \\
+\citetitle{charles2010_383} & 2010 & non-computing-domain \\
+\citetitle{rampton2015_384} & 2015 & language-education \\
+\citetitle{jones2013_385} & 2013 & higher-education-general \\
+\citetitle{mack1983_386} & 1983 & non-target-topic \\
+\citetitle{gould1983_387} & 1983 & non-education \\
+\citetitle{fredette2023_388} & 2023 & physics-domain \\
+\citetitle{fadzly2010_389} & 2010 & higher-education-general \\
+\citetitle{xu2024_390} & 2024 & education-technology-general \\
+\citetitle{k2025_391} & 2025 & method-paper-outside-scope \\
+\citetitle{es2024_392} & 2024 & other-discipline \\
+\citetitle{sd2024_393} & 2024 & other-discipline \\
+\citetitle{ml2022_394} & 2022 & other-discipline \\
+\citetitle{l2019_395} & 2019 & other-discipline \\
+\citetitle{m2015_396} & 2015 & non-computing-domain \\
+\citetitle{ai2012_397} & 2012 & nursing-domain \\
+\citetitle{hepworth2006_398} & 2006 & non-target-topic \\
+\citetitle{barrera2008_399} & 2008 & non-education \\
+\citetitle{atkinson2008_400} & 2008 & academic-integrity \\
+\citetitle{abbas2022_401} & 2022 & non-education \\
+\citetitle{valstad2011_402} & 2011 & education-technology-general \\
+\citetitle{wynn2010_403} & 2010 & general-education \\
+\citetitle{blayney2004_404} & 2004 & education-technology-general \\
+\citetitle{gregory2011_405} & 2011 & medicine-domain \\
+\citetitle{pipek2006_406} & 2006 & non-education \\
+\citetitle{fine2009_407} & 2009 & non-education \\
+\citetitle{mcfarland2013_408} & 2013 & general-education \\
+\citetitle{martinez1989_409} & 1989 & general-education \\
+\citetitle{mayernik2011_410} & 2011 & non-education \\
+\citetitle{daviskahl2013_411} & 2013 & higher-education-general \\
+\citetitle{bulger2011_412} & 2011 & non-target-topic \\
+\citetitle{amsellem2021_413} & 2021 & non-education \\
+\citetitle{webster2020_414} & 2020 & non-target-topic \\
+\citetitle{frank2015_415} & 2015 & science-domain \\
+\citetitle{learned1924_416} & 1924 & general-education \\
+\citetitle{vance2019_417} & 2019 & higher-education-general \\
+\citetitle{jn2025_418} & 2025 & non-education \\
+\citetitle{deck1984_419} & 1984 & method-paper-outside-scope \\
+\citetitle{kumar1998_420} & 1998 & management \\
+\citetitle{seebach2013_421} & 2013 & non-education \\
+\citetitle{çetinkayarundel2022_422} & 2022 & programming-learning-not-shell \\
+\citetitle{pilkington1992_423} & 1992 & cs1-learning-outcomes, help-system-design-not-learner-measurement \\
+\citetitle{amery2022_424} & 2022 & language-education \\
+\citetitle{alaqbi2017_425} & 2017 & education-technology-general \\
+\citetitle{çetinkayarundel2021_426} & 2021 & programming-learning-not-shell \\
+\citetitle{nazemi2015_427} & 2015 & education-technology-general \\
+\citetitle{husu2020_428} & 2020 & non-target-topic \\
+\citetitle{yoo2019_429} & 2019 & non-education \\
+\citetitle{libbrecht2012_430} & 2012 & education-technology-general \\
+\citetitle{morse1990_431} & 1990 & engineering-report \\
+\citetitle{teal2022_432} & 2022 & higher-education-general \\
+\citetitle{unknownnd_433} & --- & non-target-topic \\
+\citetitle{colomina2014_434} & 2014 & science-domain \\
+\citetitle{davoudi2012_435} & 2012 & method-paper-outside-scope \\
+\citetitle{markus2017_436} & 2017 & science-domain \\
+\citetitle{blinder1991_437} & 1991 & non-education \\
+\citetitle{beto1998_438} & 1998 & non-computing-domain \\
+\citetitle{holguínveras2012_439} & 2012 & non-computing-domain \\
+\citetitle{ballard2000_440} & 2000 & non-computing-domain \\
+\citetitle{sands2018_441} & 2018 & general-concept-inventory-background-physics, pre-post-test \\
+\citetitle{bisson2013_442} & 2013 & medicine-domain \\
+\citetitle{nieminen2010_443} & 2010 & non-computing-concept-inventory, pre-post-test \\
+\citetitle{flint2006_444} & 2006 & psychology-domain \\
+\citetitle{orand1996_445} & 1996 & non-education \\
+\citetitle{sheehan1998_446} & 1998 & non-computing-domain \\
+\citetitle{abánades2015_447} & 2015 & science-domain \\
+\citetitle{turoff2004_448} & 2004 & non-education \\
+\citetitle{guzzetti2019_449} & 2019 & science-domain \\
+\citetitle{meara2015_450} & 2015 & medicine-domain \\
+\citetitle{fong2003_451} & 2003 & non-education \\
+\citetitle{m2026_452} & 2026 & nursing-domain \\
+\citetitle{a2026_453} & 2026 & ai-chatbots-not-shell \\
+\citetitle{a2026_454} & 2026 & programming-learning-not-shell \\
+\citetitle{m2026_455} & 2026 & programming-learning-not-shell \\
+\citetitle{p2026_456} & 2026 & non-computing-domain \\
+\citetitle{s2026_457} & 2026 & medicine-domain \\
+\citetitle{j2026_458} & 2026 & medicine-domain \\
+\citetitle{x2026_459} & 2026 & engineering-report \\
+\citetitle{n2026_460} & 2026 & medicine-domain \\
+\citetitle{h2026_461} & 2026 & medicine-domain \\
+\citetitle{rl2026_462} & 2026 & engineering-report \\
+\citetitle{g2026_463} & 2026 & medicine-domain \\
+\citetitle{mr2026_464} & 2026 & non-education \\
+\citetitle{ps2026_465} & 2026 & non-computing-domain \\
+\citetitle{c2026_466} & 2026 & method-paper-outside-scope \\
+\citetitle{mg2026_467} & 2026 & medicine-domain \\
+\citetitle{c2026_468} & 2026 & non-education \\
+\citetitle{e2026_469} & 2026 & engineering-report \\
+\citetitle{b2026_470} & 2026 & non-target-topic \\
+\citetitle{e2026_471} & 2026 & general-education \\
+\citetitle{katoch2020_472} & 2020 & non-education \\
+\citetitle{devlin2017_473} & 2017 & medicine-domain \\
+\citetitle{osborne2003_474} & 2003 & science-education-review \\
+\citetitle{vance2015_475} & 2015 & non-education \\
+\citetitle{padial2010_476} & 2010 & science-domain \\
+\citetitle{schot1997_477} & 1997 & method-paper-outside-scope \\
+\citetitle{liang2016_478} & 2016 & science-domain \\
+\citetitle{roy2014_479} & 2014 & science-domain \\
+\citetitle{govindan2014_480} & 2014 & non-computing-domain \\
+\citetitle{jorge2011_481} & 2011 & science-domain \\
+\citetitle{chauhan2022_482} & 2022 & non-education \\
+\citetitle{zittrain2008_483} & 2008 & non-education \\
+\citetitle{kaelbling1996_484} & 1996 & non-education \\
+\citetitle{singh2021_485} & 2021 & non-education \\
+\citetitle{nolan1973_486} & 1973 & non-education \\
+\citetitle{seyedghorban2019_487} & 2019 & non-education \\
+\citetitle{mirowski2018_488} & 2018 & non-education \\
+\citetitle{schaufeli2003_489} & 2003 & psychology-domain \\
+\citetitle{liang2018_490} & 2018 & science-domain \\
+\citetitle{r2027_491} & 2027 & science-domain \\
+\citetitle{s2027_492} & 2027 & science-domain \\
+\citetitle{j2027_493} & 2027 & ai-chatbots-not-shell \\
+\citetitle{f2026_494} & 2026 & non-education \\
+\citetitle{k2026_495} & 2026 & non-computing-domain \\
+\citetitle{t2026_496} & 2026 & non-education \\
+\citetitle{ghp2026_497} & 2026 & non-computing-domain \\
+\citetitle{d2026_498} & 2026 & medicine-domain \\
+\citetitle{m2026_499} & 2026 & psychology-domain \\
+\citetitle{ta2026_500} & 2026 & non-computing-domain \\
+\citetitle{r2026_501} & 2026 & medicine-domain \\
+\citetitle{d2026_502} & 2026 & science-domain \\
+\citetitle{g2026_503} & 2026 & medicine-domain \\
+\citetitle{b2026_504} & 2026 & non-computing-domain \\
+\citetitle{jj2026_505} & 2026 & medicine-domain \\
+\citetitle{ac2026_506} & 2026 & science-domain \\
+\citetitle{a2026_507} & 2026 & chemistry-domain \\
+\citetitle{eh2026_508} & 2026 & medicine-domain \\
+\citetitle{dra2026_509} & 2026 & medicine-domain \\
+\citetitle{l2026_510} & 2026 & non-computing-domain \\
+\citetitle{bailey2018_511} & 2018 & MSc-thesis-superseded-by-SIGCSE-2019-paper, cs1-learning-outcomes \\
+\citetitle{blanchard2022_512} & 2022 & education-technology-general \\
+\citetitle{venigalla2023_513} & 2023 & programming-learning-not-shell \\
+\citetitle{perugini2020_514} & 2020 & programming-learning-not-shell \\
+\citetitle{unknown2019_515} & 2019 & engineering-report \\
+\citetitle{y2026_516} & 2026 & cs1-learning-outcomes, teaching-curriculum-abstract-unavailable-ACM \\
+\citetitle{cr2025_517} & 2025 & assessment-tooling-abstract-unavailable, cs1-learning-outcomes \\
+\citetitle{vk2025_518} & 2025 & cs1-learning-outcomes, tutoring-framework-evaluates-system-not-learners \\
+\citetitle{ad2024_519} & 2024 & programming-learning-not-shell \\
+\citetitle{asm2022_520} & 2022 & education-technology-general \\
+\citetitle{m2021_521} & 2021 & cs1-learning-outcomes, teaching-tool-abstract-truncated-measure-not-stated \\
+\end{longtable}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.4\textwidth}cccccccccccccccccccccccccccccccccccccccccccccccccccccccccc}
+\toprule
+\textbf{Title} & \rotatebox{90}{CS1-programming-pre-post-test-not-shell} & \rotatebox{90}{HPC-big-data-training-programme-not-shell} & \rotatebox{90}{HPC-gateway-usability-not-learner-understanding} & \rotatebox{90}{MSc-thesis-superseded-by-SIGCSE-2019-paper} & \rotatebox{90}{abstract-not-retrievable-author-bio-only-covered-by-Jordan2018} & \rotatebox{90}{academic-integrity} & \rotatebox{90}{ai-chatbots-not-shell} & \rotatebox{90}{assessment-tooling-abstract-unavailable} & \rotatebox{90}{astronomy-domain} & \rotatebox{90}{biology-domain} & \rotatebox{90}{chemistry-domain} & \rotatebox{90}{community-report-no-measurement} & \rotatebox{90}{computational-thinking-not-shell} & \rotatebox{90}{computing-diagnostic-instrument} & \rotatebox{90}{cs1-learning-outcomes} & \rotatebox{90}{domain-lab-no-measurement-of-shell-understanding} & \rotatebox{90}{education-technology-general} & \rotatebox{90}{engineering-report} & \rotatebox{90}{general-concept-inventory-background-physics} & \rotatebox{90}{general-education} & \rotatebox{90}{help-system-design-not-learner-measurement} & \rotatebox{90}{higher-education-general} & \rotatebox{90}{higher-education-review} & \rotatebox{90}{language-education} & \rotatebox{90}{library-carpentry-report-no-measurement} & \rotatebox{90}{llm-prompting} & \rotatebox{90}{management} & \rotatebox{90}{medicine-domain} & \rotatebox{90}{method-paper-outside-scope} & \rotatebox{90}{non-computing-concept-inventory} & \rotatebox{90}{non-computing-domain} & \rotatebox{90}{non-education} & \rotatebox{90}{non-target-topic} & \rotatebox{90}{not-about-measurement} & \rotatebox{90}{nursing-domain} & \rotatebox{90}{other-discipline} & \rotatebox{90}{out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only} & \rotatebox{90}{physics-domain} & \rotatebox{90}{physics-misconceptions} & \rotatebox{90}{pre-post-test} & \rotatebox{90}{preprint-duplicate-of-JOSE-paper} & \rotatebox{90}{programme-history-no-measurement} & \rotatebox{90}{programming-learning-not-shell} & \rotatebox{90}{psychology-domain} & \rotatebox{90}{science-domain} & \rotatebox{90}{science-education-review} & \rotatebox{90}{single-discipline-diagnostic} & \rotatebox{90}{teaching-curriculum-abstract-unavailable-ACM} & \rotatebox{90}{teaching-tool-abstract-truncated-measure-not-stated} & \rotatebox{90}{textbook-analysis} & \rotatebox{90}{tool-installation-challenges-not-measurement-of-understanding-already-cited} & \rotatebox{90}{training-demand-report-not-shell} & \rotatebox{90}{tutoring-framework-evaluates-system-not-learners} & \rotatebox{90}{variation-theory-application-other-domain-not-design-precedent} & \rotatebox{90}{workshop-curriculum-description-no-measurement} & \rotatebox{90}{workshop-design-not-measurement} & \rotatebox{90}{workshop-programme-description-no-measurement} & \rotatebox{90}{workshop-report-demographics-survey-only} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{elo2008_32} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wu2001_33} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{chin2008_34} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{oblinger2005_35} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kazemitabaar2023_36} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{graesser2003_37} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rudolph2023_38} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{link2011_39} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{slater2015_40} &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{concannon2019_41} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{johansen2022_42} &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lee2006_43} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lee2015_44} & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{zamfirescupereira2023_45} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{abdelkhalick2008_46} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  \\
+\citetitle{fakhriyah2019_47} &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{potgieter2011_48} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{hidayati2023_49} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wemyss2013_50} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{haas2019_51} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mertala2022_52} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{carlson2019_53} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{filiz2025_54} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lonka2020_55} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jarrett2016_56} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{pendergast2006_57} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jamieson2000_58} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{meyer2010_59} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fuente2021_60} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{werbińska2019_61} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{harding2009_62} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{froehlich2011_63} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{choo2006_64} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{clercq2000_65} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{senemoğlu2011_66} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{crawford2015_67} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{brink2022_68} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tena2019_69} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2024_70} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2024_71} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lm2023_72} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{de2022_73} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2018_74} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{g2006_75} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2005_76} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{hutchison2020_77} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bodner2020_78} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{strömbäck2021_79} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{smith2008_80} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lönnberg2012_81} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sumpter2020_82} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{manueli2012_83} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{danielak2019_84} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{diepen2011_85} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tinajero2013_86} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{naveed2018_87} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kilpinen2004_88} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{susimetsä2006_89} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lukkarinen2016_90} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{zwaneveld2009_91} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{masbah2018_92} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{alänge1998_93} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2020_94} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2010_95} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2009_96} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2009_97} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2008_98} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2006_99} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{gentleman2004_100} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ray2016_101} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tejesh2018_102} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ferrari2005_103} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{stohl2005_104} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{evans2008_105} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{19642006_106} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{angelopoulos2019_107} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kent2006_108} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bubeck2023_109} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{heller2015_110} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{vences2021_111} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dagestad2018_112} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{stouffer2015_113} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{roussel2020_114} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kreuzer2017_115} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{indri2019_116} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2005_117} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{polese2023_118} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dr2026_119} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{y2025_120} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ae2024_121} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{y2023_122} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{q2017_123} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{g2016_124} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{o2015_125} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2015_126} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{t2013_127} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{km2012_128} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{de2009_129} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2008_130} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2008_131} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{goldenberg2010_132} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{cai2022_133} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{saaty2007_134} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{cannon2014_135} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{stonebraker1990_136} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{altmann2009_137} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{purgato2018_138} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kessler2004_139} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{heckmann2005_140} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wang2023_141} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{edwards2013_142} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kouřil2020_143} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rockwood2017_144} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{norton2021_145} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{michie2015_146} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{manzanares2020_147} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bryfczynski2012_148} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dekeyser2008_149} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sarma2022_150} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rueda1994_151} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{n2026_152} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wch2025_153} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{q2025_154} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{g2024_155} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dn2024_156} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2024_157} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{d2020_158} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2020_159} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lv2017_160} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rw2016_161} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2014_162} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{s2012_163} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  \\
+\citetitle{c2011_164} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ma2011_165} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{s2009_166} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2007_167} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{cd2006_168} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{pawlik2017_169} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  \\
+\citetitle{seidlmayer2020_170} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{anzt2021_171} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{anzt2020_172} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wilson2013_173} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{watsonhaigh2013_174} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  \\
+\citetitle{theobold2020_175} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  \\
+\citetitle{lapp2022_176} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  \\
+\citetitle{cais2020_177} &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jordan2020_178} &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{qian2021_179} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lapp2021_180} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{latourrette2021_181} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ \\
+\citetitle{sayres2018_182} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kim2018_183} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ďurčo2019_184} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{trofimova2023_185} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{x2024_186} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wh2024_187} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{p2020_188} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{d2016_189} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2012_190} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mh2008_191} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2007_192} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2007_193} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{shen2024_194} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{miller2018_195} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{greenberg2021_196} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ahmadi2018_197} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{moran2017_198} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dukovski2021_199} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{carey2018_200} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sitto2019_201} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ellis2019_202} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{vaithilingam2019_203} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{unknown2014_204} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{moran2017_205} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sampedro2017_206} &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{zhou2024_207} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{paiva2020_208} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{miao2020_209} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kurs2016_210} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{albreiki2021_211} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kurilovas2005_212} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{via2020_213} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{purwanto2021_214} &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wright2020_215} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{he2016_216} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{reddy2014_217} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{adıgüzel2021_218} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{azcona2019_219} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{holland2009_220} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{purwanto2024_221} &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{basiel1999_222} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ramachandran2016_223} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{walmsley2015_224} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{stahl2009_225} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{gordon2004_226} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{provine2000_227} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{urban2011_228} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mendonca2022_229} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{adesina2016_230} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tm2026_231} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{webb2010_232} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{zou2016_233} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ulfert2022_234} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{liang2023_235} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{chowdhury2020_236} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{huang2019_237} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mohamed2022_238} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{westhead2015_239} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{centsboonstra2020_240} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ocan2015_241} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fan2024_242} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wu2023_243} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mukuka2021_244} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{galindodomínguez2021_245} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tarafdar2014_246} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{chen2021_247} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kazu2014_248} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wart2020_249} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lee2024_250} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{xz2026_251} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{l2026_252} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  \\
+\citetitle{v2026_253} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2026_254} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2026_255} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{as2026_256} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jm2026_257} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ak2026_258} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{e2025_259} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{v2025_260} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fv2025_261} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{d2025_262} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jp2025_263} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mw2025_264} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2025_265} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2025_266} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2024_267} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mm2024_268} &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sfa2024_269} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2024_270} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{arslan2012_271} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{odom1995_272} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{siswaningsih2017_273} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{syaifuddin2022_274} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lin2004_275} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{taşlıdere2016_276} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kırbulut2014_277} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kaltakcigurel2017_278} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{taber2017_279} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{utami2019_280} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sesli2012_281} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{habiddin2019_282} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{prodjosantoso2018_283} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{suwono2019_284} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tüysüz2009_285} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fratiwi2017_286} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{putra2020_287} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{romine2015_288} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{n2026_289} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2026_290} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2026_291} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jd2026_292} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2026_293} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2026_294} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sn2026_295} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{d2026_296} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{t2026_297} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mk2026_298} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{y2026_299} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{l2026_300} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{e2026_301} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{aa2026_302} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{y2026_303} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{v2026_304} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{cu2026_305} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2026_306} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mami2026_307} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fk2026_308} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{emeti2026_309} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dominik2026_310} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{derching2026_311} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wei2026_312} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{benjamin2026_313} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{n2023_314} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{soeharto2022_315} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{riza2022_316} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2020_317} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{derching2019_318} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{yang2018_319} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jingwen2016_320} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{oguz2015_321} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tennant2007_322} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{hollebeek2014_323} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{boateng2018_324} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{anderson2002_325} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{gillanders2013_326} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lessiter2001_327} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fleming1992_328} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{abeele2019_329} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bartneck2008_330} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{paustian2017_331} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{schaufeli2020_332} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{walsh2019_333} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fleming1992_334} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{konrath2014_335} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mahone2002_336} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{harris2020_337} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{holling1980_338} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{x2026_339} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{s2026_340} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2026_341} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2026_342} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ai2026_343} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ac2026_344} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ee2026_345} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2026_346} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{eg2026_347} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sf2026_348} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2026_349} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{b2026_350} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{s2026_351} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{l2026_352} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jtt2026_353} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{t2026_354} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{i2026_355} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{guerra2016_356} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bernhard2018_357} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{robutti2016_358} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{smit2011_359} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{hoque2021_360} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{tan2019_361} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{goodchild2020_362} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{basu2015_363} &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rongjin2019_364} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{åkerlind2011_365} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{c2024_366} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2024_367} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{cm2022_368} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{i2020_369} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mh2014_370} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{m2012_371} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  \\
+\citetitle{kling1992_372} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{odden2018_373} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{beamish1995_374} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{behuniak2010_375} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dow2005_376} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{brown2018_377} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{battarbee2004_378} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{alahmadi2008_379} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{nichols1993_380} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{karen1914_381} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{lala2011_382} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{charles2010_383} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rampton2015_384} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jones2013_385} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mack1983_386} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{gould1983_387} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fredette2023_388} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fadzly2010_389} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{xu2024_390} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{k2025_391} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{es2024_392} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sd2024_393} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ml2022_394} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{l2019_395} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2015_396} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ai2012_397} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{hepworth2006_398} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{barrera2008_399} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{atkinson2008_400} &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{abbas2022_401} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{valstad2011_402} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{wynn2010_403} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{blayney2004_404} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{gregory2011_405} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{pipek2006_406} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fine2009_407} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mcfarland2013_408} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{martinez1989_409} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mayernik2011_410} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{daviskahl2013_411} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bulger2011_412} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{amsellem2021_413} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{webster2020_414} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{frank2015_415} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{learned1924_416} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{vance2019_417} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jn2025_418} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{deck1984_419} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kumar1998_420} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{seebach2013_421} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{çetinkayarundel2022_422} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{pilkington1992_423} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{amery2022_424} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{alaqbi2017_425} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{çetinkayarundel2021_426} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{nazemi2015_427} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{husu2020_428} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{yoo2019_429} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{libbrecht2012_430} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{morse1990_431} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{teal2022_432} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{unknownnd_433} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{colomina2014_434} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{davoudi2012_435} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{markus2017_436} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{blinder1991_437} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{beto1998_438} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{holguínveras2012_439} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ballard2000_440} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sands2018_441} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bisson2013_442} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{nieminen2010_443} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{flint2006_444} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{orand1996_445} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{sheehan1998_446} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{abánades2015_447} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{turoff2004_448} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{guzzetti2019_449} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{meara2015_450} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{fong2003_451} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2026_452} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2026_453} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2026_454} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2026_455} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{p2026_456} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{s2026_457} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2026_458} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{x2026_459} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{n2026_460} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{h2026_461} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{rl2026_462} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{g2026_463} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mr2026_464} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ps2026_465} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2026_466} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mg2026_467} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{c2026_468} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{e2026_469} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{b2026_470} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{e2026_471} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{katoch2020_472} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{devlin2017_473} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{osborne2003_474} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{vance2015_475} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{padial2010_476} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{schot1997_477} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{liang2016_478} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{roy2014_479} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{govindan2014_480} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jorge2011_481} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{chauhan2022_482} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{zittrain2008_483} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{kaelbling1996_484} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{singh2021_485} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{nolan1973_486} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{seyedghorban2019_487} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{mirowski2018_488} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{schaufeli2003_489} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{liang2018_490} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{r2027_491} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{s2027_492} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{j2027_493} &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{f2026_494} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{k2026_495} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{t2026_496} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ghp2026_497} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{d2026_498} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2026_499} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ta2026_500} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{r2026_501} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{d2026_502} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{g2026_503} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{b2026_504} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{jj2026_505} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{ac2026_506} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{a2026_507} &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{eh2026_508} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{dra2026_509} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{l2026_510} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{bailey2018_511} &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{blanchard2022_512} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{venigalla2023_513} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{perugini2020_514} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{unknown2019_515} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{y2026_516} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{cr2025_517} &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{vk2025_518} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  \\
+\citetitle{ad2024_519} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{asm2022_520} &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  \\
+\citetitle{m2021_521} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  &  & $\checkmark$ &  &  &  &  &  &  &  &  &  \\
+\end{longtable}
+
+\section{Kept Papers}
+\subsection{CS-concept-inventory-review}
+\begin{enumerate}
+\item \fullcite{taylor2014_26}
+\end{enumerate}
+
+\subsection{CS1-test-items-corroboration}
+\begin{enumerate}
+\item \fullcite{jan2014_12}
+\end{enumerate}
+
+\subsection{OS-concept-inventory-nearest-instrument}
+\begin{enumerate}
+\item \fullcite{webb2014_25}
+\end{enumerate}
+
+\subsection{command-log-tooling}
+\begin{enumerate}
+\item \fullcite{mirković2020_6}
+\item \fullcite{švábenský2022_8}
+\end{enumerate}
+
+\subsection{command-log-tooling-already-cited}
+\begin{enumerate}
+\item \fullcite{v2021_29}
+\end{enumerate}
+
+\subsection{computing-diagnostic-instrument}
+\begin{enumerate}
+\item \fullcite{jan2014_12}
+\item \fullcite{webb2014_25}
+\item \fullcite{taylor2014_26}
+\end{enumerate}
+
+\subsection{conceptions-from-pre-post-tests-in-OS-course-qualifies-claim}
+\begin{enumerate}
+\item \fullcite{s2024_0}
+\end{enumerate}
+
+\subsection{cs1-learning-outcomes}
+\begin{enumerate}
+\item \fullcite{s2024_0}
+\item \fullcite{doyle2006_1}
+\item \fullcite{simperler2015_4}
+\item \fullcite{jordan2018_5}
+\item \fullcite{mirković2020_6}
+\item \fullcite{berengueres2025_7}
+\item \fullcite{švábenský2022_8}
+\item \fullcite{grant2022_9}
+\item \fullcite{c2026_27}
+\item \fullcite{j2024_28}
+\item \fullcite{v2021_29}
+\item \fullcite{i2020_30}
+\item \fullcite{j2019_31}
+\end{enumerate}
+
+\subsection{diagnostic-instrument-typology}
+\begin{enumerate}
+\item \fullcite{kaltakcigurel2015_10}
+\end{enumerate}
+
+\subsection{diagnostic-instrument-typology-corroboration}
+\begin{enumerate}
+\item \fullcite{soeharto2019_11}
+\end{enumerate}
+
+\subsection{learning-study-corroboration}
+\begin{enumerate}
+\item \fullcite{pang2011_13}
+\item \fullcite{pang2013_16}
+\item \fullcite{pang2019_17}
+\item \fullcite{marton2013_18}
+\item \fullcite{durden2017_19}
+\item \fullcite{kullberg2010_20}
+\item \fullcite{elliott2013_21}
+\item \fullcite{lindstrand2016_22}
+\item \fullcite{mf2019_23}
+\item \fullcite{m2013_24}
+\end{enumerate}
+
+\subsection{learning-study-pre-post-test}
+\begin{enumerate}
+\item \fullcite{pang2005_14}
+\item \fullcite{kullberg2017_15}
+\end{enumerate}
+
+\subsection{not-about-measurement}
+\begin{enumerate}
+\item \fullcite{doyle2007_2}
+\item \fullcite{b2007_3}
+\end{enumerate}
+
+\subsection{perception-survey-NPS}
+\begin{enumerate}
+\item \fullcite{berengueres2025_7}
+\end{enumerate}
+
+\subsection{perception-survey-carpentries}
+\begin{enumerate}
+\item \fullcite{jordan2018_5}
+\end{enumerate}
+
+\subsection{perception-survey-confidence}
+\begin{enumerate}
+\item \fullcite{j2019_31}
+\end{enumerate}
+
+\subsection{perception-survey-corroboration}
+\begin{enumerate}
+\item \fullcite{simperler2015_4}
+\item \fullcite{i2020_30}
+\end{enumerate}
+
+\subsection{perception-survey-corroboration-shell-tutor-already-cited}
+\begin{enumerate}
+\item \fullcite{j2024_28}
+\end{enumerate}
+
+\subsection{perception-survey-self-efficacy}
+\begin{enumerate}
+\item \fullcite{grant2022_9}
+\end{enumerate}
+
+\subsection{phenomenographic-unix-students}
+\begin{enumerate}
+\item \fullcite{doyle2006_1}
+\end{enumerate}
+
+\subsection{phenomenographic-unix-teachers}
+\begin{enumerate}
+\item \fullcite{doyle2007_2}
+\end{enumerate}
+
+\subsection{phenomenographic-unix-teachers-duplicate-record}
+\begin{enumerate}
+\item \fullcite{b2007_3}
+\end{enumerate}
+
+\subsection{pre-post-test}
+\begin{enumerate}
+\item \fullcite{s2024_0}
+\item \fullcite{jordan2018_5}
+\item \fullcite{kaltakcigurel2015_10}
+\item \fullcite{soeharto2019_11}
+\item \fullcite{pang2011_13}
+\item \fullcite{pang2005_14}
+\item \fullcite{kullberg2017_15}
+\item \fullcite{pang2013_16}
+\item \fullcite{pang2019_17}
+\item \fullcite{marton2013_18}
+\item \fullcite{durden2017_19}
+\item \fullcite{kullberg2010_20}
+\item \fullcite{elliott2013_21}
+\item \fullcite{lindstrand2016_22}
+\item \fullcite{mf2019_23}
+\item \fullcite{m2013_24}
+\item \fullcite{webb2014_25}
+\end{enumerate}
+
+\subsection{skill-checkoff-assessment-qualifies-claim}
+\begin{enumerate}
+\item \fullcite{c2026_27}
+\end{enumerate}
+
+\section{Discarded Papers}
+\subsection{CS1-programming-pre-post-test-not-shell}
+\begin{enumerate}
+\item \fullcite{lee2015_44}
+\end{enumerate}
+
+\subsection{HPC-big-data-training-programme-not-shell}
+\begin{enumerate}
+\item \fullcite{purwanto2021_214}
+\item \fullcite{purwanto2024_221}
+\end{enumerate}
+
+\subsection{HPC-gateway-usability-not-learner-understanding}
+\begin{enumerate}
+\item \fullcite{sampedro2017_206}
+\end{enumerate}
+
+\subsection{MSc-thesis-superseded-by-SIGCSE-2019-paper}
+\begin{enumerate}
+\item \fullcite{bailey2018_511}
+\end{enumerate}
+
+\subsection{abstract-not-retrievable-author-bio-only-covered-by-Jordan2018}
+\begin{enumerate}
+\item \fullcite{jordan2020_178}
+\end{enumerate}
+
+\subsection{academic-integrity}
+\begin{enumerate}
+\item \fullcite{johansen2022_42}
+\item \fullcite{atkinson2008_400}
+\end{enumerate}
+
+\subsection{ai-chatbots-not-shell}
+\begin{enumerate}
+\item \fullcite{rudolph2023_38}
+\item \fullcite{mertala2022_52}
+\item \fullcite{filiz2025_54}
+\item \fullcite{bubeck2023_109}
+\item \fullcite{n2026_152}
+\item \fullcite{wh2024_187}
+\item \fullcite{tm2026_231}
+\item \fullcite{liang2023_235}
+\item \fullcite{wu2023_243}
+\item \fullcite{lee2024_250}
+\item \fullcite{d2025_262}
+\item \fullcite{jp2025_263}
+\item \fullcite{sn2026_295}
+\item \fullcite{t2026_354}
+\item \fullcite{a2026_453}
+\item \fullcite{j2027_493}
+\end{enumerate}
+
+\subsection{assessment-tooling-abstract-unavailable}
+\begin{enumerate}
+\item \fullcite{cr2025_517}
+\end{enumerate}
+
+\subsection{astronomy-domain}
+\begin{enumerate}
+\item \fullcite{slater2015_40}
+\end{enumerate}
+
+\subsection{biology-domain}
+\begin{enumerate}
+\item \fullcite{basu2015_363}
+\end{enumerate}
+
+\subsection{chemistry-domain}
+\begin{enumerate}
+\item \fullcite{wu2001_33}
+\item \fullcite{potgieter2011_48}
+\item \fullcite{heller2015_110}
+\item \fullcite{ahmadi2018_197}
+\item \fullcite{ellis2019_202}
+\item \fullcite{zhou2024_207}
+\item \fullcite{he2016_216}
+\item \fullcite{d2026_296}
+\item \fullcite{y2026_299}
+\item \fullcite{l2026_300}
+\item \fullcite{a2026_507}
+\end{enumerate}
+
+\subsection{community-report-no-measurement}
+\begin{enumerate}
+\item \fullcite{cais2020_177}
+\end{enumerate}
+
+\subsection{computational-thinking-not-shell}
+\begin{enumerate}
+\item \fullcite{fakhriyah2019_47}
+\item \fullcite{mm2024_268}
+\end{enumerate}
+
+\subsection{computing-diagnostic-instrument}
+\begin{enumerate}
+\item \fullcite{lee2015_44}
+\end{enumerate}
+
+\subsection{cs1-learning-outcomes}
+\begin{enumerate}
+\item \fullcite{lee2015_44}
+\item \fullcite{pawlik2017_169}
+\item \fullcite{seidlmayer2020_170}
+\item \fullcite{wilson2013_173}
+\item \fullcite{watsonhaigh2013_174}
+\item \fullcite{theobold2020_175}
+\item \fullcite{lapp2022_176}
+\item \fullcite{cais2020_177}
+\item \fullcite{jordan2020_178}
+\item \fullcite{lapp2021_180}
+\item \fullcite{latourrette2021_181}
+\item \fullcite{trofimova2023_185}
+\item \fullcite{sampedro2017_206}
+\item \fullcite{purwanto2021_214}
+\item \fullcite{purwanto2024_221}
+\item \fullcite{l2026_252}
+\item \fullcite{pilkington1992_423}
+\item \fullcite{bailey2018_511}
+\item \fullcite{y2026_516}
+\item \fullcite{cr2025_517}
+\item \fullcite{vk2025_518}
+\item \fullcite{m2021_521}
+\end{enumerate}
+
+\subsection{domain-lab-no-measurement-of-shell-understanding}
+\begin{enumerate}
+\item \fullcite{trofimova2023_185}
+\end{enumerate}
+
+\subsection{education-technology-general}
+\begin{enumerate}
+\item \fullcite{concannon2019_41}
+\item \fullcite{jamieson2000_58}
+\item \fullcite{g2006_75}
+\item \fullcite{manueli2012_83}
+\item \fullcite{kilpinen2004_88}
+\item \fullcite{susimetsä2006_89}
+\item \fullcite{y2025_120}
+\item \fullcite{j2008_130}
+\item \fullcite{manzanares2020_147}
+\item \fullcite{bryfczynski2012_148}
+\item \fullcite{ďurčo2019_184}
+\item \fullcite{miao2020_209}
+\item \fullcite{albreiki2021_211}
+\item \fullcite{kurilovas2005_212}
+\item \fullcite{azcona2019_219}
+\item \fullcite{basiel1999_222}
+\item \fullcite{ramachandran2016_223}
+\item \fullcite{gordon2004_226}
+\item \fullcite{ulfert2022_234}
+\item \fullcite{j2026_255}
+\item \fullcite{e2025_259}
+\item \fullcite{fv2025_261}
+\item \fullcite{y2026_303}
+\item \fullcite{nichols1993_380}
+\item \fullcite{xu2024_390}
+\item \fullcite{valstad2011_402}
+\item \fullcite{blayney2004_404}
+\item \fullcite{alaqbi2017_425}
+\item \fullcite{nazemi2015_427}
+\item \fullcite{libbrecht2012_430}
+\item \fullcite{blanchard2022_512}
+\item \fullcite{asm2022_520}
+\end{enumerate}
+
+\subsection{engineering-report}
+\begin{enumerate}
+\item \fullcite{link2011_39}
+\item \fullcite{hutchison2020_77}
+\item \fullcite{bodner2020_78}
+\item \fullcite{sumpter2020_82}
+\item \fullcite{alänge1998_93}
+\item \fullcite{j2006_99}
+\item \fullcite{indri2019_116}
+\item \fullcite{q2017_123}
+\item \fullcite{x2024_186}
+\item \fullcite{i2020_369}
+\item \fullcite{morse1990_431}
+\item \fullcite{x2026_459}
+\item \fullcite{rl2026_462}
+\item \fullcite{e2026_469}
+\item \fullcite{unknown2019_515}
+\end{enumerate}
+
+\subsection{general-concept-inventory-background-physics}
+\begin{enumerate}
+\item \fullcite{sands2018_441}
+\end{enumerate}
+
+\subsection{general-education}
+\begin{enumerate}
+\item \fullcite{oblinger2005_35}
+\item \fullcite{meyer2010_59}
+\item \fullcite{fuente2021_60}
+\item \fullcite{senemoğlu2011_66}
+\item \fullcite{f2005_76}
+\item \fullcite{diepen2011_85}
+\item \fullcite{tinajero2013_86}
+\item \fullcite{zwaneveld2009_91}
+\item \fullcite{c2010_95}
+\item \fullcite{a2020_159}
+\item \fullcite{centsboonstra2020_240}
+\item \fullcite{kazu2014_248}
+\item \fullcite{fleming1992_328}
+\item \fullcite{fleming1992_334}
+\item \fullcite{robutti2016_358}
+\item \fullcite{rongjin2019_364}
+\item \fullcite{dow2005_376}
+\item \fullcite{karen1914_381}
+\item \fullcite{wynn2010_403}
+\item \fullcite{mcfarland2013_408}
+\item \fullcite{martinez1989_409}
+\item \fullcite{learned1924_416}
+\item \fullcite{e2026_471}
+\end{enumerate}
+
+\subsection{help-system-design-not-learner-measurement}
+\begin{enumerate}
+\item \fullcite{pilkington1992_423}
+\end{enumerate}
+
+\subsection{higher-education-general}
+\begin{enumerate}
+\item \fullcite{rudolph2023_38}
+\item \fullcite{lonka2020_55}
+\item \fullcite{froehlich2011_63}
+\item \fullcite{choo2006_64}
+\item \fullcite{crawford2015_67}
+\item \fullcite{f2024_71}
+\item \fullcite{westhead2015_239}
+\item \fullcite{galindodomínguez2021_245}
+\item \fullcite{wart2020_249}
+\item \fullcite{as2026_256}
+\item \fullcite{m2024_267}
+\item \fullcite{jones2013_385}
+\item \fullcite{fadzly2010_389}
+\item \fullcite{daviskahl2013_411}
+\item \fullcite{vance2019_417}
+\item \fullcite{teal2022_432}
+\end{enumerate}
+
+\subsection{higher-education-review}
+\begin{enumerate}
+\item \fullcite{haas2019_51}
+\item \fullcite{a2026_254}
+\end{enumerate}
+
+\subsection{language-education}
+\begin{enumerate}
+\item \fullcite{hidayati2023_49}
+\item \fullcite{werbińska2019_61}
+\item \fullcite{rueda1994_151}
+\item \fullcite{wch2025_153}
+\item \fullcite{reddy2014_217}
+\item \fullcite{walmsley2015_224}
+\item \fullcite{fan2024_242}
+\item \fullcite{x2026_339}
+\item \fullcite{b2026_350}
+\item \fullcite{rampton2015_384}
+\item \fullcite{amery2022_424}
+\end{enumerate}
+
+\subsection{library-carpentry-report-no-measurement}
+\begin{enumerate}
+\item \fullcite{seidlmayer2020_170}
+\end{enumerate}
+
+\subsection{llm-prompting}
+\begin{enumerate}
+\item \fullcite{zamfirescupereira2023_45}
+\item \fullcite{wang2023_141}
+\item \fullcite{chen2021_247}
+\end{enumerate}
+
+\subsection{management}
+\begin{enumerate}
+\item \fullcite{kumar1998_420}
+\end{enumerate}
+
+\subsection{medicine-domain}
+\begin{enumerate}
+\item \fullcite{purgato2018_138}
+\item \fullcite{norton2021_145}
+\item \fullcite{sarma2022_150}
+\item \fullcite{g2024_155}
+\item \fullcite{dn2024_156}
+\item \fullcite{d2020_158}
+\item \fullcite{lv2017_160}
+\item \fullcite{webb2010_232}
+\item \fullcite{ocan2015_241}
+\item \fullcite{m2025_266}
+\item \fullcite{s2026_340}
+\item \fullcite{ac2026_344}
+\item \fullcite{f2026_346}
+\item \fullcite{eg2026_347}
+\item \fullcite{sf2026_348}
+\item \fullcite{f2026_349}
+\item \fullcite{s2026_351}
+\item \fullcite{i2026_355}
+\item \fullcite{c2024_366}
+\item \fullcite{c2024_367}
+\item \fullcite{gregory2011_405}
+\item \fullcite{bisson2013_442}
+\item \fullcite{meara2015_450}
+\item \fullcite{s2026_457}
+\item \fullcite{j2026_458}
+\item \fullcite{n2026_460}
+\item \fullcite{h2026_461}
+\item \fullcite{g2026_463}
+\item \fullcite{mg2026_467}
+\item \fullcite{devlin2017_473}
+\item \fullcite{d2026_498}
+\item \fullcite{r2026_501}
+\item \fullcite{g2026_503}
+\item \fullcite{jj2026_505}
+\item \fullcite{eh2026_508}
+\item \fullcite{dra2026_509}
+\end{enumerate}
+
+\subsection{method-paper-outside-scope}
+\begin{enumerate}
+\item \fullcite{elo2008_32}
+\item \fullcite{danielak2019_84}
+\item \fullcite{a2008_98}
+\item \fullcite{saaty2007_134}
+\item \fullcite{kessler2004_139}
+\item \fullcite{edwards2013_142}
+\item \fullcite{rockwood2017_144}
+\item \fullcite{michie2015_146}
+\item \fullcite{via2020_213}
+\item \fullcite{taber2017_279}
+\item \fullcite{m2026_294}
+\item \fullcite{tennant2007_322}
+\item \fullcite{boateng2018_324}
+\item \fullcite{harris2020_337}
+\item \fullcite{brown2018_377}
+\item \fullcite{k2025_391}
+\item \fullcite{deck1984_419}
+\item \fullcite{davoudi2012_435}
+\item \fullcite{c2026_466}
+\item \fullcite{schot1997_477}
+\end{enumerate}
+
+\subsection{non-computing-concept-inventory}
+\begin{enumerate}
+\item \fullcite{anderson2002_325}
+\item \fullcite{paustian2017_331}
+\item \fullcite{walsh2019_333}
+\item \fullcite{nieminen2010_443}
+\end{enumerate}
+
+\subsection{non-computing-domain}
+\begin{enumerate}
+\item \fullcite{concannon2019_41}
+\item \fullcite{cai2022_133}
+\item \fullcite{q2025_154}
+\item \fullcite{xz2026_251}
+\item \fullcite{v2026_253}
+\item \fullcite{m2025_265}
+\item \fullcite{sfa2024_269}
+\item \fullcite{holling1980_338}
+\item \fullcite{ai2026_343}
+\item \fullcite{charles2010_383}
+\item \fullcite{m2015_396}
+\item \fullcite{beto1998_438}
+\item \fullcite{holguínveras2012_439}
+\item \fullcite{ballard2000_440}
+\item \fullcite{sheehan1998_446}
+\item \fullcite{p2026_456}
+\item \fullcite{ps2026_465}
+\item \fullcite{govindan2014_480}
+\item \fullcite{k2026_495}
+\item \fullcite{ghp2026_497}
+\item \fullcite{ta2026_500}
+\item \fullcite{b2026_504}
+\item \fullcite{l2026_510}
+\end{enumerate}
+
+\subsection{non-education}
+\begin{enumerate}
+\item \fullcite{link2011_39}
+\item \fullcite{tena2019_69}
+\item \fullcite{de2022_73}
+\item \fullcite{ray2016_101}
+\item \fullcite{tejesh2018_102}
+\item \fullcite{ferrari2005_103}
+\item \fullcite{19642006_106}
+\item \fullcite{a2005_117}
+\item \fullcite{polese2023_118}
+\item \fullcite{y2023_122}
+\item \fullcite{g2016_124}
+\item \fullcite{t2013_127}
+\item \fullcite{km2012_128}
+\item \fullcite{de2009_129}
+\item \fullcite{c2008_131}
+\item \fullcite{goldenberg2010_132}
+\item \fullcite{stonebraker1990_136}
+\item \fullcite{heckmann2005_140}
+\item \fullcite{kouřil2020_143}
+\item \fullcite{s2009_166}
+\item \fullcite{j2007_167}
+\item \fullcite{cd2006_168}
+\item \fullcite{anzt2021_171}
+\item \fullcite{anzt2020_172}
+\item \fullcite{qian2021_179}
+\item \fullcite{d2016_189}
+\item \fullcite{j2012_190}
+\item \fullcite{stahl2009_225}
+\item \fullcite{urban2011_228}
+\item \fullcite{zou2016_233}
+\item \fullcite{chowdhury2020_236}
+\item \fullcite{huang2019_237}
+\item \fullcite{mohamed2022_238}
+\item \fullcite{tarafdar2014_246}
+\item \fullcite{hollebeek2014_323}
+\item \fullcite{lessiter2001_327}
+\item \fullcite{abeele2019_329}
+\item \fullcite{bartneck2008_330}
+\item \fullcite{schaufeli2020_332}
+\item \fullcite{hoque2021_360}
+\item \fullcite{beamish1995_374}
+\item \fullcite{battarbee2004_378}
+\item \fullcite{gould1983_387}
+\item \fullcite{barrera2008_399}
+\item \fullcite{abbas2022_401}
+\item \fullcite{pipek2006_406}
+\item \fullcite{fine2009_407}
+\item \fullcite{mayernik2011_410}
+\item \fullcite{amsellem2021_413}
+\item \fullcite{jn2025_418}
+\item \fullcite{seebach2013_421}
+\item \fullcite{yoo2019_429}
+\item \fullcite{blinder1991_437}
+\item \fullcite{orand1996_445}
+\item \fullcite{turoff2004_448}
+\item \fullcite{fong2003_451}
+\item \fullcite{mr2026_464}
+\item \fullcite{c2026_468}
+\item \fullcite{katoch2020_472}
+\item \fullcite{vance2015_475}
+\item \fullcite{chauhan2022_482}
+\item \fullcite{zittrain2008_483}
+\item \fullcite{kaelbling1996_484}
+\item \fullcite{singh2021_485}
+\item \fullcite{nolan1973_486}
+\item \fullcite{seyedghorban2019_487}
+\item \fullcite{mirowski2018_488}
+\item \fullcite{f2026_494}
+\item \fullcite{t2026_496}
+\end{enumerate}
+
+\subsection{non-target-topic}
+\begin{enumerate}
+\item \fullcite{kazemitabaar2023_36}
+\item \fullcite{johansen2022_42}
+\item \fullcite{zamfirescupereira2023_45}
+\item \fullcite{fakhriyah2019_47}
+\item \fullcite{hidayati2023_49}
+\item \fullcite{haas2019_51}
+\item \fullcite{lm2023_72}
+\item \fullcite{kent2006_108}
+\item \fullcite{stouffer2015_113}
+\item \fullcite{dr2026_119}
+\item \fullcite{ae2024_121}
+\item \fullcite{dekeyser2008_149}
+\item \fullcite{i2024_157}
+\item \fullcite{rw2016_161}
+\item \fullcite{ma2011_165}
+\item \fullcite{i2007_192}
+\item \fullcite{i2007_193}
+\item \fullcite{miller2018_195}
+\item \fullcite{greenberg2021_196}
+\item \fullcite{moran2017_198}
+\item \fullcite{vaithilingam2019_203}
+\item \fullcite{moran2017_205}
+\item \fullcite{ak2026_258}
+\item \fullcite{kling1992_372}
+\item \fullcite{mack1983_386}
+\item \fullcite{hepworth2006_398}
+\item \fullcite{bulger2011_412}
+\item \fullcite{webster2020_414}
+\item \fullcite{husu2020_428}
+\item \fullcite{unknownnd_433}
+\item \fullcite{b2026_470}
+\end{enumerate}
+
+\subsection{not-about-measurement}
+\begin{enumerate}
+\item \fullcite{oblinger2005_35}
+\end{enumerate}
+
+\subsection{nursing-domain}
+\begin{enumerate}
+\item \fullcite{elo2008_32}
+\item \fullcite{carlson2019_53}
+\item \fullcite{m2026_342}
+\item \fullcite{lala2011_382}
+\item \fullcite{ai2012_397}
+\item \fullcite{m2026_452}
+\end{enumerate}
+
+\subsection{other-discipline}
+\begin{enumerate}
+\item \fullcite{wu2001_33}
+\item \fullcite{chin2008_34}
+\item \fullcite{graesser2003_37}
+\item \fullcite{lee2006_43}
+\item \fullcite{abdelkhalick2008_46}
+\item \fullcite{wemyss2013_50}
+\item \fullcite{jarrett2016_56}
+\item \fullcite{harding2009_62}
+\item \fullcite{clercq2000_65}
+\item \fullcite{brink2022_68}
+\item \fullcite{i2024_70}
+\item \fullcite{es2024_392}
+\item \fullcite{sd2024_393}
+\item \fullcite{ml2022_394}
+\item \fullcite{l2019_395}
+\end{enumerate}
+
+\subsection{out-of-scope-single-topic-science-diagnostic-test-corroborates-instrument-typology-only}
+\begin{enumerate}
+\item \fullcite{wilson2013_173}
+\item \fullcite{arslan2012_271}
+\item \fullcite{odom1995_272}
+\item \fullcite{siswaningsih2017_273}
+\item \fullcite{syaifuddin2022_274}
+\item \fullcite{lin2004_275}
+\item \fullcite{taşlıdere2016_276}
+\item \fullcite{kırbulut2014_277}
+\item \fullcite{kaltakcigurel2017_278}
+\item \fullcite{utami2019_280}
+\item \fullcite{sesli2012_281}
+\item \fullcite{habiddin2019_282}
+\item \fullcite{prodjosantoso2018_283}
+\item \fullcite{suwono2019_284}
+\item \fullcite{tüysüz2009_285}
+\item \fullcite{fratiwi2017_286}
+\item \fullcite{putra2020_287}
+\item \fullcite{romine2015_288}
+\item \fullcite{n2026_289}
+\item \fullcite{a2026_293}
+\item \fullcite{v2026_304}
+\item \fullcite{cu2026_305}
+\item \fullcite{mami2026_307}
+\item \fullcite{emeti2026_309}
+\item \fullcite{dominik2026_310}
+\item \fullcite{derching2026_311}
+\item \fullcite{wei2026_312}
+\item \fullcite{benjamin2026_313}
+\item \fullcite{n2023_314}
+\item \fullcite{soeharto2022_315}
+\item \fullcite{riza2022_316}
+\item \fullcite{a2020_317}
+\item \fullcite{derching2019_318}
+\item \fullcite{yang2018_319}
+\item \fullcite{jingwen2016_320}
+\item \fullcite{oguz2015_321}
+\end{enumerate}
+
+\subsection{physics-domain}
+\begin{enumerate}
+\item \fullcite{graesser2003_37}
+\item \fullcite{evans2008_105}
+\item \fullcite{unknown2014_204}
+\item \fullcite{adıgüzel2021_218}
+\item \fullcite{c2026_290}
+\item \fullcite{jd2026_292}
+\item \fullcite{t2026_297}
+\item \fullcite{fk2026_308}
+\item \fullcite{alahmadi2008_379}
+\item \fullcite{fredette2023_388}
+\end{enumerate}
+
+\subsection{physics-misconceptions}
+\begin{enumerate}
+\item \fullcite{wemyss2013_50}
+\end{enumerate}
+
+\subsection{pre-post-test}
+\begin{enumerate}
+\item \fullcite{lee2015_44}
+\item \fullcite{purwanto2021_214}
+\item \fullcite{arslan2012_271}
+\item \fullcite{odom1995_272}
+\item \fullcite{siswaningsih2017_273}
+\item \fullcite{syaifuddin2022_274}
+\item \fullcite{lin2004_275}
+\item \fullcite{taşlıdere2016_276}
+\item \fullcite{kırbulut2014_277}
+\item \fullcite{kaltakcigurel2017_278}
+\item \fullcite{utami2019_280}
+\item \fullcite{sesli2012_281}
+\item \fullcite{habiddin2019_282}
+\item \fullcite{prodjosantoso2018_283}
+\item \fullcite{suwono2019_284}
+\item \fullcite{tüysüz2009_285}
+\item \fullcite{fratiwi2017_286}
+\item \fullcite{putra2020_287}
+\item \fullcite{romine2015_288}
+\item \fullcite{n2026_289}
+\item \fullcite{a2026_293}
+\item \fullcite{v2026_304}
+\item \fullcite{cu2026_305}
+\item \fullcite{mami2026_307}
+\item \fullcite{emeti2026_309}
+\item \fullcite{dominik2026_310}
+\item \fullcite{derching2026_311}
+\item \fullcite{wei2026_312}
+\item \fullcite{benjamin2026_313}
+\item \fullcite{n2023_314}
+\item \fullcite{soeharto2022_315}
+\item \fullcite{riza2022_316}
+\item \fullcite{a2020_317}
+\item \fullcite{derching2019_318}
+\item \fullcite{yang2018_319}
+\item \fullcite{jingwen2016_320}
+\item \fullcite{oguz2015_321}
+\item \fullcite{anderson2002_325}
+\item \fullcite{paustian2017_331}
+\item \fullcite{walsh2019_333}
+\item \fullcite{bernhard2018_357}
+\item \fullcite{smit2011_359}
+\item \fullcite{tan2019_361}
+\item \fullcite{åkerlind2011_365}
+\item \fullcite{cm2022_368}
+\item \fullcite{mh2014_370}
+\item \fullcite{m2012_371}
+\item \fullcite{sands2018_441}
+\item \fullcite{nieminen2010_443}
+\end{enumerate}
+
+\subsection{preprint-duplicate-of-JOSE-paper}
+\begin{enumerate}
+\item \fullcite{lapp2021_180}
+\end{enumerate}
+
+\subsection{programme-history-no-measurement}
+\begin{enumerate}
+\item \fullcite{wilson2013_173}
+\end{enumerate}
+
+\subsection{programming-learning-not-shell}
+\begin{enumerate}
+\item \fullcite{kazemitabaar2023_36}
+\item \fullcite{pendergast2006_57}
+\item \fullcite{a2018_74}
+\item \fullcite{strömbäck2021_79}
+\item \fullcite{smith2008_80}
+\item \fullcite{lönnberg2012_81}
+\item \fullcite{naveed2018_87}
+\item \fullcite{lukkarinen2016_90}
+\item \fullcite{masbah2018_92}
+\item \fullcite{f2020_94}
+\item \fullcite{a2009_96}
+\item \fullcite{i2009_97}
+\item \fullcite{paiva2020_208}
+\item \fullcite{holland2009_220}
+\item \fullcite{provine2000_227}
+\item \fullcite{v2025_260}
+\item \fullcite{f2024_270}
+\item \fullcite{çetinkayarundel2022_422}
+\item \fullcite{çetinkayarundel2021_426}
+\item \fullcite{a2026_454}
+\item \fullcite{m2026_455}
+\item \fullcite{venigalla2023_513}
+\item \fullcite{perugini2020_514}
+\item \fullcite{ad2024_519}
+\end{enumerate}
+
+\subsection{psychology-domain}
+\begin{enumerate}
+\item \fullcite{altmann2009_137}
+\item \fullcite{c2014_162}
+\item \fullcite{c2011_164}
+\item \fullcite{mh2008_191}
+\item \fullcite{jm2026_257}
+\item \fullcite{mw2025_264}
+\item \fullcite{gillanders2013_326}
+\item \fullcite{konrath2014_335}
+\item \fullcite{mahone2002_336}
+\item \fullcite{i2026_341}
+\item \fullcite{ee2026_345}
+\item \fullcite{l2026_352}
+\item \fullcite{jtt2026_353}
+\item \fullcite{behuniak2010_375}
+\item \fullcite{flint2006_444}
+\item \fullcite{schaufeli2003_489}
+\item \fullcite{m2026_499}
+\end{enumerate}
+
+\subsection{science-domain}
+\begin{enumerate}
+\item \fullcite{lee2006_43}
+\item \fullcite{gentleman2004_100}
+\item \fullcite{stohl2005_104}
+\item \fullcite{angelopoulos2019_107}
+\item \fullcite{vences2021_111}
+\item \fullcite{dagestad2018_112}
+\item \fullcite{roussel2020_114}
+\item \fullcite{kreuzer2017_115}
+\item \fullcite{o2015_125}
+\item \fullcite{c2015_126}
+\item \fullcite{cannon2014_135}
+\item \fullcite{sayres2018_182}
+\item \fullcite{kim2018_183}
+\item \fullcite{p2020_188}
+\item \fullcite{shen2024_194}
+\item \fullcite{dukovski2021_199}
+\item \fullcite{carey2018_200}
+\item \fullcite{sitto2019_201}
+\item \fullcite{kurs2016_210}
+\item \fullcite{wright2020_215}
+\item \fullcite{mendonca2022_229}
+\item \fullcite{j2026_291}
+\item \fullcite{mk2026_298}
+\item \fullcite{aa2026_302}
+\item \fullcite{f2026_306}
+\item \fullcite{guerra2016_356}
+\item \fullcite{frank2015_415}
+\item \fullcite{colomina2014_434}
+\item \fullcite{markus2017_436}
+\item \fullcite{abánades2015_447}
+\item \fullcite{guzzetti2019_449}
+\item \fullcite{padial2010_476}
+\item \fullcite{liang2016_478}
+\item \fullcite{roy2014_479}
+\item \fullcite{jorge2011_481}
+\item \fullcite{liang2018_490}
+\item \fullcite{r2027_491}
+\item \fullcite{s2027_492}
+\item \fullcite{d2026_502}
+\item \fullcite{ac2026_506}
+\end{enumerate}
+
+\subsection{science-education-review}
+\begin{enumerate}
+\item \fullcite{chin2008_34}
+\item \fullcite{odden2018_373}
+\item \fullcite{osborne2003_474}
+\end{enumerate}
+
+\subsection{single-discipline-diagnostic}
+\begin{enumerate}
+\item \fullcite{slater2015_40}
+\item \fullcite{potgieter2011_48}
+\item \fullcite{adesina2016_230}
+\item \fullcite{mukuka2021_244}
+\item \fullcite{e2026_301}
+\item \fullcite{goodchild2020_362}
+\end{enumerate}
+
+\subsection{teaching-curriculum-abstract-unavailable-ACM}
+\begin{enumerate}
+\item \fullcite{y2026_516}
+\end{enumerate}
+
+\subsection{teaching-tool-abstract-truncated-measure-not-stated}
+\begin{enumerate}
+\item \fullcite{m2021_521}
+\end{enumerate}
+
+\subsection{textbook-analysis}
+\begin{enumerate}
+\item \fullcite{abdelkhalick2008_46}
+\item \fullcite{s2012_163}
+\end{enumerate}
+
+\subsection{tool-installation-challenges-not-measurement-of-understanding-already-cited}
+\begin{enumerate}
+\item \fullcite{l2026_252}
+\end{enumerate}
+
+\subsection{training-demand-report-not-shell}
+\begin{enumerate}
+\item \fullcite{watsonhaigh2013_174}
+\end{enumerate}
+
+\subsection{tutoring-framework-evaluates-system-not-learners}
+\begin{enumerate}
+\item \fullcite{vk2025_518}
+\end{enumerate}
+
+\subsection{variation-theory-application-other-domain-not-design-precedent}
+\begin{enumerate}
+\item \fullcite{bernhard2018_357}
+\item \fullcite{smit2011_359}
+\item \fullcite{tan2019_361}
+\item \fullcite{åkerlind2011_365}
+\item \fullcite{cm2022_368}
+\item \fullcite{mh2014_370}
+\item \fullcite{m2012_371}
+\end{enumerate}
+
+\subsection{workshop-curriculum-description-no-measurement}
+\begin{enumerate}
+\item \fullcite{lapp2022_176}
+\end{enumerate}
+
+\subsection{workshop-design-not-measurement}
+\begin{enumerate}
+\item \fullcite{theobold2020_175}
+\end{enumerate}
+
+\subsection{workshop-programme-description-no-measurement}
+\begin{enumerate}
+\item \fullcite{pawlik2017_169}
+\end{enumerate}
+
+\subsection{workshop-report-demographics-survey-only}
+\begin{enumerate}
+\item \fullcite{latourrette2021_181}
+\end{enumerate}
+
+\end{document}

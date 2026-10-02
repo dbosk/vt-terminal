@@ -1,0 +1,166 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\usepackage{enumitem}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{vt-terminal-systematic.bib}
+
+\title{Literature Review Report}
+\date{2026-07-19}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Field-tagged systematic round for the vt-terminal paper: shell/CLI misconceptions, learner file-system mental models, SSH learning. Screening: retain only sources whose read abstract entails a claim used in the paper, at the source's strength. The search covered scopus, wos and yielded 8 papers (5 kept, 3 discarded, 0 pending).
+\end{abstract}
+\clearpage
+\clearpage
+\tableofcontents
+\clearpage
+
+\section{Research Context}
+Field-tagged systematic round for the vt-terminal paper: shell/CLI
+misconceptions, learner file-system mental models, SSH learning.
+Screening: retain only sources whose read abstract entails a claim used
+in the paper, at the source's strength.
+
+\section{Search Parameters}
+
+\begin{description}
+\item[Base query] TS=("command line" AND (student* OR novice*) AND (misconception* OR difficult* OR learn*))
+\item[Providers] scopus, wos
+\end{description}
+
+\subsection{Provider-specific queries}
+\begin{longtable}{lp{10cm}}
+\toprule
+Provider & Query \\
+\midrule
+wos & TS=("command line" AND (student* OR novice*) AND (misconception* OR difficult* OR learn*)) \\
+scopus & TITLE-ABS-KEY("command line" AND (student OR novice) AND (misconception OR difficulty OR learning)) \\
+wos & TS=((unix OR linux) AND shell AND (teach* OR learn*) AND (student* OR novice*)) \\
+wos & TS=(ssh AND (teach* OR learn* OR misconception*) AND (student* OR novice*)) \\
+scopus & TITLE-ABS-KEY(ssh AND (teaching OR learning) AND (student OR novice)) \\
+wos & TS=("file system" AND (student* OR user*) AND ("mental model*" OR misconception*)) \\
+\bottomrule
+\end{longtable}
+
+\begin{description}
+\item[Date] 2026-07-19 09:30
+\item[Total Papers] 8
+\end{description}
+
+\section{Summary}
+\begin{description}
+\item[Kept] 5
+\item[Discarded] 3
+\item[Pending] 0
+\end{description}
+
+\section{Summary Tables}
+
+\subsection{Kept Papers Overview}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.55\textwidth}c>{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+\textbf{Title} & \textbf{Year} & \textbf{Themes} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{lucie2026_0} & 2026 & cli-education-non-cs \\
+\citetitle{vincent2022_1} & 2022 & shell-teaching-intervention \\
+\citetitle{cabral2023_2} & 2023 & ssh-assessment-not-learning \\
+\citetitle{g2025_3} & 2025 & git-pedagogy \\
+\citetitle{j2019_4} & 2019 & file-mental-models \\
+\end{longtable}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.4\textwidth}ccccc}
+\toprule
+\textbf{Title} & \rotatebox{90}{cli-education-non-cs} & \rotatebox{90}{file-mental-models} & \rotatebox{90}{git-pedagogy} & \rotatebox{90}{shell-teaching-intervention} & \rotatebox{90}{ssh-assessment-not-learning} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{lucie2026_0} & $\checkmark$ &  &  &  &  \\
+\citetitle{vincent2022_1} &  &  &  & $\checkmark$ &  \\
+\citetitle{cabral2023_2} &  &  &  &  & $\checkmark$ \\
+\citetitle{g2025_3} &  &  & $\checkmark$ &  &  \\
+\citetitle{j2019_4} &  & $\checkmark$ &  &  &  \\
+\end{longtable}
+
+\subsection{Discarded Papers Overview}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.55\textwidth}c>{\raggedright\arraybackslash}p{0.25\textwidth}}
+\toprule
+\textbf{Title} & \textbf{Year} & \textbf{Motivations} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{tyler2024_5} & 2024 & perception survey, not misconceptions \\
+\citetitle{vk2025_6} & 2025 & LLM tutoring tool, no learner findings \\
+\citetitle{j2022_7} & 2022 & overlaps May et al. TOIS 2019; weaker fit \\
+\end{longtable}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.4\textwidth}ccc}
+\toprule
+\textbf{Title} & \rotatebox{90}{LLM tutoring tool, no learner findings} & \rotatebox{90}{overlaps May et al. TOIS 2019; weaker fit} & \rotatebox{90}{perception survey, not misconceptions} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+\citetitle{tyler2024_5} &  &  & $\checkmark$ \\
+\citetitle{vk2025_6} & $\checkmark$ &  &  \\
+\citetitle{j2022_7} &  & $\checkmark$ &  \\
+\end{longtable}
+
+\section{Kept Papers}
+\subsection{cli-education-non-cs}
+\begin{enumerate}
+\item \fullcite{lucie2026_0}
+\end{enumerate}
+
+\subsection{file-mental-models}
+\begin{enumerate}
+\item \fullcite{j2019_4}
+\end{enumerate}
+
+\subsection{git-pedagogy}
+\begin{enumerate}
+\item \fullcite{g2025_3}
+\end{enumerate}
+
+\subsection{shell-teaching-intervention}
+\begin{enumerate}
+\item \fullcite{vincent2022_1}
+\end{enumerate}
+
+\subsection{ssh-assessment-not-learning}
+\begin{enumerate}
+\item \fullcite{cabral2023_2}
+\end{enumerate}
+
+\section{Discarded Papers}
+\subsection{LLM tutoring tool, no learner findings}
+\begin{enumerate}
+\item \fullcite{vk2025_6}
+\end{enumerate}
+
+\subsection{overlaps May et al. TOIS 2019; weaker fit}
+\begin{enumerate}
+\item \fullcite{j2022_7}
+\end{enumerate}
+
+\subsection{perception survey, not misconceptions}
+\begin{enumerate}
+\item \fullcite{tyler2024_5}
+\end{enumerate}
+
+\end{document}
